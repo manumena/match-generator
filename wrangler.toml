@@ -8,6 +8,10 @@ compatibility_date = "2023-04-08"
 DATABASE = "animasters"
 DEFAULT_SONGS_AMOUNT = "10"
 DEFAULT_REPEAT_ANIMES = "false"
+DEFAULT_INCLUDE_OPENINGS = "true"
+DEFAULT_INCLUDE_ENDINGS = "true"
+DEFAULT_INCLUDE_SOUNDTRACK = "true"
+
 
 [observability]
 enabled = true

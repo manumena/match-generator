@@ -5,4 +5,7 @@ export interface Env {
   DB_PASSWORD: string
   DEFAULT_SONGS_AMOUNT: number
   DEFAULT_REPEAT_ANIMES: string 
+  DEFAULT_INCLUDE_OPENINGS: string
+  DEFAULT_INCLUDE_ENDINGS: string
+  DEFAULT_INCLUDE_SOUNDTRACKS: string
 }
