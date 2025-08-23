@@ -14,6 +14,7 @@ export function getRandomNumbers(quantity: number, min: number, max: number): nu
 }
 
 export function getRandomElementsFromList(list: any[], amount: number): any[] {
-  const randomPositions = getRandomNumbers(amount, 0, list.length - 1)
+  const safeAmount = Math.min(amount, list.length)
+  const randomPositions = getRandomNumbers(safeAmount, 0, list.length - 1)
   return randomPositions.map(pos => list[pos])
 }
