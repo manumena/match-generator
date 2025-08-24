@@ -12,7 +12,7 @@ interface MatchOptions {
 
 const QUERY_GET_SONG_IDS = 'SELECT id FROM songs WHERE {};'
 const QUERY_GET_SONGS_BY_CONDITION = 'SELECT * FROM songs WHERE {};'
-const QUERY_GET_EVERY_ANIME = 'SELECT DISTINCT anime FROM songs;'
+const QUERY_GET_EVERY_ANIME_BY_CONDITION = 'SELECT DISTINCT anime FROM songs WHERE {};'
 
 export async function generateMatch(env: Env, options: MatchOptions) {
   let { amount, repeatAnimes, includeOpenings, includeEndings, includeSoundtracks } = options
@@ -47,12 +47,13 @@ export async function generateMatch(env: Env, options: MatchOptions) {
     } else {
       // Get a list of every anime that matches the filters
       const typeCondition = buildTypeCondition(includeOpenings, includeEndings, includeSoundtracks)
-      let queryResponse = await conn(QUERY_GET_EVERY_ANIME.replace("{}", typeCondition))
+      console.log({typeCondition})
+      let queryResponse = await conn(QUERY_GET_EVERY_ANIME_BY_CONDITION.replace("{}", typeCondition))
       const allAnimes = queryResponse.rows.map((row) => row.anime)
-
+      console.log({allAnimes})
       // Choose random animes
       const randomAnimes = getRandomElementsFromList(allAnimes, amount)
-
+      console.log({randomAnimes})
       // Choose random songs from selected animes, which match the filters
       const randomSongsPromises = randomAnimes.map(async anime => {
         queryResponse = await conn(buildQuerySongsByAnime(anime, typeCondition))
