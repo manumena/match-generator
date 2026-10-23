@@ -1,8 +1,8 @@
 import { getDBConnection } from "../db";
-import { Env } from "../env";
-import { getRandomElementsFromList, getRandomNumbers } from "./random";
+import type { Env } from "../env";
+import { getRandomElementsFromList } from "./random";
 
-interface MatchOptions {
+export interface MatchOptions {
   amount?: number,
   repeatAnimes?: boolean,
   includeOpenings?: boolean,
@@ -15,14 +15,11 @@ const QUERY_GET_SONGS_BY_CONDITION = 'SELECT * FROM songs WHERE {};'
 const QUERY_GET_EVERY_ANIME_BY_CONDITION = 'SELECT DISTINCT anime FROM songs WHERE {};'
 
 export async function generateMatch(env: Env, options: MatchOptions) {
-  let { amount, repeatAnimes, includeOpenings, includeEndings, includeSoundtracks } = options
+  let { repeatAnimes, includeOpenings, includeEndings, includeSoundtracks } = options
   let response
   
-  // Log parameters
-  console.log('env', env, 'options', options)
-
   // Set default options
-  amount = amount ?? env.DEFAULT_SONGS_AMOUNT
+  const amount = options.amount ?? env.DEFAULT_SONGS_AMOUNT
   includeOpenings = includeOpenings ?? (env.DEFAULT_INCLUDE_OPENINGS === 'true')
   includeEndings = includeEndings ?? (env.DEFAULT_INCLUDE_ENDINGS === 'true')
   includeSoundtracks = includeSoundtracks ?? (env.DEFAULT_INCLUDE_SOUNDTRACKS === 'true')
@@ -65,8 +62,8 @@ export async function generateMatch(env: Env, options: MatchOptions) {
       response = await Promise.all(randomSongsPromises)
     }
     return response
-  } catch (error: any) {
-    console.error(error.message)
+  } catch (error: unknown) {
+    console.error((error as { message?: unknown }).message)
   }
 }
 

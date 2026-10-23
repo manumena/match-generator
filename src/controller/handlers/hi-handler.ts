@@ -1,8 +1,3 @@
-import { RouterHandler } from '@tsndr/cloudflare-worker-router'
-import { Env } from '../../env'
-
-const hiHandler: RouterHandler<Env> = ({ res }) => {
-  res.body = 'Hi'
+export default function hiHandler() {
+  return new Response('Hi');
 }
-
-export default hiHandler

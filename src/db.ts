@@ -1,4 +1,4 @@
-import { Env } from './env'
+import type { Env } from './env'
 import { neon } from '@neondatabase/serverless'
 
 function getDBConnection(env: Env) {

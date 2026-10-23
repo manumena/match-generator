@@ -1,5 +1,5 @@
 import router from "./controller/routes";
-import { Env } from "./env";
+import type { Env } from "./env";
 
 export default {
   async fetch(
@@ -7,6 +7,6 @@ export default {
     env: Env,
     ctx: ExecutionContext
   ): Promise<Response> {
-    return router.handle(env, request)
+    return router.fetch(request, env, ctx)
   }
-};
+} satisfies ExportedHandler<Env>;

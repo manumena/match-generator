@@ -13,8 +13,8 @@ export function getRandomNumbers(quantity: number, min: number, max: number): nu
   return result
 }
 
-export function getRandomElementsFromList(list: any[], amount: number): any[] {
-  const safeAmount = Math.min(amount, list.length)
+export function getRandomElementsFromList<T>(list: T[], amount: number | string): T[] {
+  const safeAmount = Math.min(Number(amount), list.length)
   const randomPositions = getRandomNumbers(safeAmount, 0, list.length - 1)
   return randomPositions.map(pos => list[pos])
 }

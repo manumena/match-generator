@@ -2,7 +2,7 @@ name = "match-generator"
 main = "src/index.ts"
 account_id = '8a93337e5cf183625e3ce2b4ffe43284'
 workers_dev = true
-compatibility_date = "2023-04-08"
+compatibility_date = "2026-10-19"
 
 [env.production.vars]
 DATABASE = "animasters"

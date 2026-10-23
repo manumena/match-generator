@@ -1,31 +1,30 @@
-import { RouterHandler } from "@tsndr/cloudflare-worker-router";
-import { generateMatch } from "../../logic/generate-match";
-import { Env } from "../../env";
+import type { Handler } from "hono";
+import { generateMatch, type MatchOptions } from "../../logic/generate-match";
+import type { Env } from "../../env";
 
-const generateMatchHandler: RouterHandler<Env> = async ({ res, req, env }) => {
-  const options: any = {};
+const generateMatchHandler: Handler<{ Bindings: Env }> = async (context) => {
+  const options: MatchOptions = {};
+  // Preserve the old router's last-value-wins rule for duplicate parameters.
+  const query = Object.fromEntries(new URL(context.req.url).searchParams);
 
-  if ('amount' in req.query) {
-    options.amount = parseInt(req.query.amount);
+  if ('amount' in query) {
+    options.amount = parseInt(query.amount);
   }
-  if ('repeatAnimes' in req.query) {
-    options.repeatAnimes = req.query.repeatAnimes === 'true';
+  if ('repeatAnimes' in query) {
+    options.repeatAnimes = query.repeatAnimes === 'true';
   }
-  if ('includeOpenings' in req.query) {
-    options.includeOpenings = req.query.includeOpenings === 'true';
+  if ('includeOpenings' in query) {
+    options.includeOpenings = query.includeOpenings === 'true';
   }
-  if ('includeEndings' in req.query) {
-    options.includeEndings = req.query.includeEndings === 'true';
+  if ('includeEndings' in query) {
+    options.includeEndings = query.includeEndings === 'true';
   }
-  if ('includeSoundtracks' in req.query) {
-    options.includeSoundtracks = req.query.includeSoundtracks === 'true';
+  if ('includeSoundtracks' in query) {
+    options.includeSoundtracks = query.includeSoundtracks === 'true';
   }
 
-  const response = await generateMatch(env, options)
-  res.status = 200
-  res.body = {
-    match: response
-  }
+  const response = await generateMatch(context.env, options);
+  return context.body(JSON.stringify({ match: response }), 200, { 'Content-Type': 'application/json' });
 }
 
 export default generateMatchHandler

@@ -2,16 +2,8 @@
   "name": "match-generator",
   "version": "1.0.0",
   "description": "REST API that generates matches for guess-the-anime",
-  "main": "build/worker.js",
-  "homepage": "https://github.com/karanpratapsingh/cloudflare-workers-typescript#readme",
+  "main": "src/index.ts",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/karanpratapsingh/cloudflare-workers-typescript/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/karanpratapsingh/cloudflare-workers-typescript.git"
-  },
   "keywords": [
     "typescript"
   ],
@@ -21,17 +13,33 @@
   },
   "scripts": {
     "start": "wrangler dev",
-    "deploy": "wrangler publish",
-    "test": "vitest"
+    "dev": "wrangler dev",
+    "build": "npm run typecheck && wrangler deploy --dry-run --outdir dist",
+    "deploy": "wrangler deploy",
+    "typegen": "wrangler types worker-configuration.d.ts --include-env false",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20230404.0",
-    "@tsndr/cloudflare-worker-router": "^2.3.2",
-    "typescript": "^5.0.4",
-    "vitest": "^0.30.1",
-    "wrangler": "^3.80.4"
+    "@cloudflare/vitest-plugin": "1.4.7",
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.19.2",
+    "eslint": "10.13.0",
+    "globals": "17.13.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.0",
+    "vitest": "5.0.5",
+    "wrangler": "4.152.0"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^0.10.1"
+    "@neondatabase/serverless": "0.10.1",
+    "hono": "4.13.13"
+  },
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.18.0 <25"
   }
 }
