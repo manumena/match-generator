@@ -20,7 +20,9 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "catalog": "node scripts/catalog/cli.mjs",
+    "test:catalog": "node --test test/catalog/*.test.mjs"
   },
   "devDependencies": {
     "@cloudflare/vitest-plugin": "1.4.7",

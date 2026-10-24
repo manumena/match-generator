@@ -67,3 +67,7 @@ Use `--env=""` to explicitly target the top-level Worker. This migration does no
 The initial 28 regression tests passed against the original implementation before the router migration; those tests plus two full request-to-generator cases now cover the modernized Worker. The production-environment dry-run build, type checking, lint, and all 30 tests passed. A separate local Wrangler smoke test using the existing database returned two songs from distinct anime with the expected response schema. No remote deployment was performed.
 
 Private pre-migration backups of both repositories are in the frontend repository at `.local-backups/2026-10-22-pre-frontend-migration/`, including recovery instructions. They are local archives, not database or cloud-storage backups.
+
+## Anime catalog import
+
+The additive catalog importer and explicit season mappings are documented in [catalog/README.md](catalog/README.md). It adds stable answer IDs, aliases and source artwork URLs without changing the current game API. Run `npm run test:catalog` for its Node tests; `npm test` continues to exercise the Worker API.
