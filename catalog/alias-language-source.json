@@ -1,0 +1,15 @@
+{
+  "version": "anidb-titles-2026-10-25",
+  "url": "https://anidb.net/api/anime-titles.dat.gz",
+  "sha256": "dd8ae45bd73becef33c381eaf644eb14edf12a200c5ce113154232d1375e40c2",
+  "created": "2026-10-25T03:00:01",
+  "allowedLanguages": [
+    "en",
+    "es",
+    "es-419",
+    "ja",
+    "x-jat"
+  ],
+  "policy": "en-es-ja-conservative-v1",
+  "latinReviewSha256": "8022d94e59cd7a3d543b101581dc7465b10a18faa0889d23d72d1cf39cd2d489"
+}

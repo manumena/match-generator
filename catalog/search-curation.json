@@ -1,0 +1,300 @@
+{
+  "version": "search-curation-1",
+  "note": "Editorial starter values are not sourced popularity statistics. No rating score or playable-song count is used. Other duplicate candidates require individual review.",
+  "metadata": [
+    {
+      "source": "https://myanimelist.net/anime/21",
+      "priority": 100,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/20",
+      "priority": 100,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/1735",
+      "priority": 100,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/527",
+      "priority": 100,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/813",
+      "priority": 100,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/225",
+      "priority": 100,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/30694",
+      "priority": 100,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/1535",
+      "priority": 95,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/16498",
+      "priority": 95,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/269",
+      "priority": 95,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/11061",
+      "priority": 95,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability.",
+      "title": "Hunter x Hunter (2011)"
+    },
+    {
+      "source": "https://myanimelist.net/anime/121",
+      "priority": 95,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/5114",
+      "priority": 95,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/38000",
+      "priority": 95,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/31964",
+      "priority": 95,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/23755",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/30276",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/40748",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/1",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/30",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/9253",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/1575",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/11757",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/28851",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/199",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/523",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/20583",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/50265",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/37521",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/28171",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/38691",
+      "priority": 90,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/33352",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/44511",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/31240",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/32182",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/29803",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/2001",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/226",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/35507",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/32281",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/52034",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/52991",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/37987",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/918",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/47",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/57",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/44",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/136",
+      "priority": 85,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability.",
+      "title": "Hunter x Hunter (1999)"
+    },
+    {
+      "source": "https://myanimelist.net/anime/30654",
+      "priority": 80,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/12355",
+      "priority": 80,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/37779",
+      "priority": 80,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/34572",
+      "priority": 80,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/22319",
+      "priority": 80,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/22535",
+      "priority": 80,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/52211",
+      "priority": 80,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    },
+    {
+      "source": "https://myanimelist.net/anime/46569",
+      "priority": 80,
+      "reason": "Initial editorial prominence tier; provisional and manually adjustable, not an audience measurement. Includes titles independent of playable-song availability."
+    }
+  ],
+  "redirects": [
+    {
+      "source": "https://animenewsnetwork.com/encyclopedia/anime.php?id=836",
+      "target": "https://myanimelist.net/anime/21",
+      "reason": "Reviewed source records identify the same One Piece TV series beginning in fall 1999; overlapping localized aliases. Provider episode counts differ by update date."
+    },
+    {
+      "source": "https://animenewsnetwork.com/encyclopedia/anime.php?id=16867",
+      "target": "https://myanimelist.net/anime/30347",
+      "reason": "Reviewed 2015 Seven Deadly Sins OVA records: same two episodes, spring 2015 and 24-minute duration. Keep separate from the TV answer."
+    }
+  ]
+}
