@@ -1,4 +1,6 @@
 export interface Env {
+  ROOMS: DurableObjectNamespace
+  ROOM_ORIGINS?: string
   DATABASE: string
   DB_USERNAME: string
   DB_HOST: string

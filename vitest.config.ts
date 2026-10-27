@@ -6,6 +6,9 @@ export default defineConfig({
   plugins: [cloudflareTest({
     // Keep tests isolated from local secrets and the deployed database.
     main: './src/index.ts',
-    miniflare: { compatibilityDate: '2026-10-19' },
+    miniflare: {
+      compatibilityDate: '2026-10-19',
+      durableObjects: { ROOMS: { className: 'Room', useSQLite: true } },
+    },
   })],
 });

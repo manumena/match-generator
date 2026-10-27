@@ -1,3 +1,4 @@
+export { Room } from './rooms/room';
 import router from "./controller/routes";
 import type { Env } from "./env";
 

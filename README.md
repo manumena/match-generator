@@ -71,3 +71,13 @@ Private pre-migration backups of both repositories are in the frontend repositor
 ## Anime catalog import
 
 The additive catalog importer and explicit season mappings are documented in [catalog/README.md](catalog/README.md). It adds stable answer IDs, aliases and source artwork URLs without changing the current game API. Run `npm run test:catalog` for its Node tests; `npm test` continues to exercise the Worker API.
+
+## Multiplayer lobby
+
+`src/rooms/routes.ts` adds `POST /rooms` (nickname), `POST /rooms/:code/join` (nickname), authenticated `GET /rooms/:code/session`, and `GET /rooms/:code/connect` for WebSockets. JSON entry responses contain a public room snapshot plus the caller's private player ID/token. Snapshot broadcasts never include credentials. Errors use readable JSON with CORS headers; existing endpoints keep their original contracts.
+
+`src/rooms/room.ts` exports the `Room` Durable Object. Its embedded SQLite record owns each four-character code and roster, with collision-safe reservation, at most ten players, case-insensitive nickname uniqueness, private reconnect credentials and hibernatable sockets. Joining/creating requires a nickname of 1–24 Unicode code points after trimming/NFC normalization. HTTP session checks authenticate with `Authorization: Bearer <token>`. WebSockets offer `animasters, token.<token>` as protocols; the selected protocol is only `animasters`. Never log credentials or put them in share URLs.
+
+Wrangler defines the `ROOMS` binding for both existing deployment targets and a new `v1-rooms` migration using `new_sqlite_classes`. Deploy to the same target as before; do not edit migration history after deployment. `ROOM_ORIGINS` is a comma-separated WebSocket origin allowlist (the Pages site by default, with explicit local development origins in the top-level configuration). Add exact preview/custom origins if needed. No Neon migration or storage upload is required for this lobby slice.
+
+For local verification run `npx wrangler dev --local --port 8788`; start the frontend with `VITE_API_URL=http://127.0.0.1:8788`. Local Durable Object data stays in Wrangler's ignored local state. `npm test` covers collision retries, capacity, input validation, credential isolation, socket replacement, hibernation and expiry alarms alongside the legacy API tests. Rooms expire after thirty minutes with nobody connected; no host transfer or automatic slot release is implemented. Match settings, audio enablement and gameplay remain future work.

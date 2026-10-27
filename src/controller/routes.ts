@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import { rooms } from '../rooms/routes';
 import type { Env } from '../env';
 import hiHandler from './handlers/hi-handler';
 import generateMatchHandler from './handlers/generate-match-handler';
@@ -27,6 +28,8 @@ router.use('*', async (context, next) => {
     for (const [name, value] of Object.entries(corsHeaders)) context.header(name, value);
   }
 });
+
+router.route('/rooms', rooms);
 
 router.get('/', hiHandler);
 router.get('/hi', hiHandler);
