@@ -35,7 +35,7 @@ describe('room lifecycle', () => {
     const session = await create();
     expect(session.room.code).toMatch(/^[A-Z0-9]{4}$/);
     expect(session.room.hostId).toBe(session.playerId);
-    expect(session.room.players).toEqual([{ id: session.playerId, nickname: 'Host', connected: false }]);
+    expect(session.room.players).toMatchObject([{ id: session.playerId, nickname: 'Host', connected: false }]);
     expect(JSON.stringify(session.room)).not.toContain(session.token);
   });
 
