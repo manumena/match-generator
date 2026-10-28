@@ -1,8 +1,8 @@
 import { DurableObject } from 'cloudflare:workers';
 import type { Env } from '../env';
 import { nicknameFrom, ROOM_TTL } from './validation';
-import { advance, beginCountdown, hydrateRoom, publicSnapshot, setReady, submit, type RoomState } from './game';
-import { prepareMatch } from './match';
+import { advance, beginCountdown, hydrateRoom, publicSnapshot, setReady, submit, updateSettings, type RoomState } from './game';
+import { MatchAvailabilityError, prepareMatch } from './match';
 
 interface Attachment { playerId: string }
 
@@ -153,7 +153,12 @@ export class Room extends DurableObject<Env> {
       }
       let error: string | undefined;
       if (action.type === 'ready') {
-        error = setReady(room, player, action.roundId, action.catalogVersion, Date.now(), this.connected());
+        error = setReady(room, player, action.roundId, action.catalogVersion, Date.now(), this.connected(), action.settingsRevision);
+      } else if (action.type === 'unready') {
+        if (room.phase !== 'lobby') error = 'The match has already started.';
+        else player.ready = false;
+      } else if (action.type === 'settings') {
+        error = updateSettings(room, player, action.settings, action.settingsRevision);
       } else if (action.type === 'guess') {
         error = submit(room, player, action, Date.now(), this.connected());
       } else {
@@ -183,8 +188,10 @@ export class Room extends DurableObject<Env> {
     let error: string | undefined;
     try {
       songs = await prepareMatch(this.env, settings);
-    } catch {
-      error = 'Could not prepare the match. Check song availability and try Ready again.';
+    } catch (cause) {
+      // Availability is safe to show; database/network diagnostics remain private.
+      error = cause instanceof MatchAvailabilityError ? cause.message :
+        'Could not prepare the match. Check song availability and try Ready again.';
     }
     await this.ctx.blockConcurrencyWhile(async () => {
       const room = this.liveRoom();
@@ -206,8 +213,13 @@ export class Room extends DurableObject<Env> {
   }
 
   async webSocketClose(socket: WebSocket, code: number): Promise<void> {
-    socket.close(code, 'Disconnected');
-    await this.disconnected();
+    // Abnormal-close codes describe a lost connection and cannot be sent back.
+    // Still update presence/expiry after a browser or local runtime interruption.
+    try {
+      if (![1005, 1006, 1015].includes(code)) socket.close(code, 'Disconnected');
+    } finally {
+      await this.disconnected();
+    }
   }
 
   async webSocketError(socket: WebSocket): Promise<void> {

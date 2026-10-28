@@ -161,3 +161,19 @@ describe('room lifecycle', () => {
     for (let i = 0; i < 100; i++) expect(newRoomCode()).toMatch(/^[A-Z0-9]{4}$/);
   });
 });
+
+
+it('cleans up presence after abnormal socket closure without echoing reserved codes', async () => {
+  const session = await create();
+  await runInDurableObject(env.ROOMS.getByName(session.room.code), async (instance: Room, state) => {
+    const room = JSON.parse(state.storage.sql.exec<{ data: string }>('SELECT data FROM lobby').one().data);
+    room.abandonedAt = null;
+    state.storage.sql.exec('UPDATE lobby SET data = ?', JSON.stringify(room));
+    const close = vi.fn(() => { throw new Error('Reserved close code'); });
+    await instance.webSocketClose({ close } as unknown as WebSocket, 1006);
+    expect(close).not.toHaveBeenCalled();
+    expect(await state.storage.getAlarm()).toBeGreaterThan(Date.now());
+    const updated = JSON.parse(state.storage.sql.exec<{ data: string }>('SELECT data FROM lobby').one().data);
+    expect(updated.abandonedAt).not.toBeNull();
+  });
+});

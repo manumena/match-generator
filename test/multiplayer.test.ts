@@ -5,7 +5,9 @@ import { env } from './fixtures';
 import { CATALOG_VERSION, answerTitles, type RoomState } from '../src/rooms/game';
 import { prepareMatch } from '../src/rooms/match';
 
-vi.mock('../src/rooms/match', () => ({ prepareMatch: vi.fn() }));
+vi.mock('../src/rooms/match', async importOriginal => ({
+  ...await importOriginal<typeof import('../src/rooms/match')>(), prepareMatch: vi.fn(),
+}));
 interface Session { token: string; playerId: string; room: { code: string } }
 async function post(path: string, nickname: string): Promise<Session> {
   const response = await worker.fetch(new Request(`https://api.example${path}`, {
@@ -37,7 +39,15 @@ it('starts once when every connected player is ready, restores guessing, and com
   const guestSocket = await open(guest);
   const snapshots: { room: { phase: string; result?: unknown; submission?: unknown } }[] = [];
   hostSocket.addEventListener('message', event => { snapshots.push(JSON.parse(event.data as string)); });
-  const ready = JSON.stringify({ v: 1, type: 'ready', catalogVersion: CATALOG_VERSION });
+  // The guest's old readiness must be cleared when the host saves preferences.
+  const oldReady = JSON.stringify({ v: 1, type: 'ready', catalogVersion: CATALOG_VERSION });
+  guestSocket.send(oldReady);
+  await vi.waitFor(async () => expect((await saved(host.room.code)).players[1].ready).toBe(true));
+  const preferences = { amount: 1, repeatAnimes: false, includeOpenings: false, includeEndings: true, includeSoundtracks: false };
+  hostSocket.send(JSON.stringify({ v: 1, type: 'settings', settings: preferences, settingsRevision: 0 }));
+  await vi.waitFor(async () => expect((await saved(host.room.code)).settingsRevision).toBe(1));
+  expect((await saved(host.room.code)).players.every(player => !player.ready)).toBe(true);
+  const ready = JSON.stringify({ v: 1, type: 'ready', catalogVersion: CATALOG_VERSION, settingsRevision: 1 });
   hostSocket.send(ready);
   await vi.waitFor(async () => expect((await saved(host.room.code)).players[0].ready).toBe(true));
   expect(prepareMatch).not.toHaveBeenCalled();
@@ -45,6 +55,7 @@ it('starts once when every connected player is ready, restores guessing, and com
   guestSocket.send(ready);
   await vi.waitFor(async () => expect((await saved(host.room.code)).phase).toBe('countdown'));
   expect(prepareMatch).toHaveBeenCalledTimes(1);
+  expect(prepareMatch).toHaveBeenCalledWith(expect.anything(), preferences);
   const countdown = await saved(host.room.code);
   expect(countdown.startsAt! - Date.now()).toBeGreaterThan(9000);
   expect(JSON.stringify(snapshots)).not.toContain('Hidden anime');

@@ -44,6 +44,7 @@ export interface RoomState {
   phase: Phase;
   catalogVersion: string;
   settings: Settings;
+  settingsRevision: number;
   generationId?: string;
   preparationDeadline?: number;
   songs?: Song[];
@@ -61,8 +62,37 @@ export interface RoomState {
 export function hydrateRoom(raw: Partial<RoomState>): RoomState {
   return {
     phase: 'lobby', catalogVersion: CATALOG_VERSION, settings: { ...DEFAULT_SETTINGS },
-    roundIndex: 0, submissions: {}, ...raw,
+    roundIndex: 0, submissions: {}, settingsRevision: 0, ...raw,
   } as RoomState;
+}
+
+/** Only the host can change the lobby configuration. Copy validated fields rather
+ * than persisting arbitrary client properties or exposing repeat-anime controls. */
+export function updateSettings(room: RoomState, player: Player, input: unknown, revision: unknown): string | undefined {
+  if (player.id !== room.hostId) return 'Only the host can change match settings.';
+  if (room.phase !== 'lobby') return 'Match settings are locked after the match starts.';
+  if (!input || typeof input !== 'object') return 'Invalid match settings.';
+  const value = input as Record<string, unknown>;
+  if (!Number.isInteger(value.amount) || (value.amount as number) < 1 || (value.amount as number) > 999) {
+    return 'Choose a whole number of songs between 1 and 999.';
+  }
+  if (['includeOpenings', 'includeEndings', 'includeSoundtracks'].some(key => typeof value[key] !== 'boolean')) {
+    return 'Song type settings must be true or false.';
+  }
+  const settings: Settings = {
+    amount: value.amount as number,
+    repeatAnimes: false,
+    includeOpenings: value.includeOpenings as boolean,
+    includeEndings: value.includeEndings as boolean,
+    includeSoundtracks: value.includeSoundtracks as boolean,
+  };
+  // Retrying an already-applied save must not clear readiness a second time.
+  if (Object.entries(settings).every(([key, setting]) => room.settings[key as keyof Settings] === setting)) return;
+  if (revision !== room.settingsRevision) return 'Settings changed in another tab. Review them and try again.';
+  room.settings = settings;
+  room.settingsRevision++;
+  room.error = undefined;
+  room.players.forEach(member => { member.ready = false; });
 }
 
 export function beginCountdown(room: RoomState, now: number, connected: string[]): void {
@@ -126,8 +156,9 @@ export function advance(room: RoomState, now: number, connected: string[]): void
   if (room.phase === 'guessing' && now >= room.deadline!) finishRound(room, now, connected);
 }
 
-export function setReady(room: RoomState, player: Player, roundId: unknown, version: unknown, now: number, connected: string[]): string | undefined {
+export function setReady(room: RoomState, player: Player, roundId: unknown, version: unknown, now: number, connected: string[], settingsRevision: unknown = 0): string | undefined {
   if (room.phase === 'lobby') {
+    if (settingsRevision !== room.settingsRevision) return 'Match settings changed. Review them and press Ready again.';
     if (version !== room.catalogVersion) return 'Reload the room to load its anime catalog.';
     player.ready = true;
     return;
@@ -171,7 +202,7 @@ export function publicSnapshot(room: RoomState, connected: string[], playerId?: 
   const submission = playerId ? room.submissions[playerId] : undefined;
   return {
     code: room.code, hostId: room.hostId, phase: room.phase,
-    catalogVersion: room.catalogVersion, settings: room.settings, serverTime: Date.now(),
+    catalogVersion: room.catalogVersion, settings: room.settings, settingsRevision: room.settingsRevision, serverTime: Date.now(),
     players: room.players.map(player => ({
       id: player.id, nickname: player.nickname, connected: connected.includes(player.id),
       ready: player.ready ?? false, score: player.score ?? 0,
