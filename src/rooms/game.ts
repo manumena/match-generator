@@ -14,6 +14,7 @@ export interface Player {
   nickname: string;
   token: string;
   ready?: boolean;
+  readyForNextMatch?: string;
   score?: number;
 }
 export interface Song {
@@ -66,11 +67,11 @@ export function hydrateRoom(raw: Partial<RoomState>): RoomState {
   } as RoomState;
 }
 
-/** Only the host can change the lobby configuration. Copy validated fields rather
+/** Only the host can change preferences between matches. Copy validated fields rather
  * than persisting arbitrary client properties or exposing repeat-anime controls. */
 export function updateSettings(room: RoomState, player: Player, input: unknown, revision: unknown): string | undefined {
   if (player.id !== room.hostId) return 'Only the host can change match settings.';
-  if (room.phase !== 'lobby') return 'Match settings are locked after the match starts.';
+  if (!acceptsMatchPreferences(room)) return 'Match settings are locked after the match starts.';
   if (!input || typeof input !== 'object') return 'Invalid match settings.';
   const value = input as Record<string, unknown>;
   if (!Number.isInteger(value.amount) || (value.amount as number) < 1 || (value.amount as number) > 999) {
@@ -93,6 +94,38 @@ export function updateSettings(room: RoomState, player: Player, input: unknown, 
   room.settingsRevision++;
   room.error = undefined;
   room.players.forEach(member => { member.ready = false; });
+}
+
+export function acceptsMatchPreferences(room: RoomState): boolean {
+  return room.phase === 'lobby' || room.phase === 'completed';
+}
+
+export function isPlayerReady(room: RoomState, player: Player): boolean {
+  if (room.phase === 'completed') {
+    // Older deployed rooms can retain final-round Ready flags. Those are not
+    // consent to a rematch: require readiness for this particular final result.
+    return Boolean(player.ready && room.result && player.readyForNextMatch === room.result.roundId);
+  }
+  return player.ready ?? false;
+}
+
+/** Keep final standings available until a new sequence has actually been generated. */
+export function failPreparation(room: RoomState, error: string): void {
+  room.phase = room.completedAt === undefined ? 'lobby' : 'completed';
+  room.generationId = undefined;
+  room.preparationDeadline = undefined;
+  room.error = error;
+  room.players.forEach(player => { player.ready = false; });
+}
+
+export function startMatch(room: RoomState, songs: Song[], now: number, connected: string[]): void {
+  room.songs = songs;
+  room.roundIndex = 0;
+  room.result = undefined;
+  room.completedAt = undefined;
+  room.error = undefined;
+  room.players.forEach(player => { player.score = 0; });
+  beginCountdown(room, now, connected);
 }
 
 export function beginCountdown(room: RoomState, now: number, connected: string[]): void {
@@ -125,6 +158,7 @@ function finishRound(room: RoomState, now: number, connected: string[]): void {
     room.completedAt = now;
     room.startsAt = undefined;
     room.deadline = undefined;
+    room.players.forEach(player => { player.ready = false; });
   } else {
     beginCountdown(room, now, connected);
   }
@@ -133,11 +167,7 @@ function finishRound(room: RoomState, now: number, connected: string[]): void {
 /** Called before every action and by alarms. Late alarms never accept late guesses. */
 export function advance(room: RoomState, now: number, connected: string[]): void {
   if (room.phase === 'preparing' && now >= room.preparationDeadline!) {
-    room.phase = 'lobby';
-    room.generationId = undefined;
-    room.preparationDeadline = undefined;
-    room.error = 'Match preparation timed out. Please ready up again.';
-    room.players.forEach(player => { player.ready = false; });
+    failPreparation(room, 'Match preparation timed out. Please ready up again.');
   }
   if (room.phase === 'countdown') {
     // A disconnect can also make every remaining player ready for a later round.
@@ -156,13 +186,25 @@ export function advance(room: RoomState, now: number, connected: string[]): void
   if (room.phase === 'guessing' && now >= room.deadline!) finishRound(room, now, connected);
 }
 
-export function setReady(room: RoomState, player: Player, roundId: unknown, version: unknown, now: number, connected: string[], settingsRevision: unknown = 0): string | undefined {
-  if (room.phase === 'lobby') {
-    if (settingsRevision !== room.settingsRevision) return 'Match settings changed. Review them and press Ready again.';
-    if (version !== room.catalogVersion) return 'Reload the room to load its anime catalog.';
-    player.ready = true;
-    return;
+function readyForMatch(room: RoomState, player: Player, version: unknown, settingsRevision: unknown): string | undefined {
+  if (settingsRevision !== room.settingsRevision) return 'Match settings changed. Review them and press Ready again.';
+  if (version !== room.catalogVersion) return 'Reload the room to load its anime catalog.';
+  player.ready = true;
+}
+
+/** A distinct action tied to the final round prevents old round/lobby Ready
+ * messages from opting a player into another match, including after reconnect. */
+export function setNextMatchReady(room: RoomState, player: Player, completedRoundId: unknown, version: unknown, settingsRevision: unknown): string | undefined {
+  if (room.phase !== 'completed' || !room.result || completedRoundId !== room.result.roundId) {
+    return 'This match is not accepting Play again.';
   }
+  const error = readyForMatch(room, player, version, settingsRevision);
+  if (!error) player.readyForNextMatch = room.result.roundId;
+  return error;
+}
+
+export function setReady(room: RoomState, player: Player, roundId: unknown, version: unknown, now: number, connected: string[], settingsRevision: unknown = 0): string | undefined {
+  if (room.phase === 'lobby') return readyForMatch(room, player, version, settingsRevision);
   // First-song readiness cannot shorten its full ten-second countdown.
   if (room.phase !== 'countdown' || !room.result || room.songs?.[room.roundIndex].roundId !== roundId) {
     return 'This round is not accepting Ready.';
@@ -205,7 +247,7 @@ export function publicSnapshot(room: RoomState, connected: string[], playerId?: 
     catalogVersion: room.catalogVersion, settings: room.settings, settingsRevision: room.settingsRevision, serverTime: Date.now(),
     players: room.players.map(player => ({
       id: player.id, nickname: player.nickname, connected: connected.includes(player.id),
-      ready: player.ready ?? false, score: player.score ?? 0,
+      ready: isPlayerReady(room, player), score: player.score ?? 0,
       submitted: Boolean(room.submissions[player.id]),
     })),
     round: song && ['countdown', 'guessing', 'paused'].includes(room.phase) ? {

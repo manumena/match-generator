@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { advance, answerTitles, beginCountdown, hydrateRoom, publicSnapshot, setReady, submit, CATALOG_VERSION } from '../src/rooms/game';
+import { advance, answerTitles, beginCountdown, hydrateRoom, publicSnapshot, setNextMatchReady, setReady, startMatch, submit, updateSettings, CATALOG_VERSION } from '../src/rooms/game';
 
 const ids = Object.keys(answerTitles).slice(0, 3).map(Number);
 function match(players = 4, songs = 2) {
@@ -110,5 +110,67 @@ describe('authoritative match rules', () => {
     expect(room.phase).toBe('lobby');
     expect(room.generationId).toBeUndefined();
     expect(room.players.every(player => !player.ready)).toBe(true);
+  });
+});
+
+describe('playing another match', () => {
+  function completedMatch() {
+    const state = match(2, 1);
+    answer(state.room, 0, ids[0], 11_000);
+    answer(state.room, 1, null, 12_000);
+    return state;
+  }
+
+  it('requires fresh consent, the final round ID, current settings and the pinned catalog', () => {
+    const { room, connected } = completedMatch();
+    const host = room.players[0];
+    expect(room.players.every(player => !player.ready)).toBe(true);
+    expect(setReady(room, host, 'round-0', CATALOG_VERSION, 13_000, connected)).toBeDefined();
+    expect(setNextMatchReady(room, host, 'old-match', CATALOG_VERSION, 0)).toBeDefined();
+    expect(setNextMatchReady(room, host, 'round-0', 'old-catalog', 0)).toBeDefined();
+    expect(setNextMatchReady(room, host, 'round-0', CATALOG_VERSION, -1)).toBeDefined();
+    expect(host.ready).toBe(false);
+
+    expect(setNextMatchReady(room, host, 'round-0', CATALOG_VERSION, 0)).toBeUndefined();
+    expect(publicSnapshot(room, connected).players[0].ready).toBe(true);
+    expect(updateSettings(room, host, { ...room.settings, amount: 5 }, 0)).toBeUndefined();
+    expect(host.ready).toBe(false);
+    expect(setNextMatchReady(room, host, 'round-0', CATALOG_VERSION, 0)).toContain('settings changed');
+  });
+
+  it('does not reuse final-round readiness from a room completed before this feature deployed', () => {
+    const { room, connected } = completedMatch();
+    room.players.forEach(player => { player.ready = true; });
+    expect(publicSnapshot(room, connected).players.every(player => !player.ready)).toBe(true);
+  });
+
+  it('restores final standings and their original expiry after a rematch preparation timeout', () => {
+    const { room, connected } = completedMatch();
+    const result = room.result;
+    room.phase = 'preparing';
+    room.generationId = 'rematch-attempt';
+    room.preparationDeadline = 50_000;
+    room.players.forEach(player => { player.ready = true; });
+    advance(room, 50_000, connected);
+    expect(room.phase).toBe('completed');
+    expect(room.completedAt).toBe(12_000);
+    expect(room.result).toEqual(result);
+    expect(room.players.map(player => player.score)).toEqual([2, 0]);
+    expect(room.players.every(player => !player.ready)).toBe(true);
+    expect(room.generationId).toBeUndefined();
+  });
+
+  it('starts rematches with a full first-song countdown, even if everyone was ready', () => {
+    const { room, connected } = completedMatch();
+    const songs = [{ ...room.songs![0], roundId: 'new-first' }];
+    startMatch(room, songs, 20_000, connected);
+    expect(room.startsAt).toBe(30_000);
+    expect(room.result).toBeUndefined();
+    expect(room.completedAt).toBeUndefined();
+    expect(room.players.map(player => player.score)).toEqual([0, 0]);
+    expect(room.submissions).toEqual({});
+    expect(setReady(room, room.players[0], 'new-first', CATALOG_VERSION, 20_001, connected)).toBeDefined();
+    advance(room, 20_002, connected);
+    expect(room.startsAt).toBe(30_000);
   });
 });

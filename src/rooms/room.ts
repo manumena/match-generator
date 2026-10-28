@@ -1,7 +1,11 @@
 import { DurableObject } from 'cloudflare:workers';
 import type { Env } from '../env';
 import { nicknameFrom, ROOM_TTL } from './validation';
-import { advance, beginCountdown, hydrateRoom, publicSnapshot, setReady, submit, updateSettings, type RoomState } from './game';
+import {
+  acceptsMatchPreferences, advance, failPreparation, hydrateRoom, isPlayerReady,
+  publicSnapshot, setNextMatchReady, setReady, startMatch, submit, updateSettings,
+  type RoomState,
+} from './game';
 import { MatchAvailabilityError, prepareMatch } from './match';
 
 interface Attachment { playerId: string }
@@ -33,7 +37,7 @@ export class Room extends DurableObject<Env> {
   private liveRoom(): RoomState | undefined {
     const room = this.read();
     if (!room) return;
-    const expired = room.completedAt !== undefined
+    const expired = room.phase === 'completed' && room.completedAt !== undefined
       ? Date.now() >= room.completedAt + ROOM_TTL
       : room.abandonedAt !== null && Date.now() >= room.abandonedAt + ROOM_TTL;
     if (expired) {
@@ -49,7 +53,9 @@ export class Room extends DurableObject<Env> {
   private async commit(room: RoomState): Promise<void> {
     this.ctx.storage.sql.exec('INSERT OR REPLACE INTO lobby (id, data) VALUES (1, ?)', JSON.stringify(room));
     const deadlines: number[] = [];
-    if (room.completedAt !== undefined) deadlines.push(room.completedAt + ROOM_TTL);
+    // Preparation has its own short timeout. A rematch must not inherit the
+    // previous match's expiry alarm; failure restores that original expiry.
+    if (room.phase === 'completed' && room.completedAt !== undefined) deadlines.push(room.completedAt + ROOM_TTL);
     else if (room.abandonedAt !== null) deadlines.push(room.abandonedAt + ROOM_TTL);
     if (room.phase === 'preparing') deadlines.push(room.preparationDeadline!);
     if (room.phase === 'countdown') deadlines.push(room.startsAt!);
@@ -118,8 +124,8 @@ export class Room extends DurableObject<Env> {
     const pair = new WebSocketPair();
     this.ctx.acceptWebSocket(pair[1]);
     pair[1].serializeAttachment({ playerId: player.id } satisfies Attachment);
-    // Refresh may have lost audio permission. Require an explicit lobby Ready again.
-    if (room.phase === 'lobby') player.ready = false;
+    // Refresh may have lost audio permission. Require an explicit Ready again.
+    if (acceptsMatchPreferences(room)) player.ready = false;
     room.abandonedAt = null;
     advance(room, Date.now(), this.connected());
     await this.commit(room);
@@ -154,8 +160,10 @@ export class Room extends DurableObject<Env> {
       let error: string | undefined;
       if (action.type === 'ready') {
         error = setReady(room, player, action.roundId, action.catalogVersion, Date.now(), this.connected(), action.settingsRevision);
+      } else if (action.type === 'ready-next-match') {
+        error = setNextMatchReady(room, player, action.completedRoundId, action.catalogVersion, action.settingsRevision);
       } else if (action.type === 'unready') {
-        if (room.phase !== 'lobby') error = 'The match has already started.';
+        if (!acceptsMatchPreferences(room)) error = 'The match has already started.';
         else player.ready = false;
       } else if (action.type === 'settings') {
         error = updateSettings(room, player, action.settings, action.settingsRevision);
@@ -174,7 +182,11 @@ export class Room extends DurableObject<Env> {
 
   private maybePrepare(room: RoomState): void {
     const connected = this.connected();
-    if (room.phase !== 'lobby' || !connected.length || !connected.every(id => room.players.find(player => player.id === id)?.ready)) return;
+    const everyoneReady = connected.length > 0 && connected.every(id => {
+      const player = room.players.find(member => member.id === id);
+      return player && isPlayerReady(room, player);
+    });
+    if (!acceptsMatchPreferences(room) || !everyoneReady) return;
     room.phase = 'preparing';
     room.error = undefined;
     room.generationId = crypto.randomUUID();
@@ -199,13 +211,9 @@ export class Room extends DurableObject<Env> {
       room.generationId = undefined;
       room.preparationDeadline = undefined;
       if (!songs?.length) {
-        room.phase = 'lobby';
-        room.error = error ?? 'No songs are available.';
-        room.players.forEach(player => { player.ready = false; });
+        failPreparation(room, error ?? 'No songs are available.');
       } else {
-        room.songs = songs;
-        room.roundIndex = 0;
-        beginCountdown(room, Date.now(), this.connected());
+        startMatch(room, songs, Date.now(), this.connected());
       }
       await this.commit(room);
       this.broadcast(room);

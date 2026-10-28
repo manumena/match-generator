@@ -28,7 +28,7 @@ async function saved(code: string): Promise<RoomState> {
     JSON.parse(state.storage.sql.exec<{ data: string }>('SELECT data FROM lobby').one().data));
 }
 
-it('starts once when every connected player is ready, restores guessing, and completes authoritatively', async () => {
+it('completes a match, preserves standings on rematch failure, and starts one fresh match after retry', async () => {
   const animeId = Number(Object.keys(answerTitles)[0]);
   vi.mocked(prepareMatch).mockResolvedValue([
     { roundId: 'first', animeId, anime: 'Hidden anime', name: 'Hidden title', audioUrl: 'https://audio.example/one' },
@@ -36,7 +36,7 @@ it('starts once when every connected player is ready, restores guessing, and com
   const host = await post('/rooms', 'Host');
   const guest = await post(`/rooms/${host.room.code}/join`, 'Guest');
   const hostSocket = await open(host);
-  const guestSocket = await open(guest);
+  let guestSocket = await open(guest);
   const snapshots: { room: { phase: string; result?: unknown; submission?: unknown } }[] = [];
   hostSocket.addEventListener('message', event => { snapshots.push(JSON.parse(event.data as string)); });
   // The guest's old readiness must be cleared when the host saves preferences.
@@ -76,6 +76,67 @@ it('starts once when every connected player is ready, restores guessing, and com
   guestSocket.send(JSON.stringify({ v: 1, type: 'guess', roundId: 'first', actionId: 'two', animeId: null }));
   await vi.waitFor(async () => expect((await saved(host.room.code)).phase).toBe('completed'));
   expect((await saved(host.room.code)).players.map(player => player.score)).toEqual([2, 0]);
+
+  // Keep the same room and standings while players choose a rematch.
+  const playAgain = (revision: number) => JSON.stringify({
+    v: 1, type: 'ready-next-match', completedRoundId: 'first',
+    catalogVersion: CATALOG_VERSION, settingsRevision: revision,
+  });
+  guestSocket.send(playAgain(1));
+  await vi.waitFor(async () => expect((await saved(host.room.code)).players[1].ready).toBe(true));
+  // A refreshed browser must enable audio and opt in again, even after completion.
+  guestSocket = await open(guest);
+  expect((await saved(host.room.code)).players[1].ready).toBe(false);
+  guestSocket.send(playAgain(1));
+  await vi.waitFor(async () => expect((await saved(host.room.code)).players[1].ready).toBe(true));
+  const nextPreferences = { ...preferences, includeOpenings: true };
+  hostSocket.send(JSON.stringify({ v: 1, type: 'settings', settings: nextPreferences, settingsRevision: 1 }));
+  await vi.waitFor(async () => expect((await saved(host.room.code)).settingsRevision).toBe(2));
+  const waiting = await saved(host.room.code);
+  expect(waiting.phase).toBe('completed');
+  expect(waiting.players.every(player => !player.ready)).toBe(true);
+  expect(waiting.players.map(player => player.score)).toEqual([2, 0]);
+
+  // A failed rematch returns to the final standings, with settings still editable.
+  vi.mocked(prepareMatch).mockRejectedValueOnce(new Error('Temporary generator failure'));
+  hostSocket.send(playAgain(2));
+  await vi.waitFor(async () => expect((await saved(host.room.code)).players[0].ready).toBe(true));
+  hostSocket.send(JSON.stringify({ v: 1, type: 'unready' }));
+  await vi.waitFor(async () => expect((await saved(host.room.code)).players[0].ready).toBe(false));
+  hostSocket.send(playAgain(2));
+  await vi.waitFor(async () => expect((await saved(host.room.code)).players[0].ready).toBe(true));
+  expect(prepareMatch).toHaveBeenCalledTimes(1);
+  guestSocket.send(playAgain(2));
+  await vi.waitFor(async () => expect((await saved(host.room.code)).error).toContain('Could not prepare'));
+  const failed = await saved(host.room.code);
+  expect(failed.phase).toBe('completed');
+  expect(failed.completedAt).toBe(waiting.completedAt);
+  expect(failed.result).toEqual(waiting.result);
+  expect(failed.players.map(player => player.score)).toEqual([2, 0]);
+  expect(failed.players.every(player => !player.ready)).toBe(true);
+
+  // Retrying creates one fresh sequence and resets only match-specific state.
+  vi.mocked(prepareMatch).mockResolvedValueOnce([
+    { roundId: 'second-match', animeId, anime: 'Next anime', name: 'Next title', audioUrl: 'https://audio.example/two' },
+  ]);
+  hostSocket.send(playAgain(2));
+  guestSocket.send(playAgain(2));
+  guestSocket.send(playAgain(2));
+  await vi.waitFor(async () => expect((await saved(host.room.code)).phase).toBe('countdown'));
+  expect(prepareMatch).toHaveBeenCalledTimes(3);
+  expect(prepareMatch).toHaveBeenLastCalledWith(expect.anything(), nextPreferences);
+  const rematch = await saved(host.room.code);
+  expect(rematch.code).toBe(host.room.code);
+  expect(rematch.players.map(player => player.id)).toEqual([host.playerId, guest.playerId]);
+  expect(rematch.players.map(player => player.score)).toEqual([0, 0]);
+  expect(rematch.result).toBeUndefined();
+  expect(rematch.completedAt).toBeUndefined();
+  expect(rematch.submissions).toEqual({});
+  expect(rematch.roundIndex).toBe(0);
+  expect(rematch.songs?.[0].roundId).toBe('second-match');
+  expect(rematch.startsAt! - Date.now()).toBeGreaterThan(9000);
+  const alarm = await runInDurableObject(stub, (_instance: Room, state) => state.storage.getAlarm());
+  expect(alarm).toBe(rematch.startsAt);
   hostSocket.close(1000);
   guestSocket.close(1000);
 });
