@@ -4,7 +4,8 @@ import catalog from './catalog/answers.1c6fcb37341c6d74935feed490f60e02beb90dfcd
 export const CATALOG_VERSION = catalog.version;
 export const answerTitles: Readonly<Record<string, string>> = catalog.titles;
 export const DEFAULT_SETTINGS = {
-  amount: 40, repeatAnimes: false,
+  // Match the lobby's 5 / 10 / 20 / 50 presets for newly created rooms.
+  amount: 10, repeatAnimes: false,
   includeOpenings: true, includeEndings: true, includeSoundtracks: true,
 };
 export type Settings = typeof DEFAULT_SETTINGS;

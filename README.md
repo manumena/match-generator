@@ -12,6 +12,8 @@ npm ci
 npm run dev
 ```
 
+For Wi-Fi multiplayer testing, run `npm run dev:lan` here and `yarn dev:lan` in `animasters`. This command keeps Wrangler on loopback port 8787 and permits exact HTTPS frontend origins for this Mac’s current addresses. Complete the certificate setup and device trust steps in the frontend’s `docs/local-https.md` first. The CLI override does not change deployed origins or `.dev.vars`.
+
 The local Worker listens on `http://localhost:8787`. Existing local `.dev.vars` configuration is reused. Keep database credentials in that ignored file or in Cloudflare secrets; never commit them.
 
 | Command | Purpose |
@@ -84,7 +86,7 @@ For local verification run `npx wrangler dev --local --port 8788`; start the fro
 
 ## Multiplayer gameplay
 
-`src/rooms/game.ts` contains the deterministic round rules and explicit public snapshot projection. `room.ts` persists those rules in SQLite, authenticates commands, serializes mutations and schedules alarms. `match.ts` queries existing songs with canonical answer IDs and samples the configured count without repeated canonical anime; the old generation endpoint is unchanged. Current defaults are 40 songs and all song types enabled.
+`src/rooms/game.ts` contains the deterministic round rules and explicit public snapshot projection. `room.ts` persists those rules in SQLite, authenticates commands, serializes mutations and schedules alarms. `match.ts` queries existing songs with canonical answer IDs and samples the configured count without repeated canonical anime; the old generation endpoint is unchanged. New room defaults are 10 songs and all song types enabled.
 
 WebSocket game messages use `v: 1`: `ready` supplies `catalogVersion` (and `roundId` between rounds); `guess` supplies `roundId`, a unique `actionId`, and a selected `animeId` or null for pass. `clock` echoes a client `sentAt` with server time for scheduling only. Snapshots acknowledge final personal submissions without disclosing correctness until reveal. Unknown IDs, second attempts, stale rounds and deadline-boundary guesses are rejected. Per-room preparation tokens prevent duplicate generation; a thirty-second preparation timeout returns the room to the lobby. Alarms cover countdowns, guessing, preparation and expiry, with request-time checks for delayed alarms.
 
