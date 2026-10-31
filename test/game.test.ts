@@ -29,7 +29,7 @@ describe('authoritative match rules', () => {
     expect(room.phase).toBe('countdown');
     advance(room, 5_000, connected);
     expect(room.phase).toBe('guessing');
-    expect(room.deadline).toBe(95_000);
+    expect(room.deadline).toBe(65_000);
   });
 
   it('scores wrong/first-correct/pass/second-correct as -1,+4,0,+3', () => {
@@ -62,28 +62,46 @@ describe('authoritative match rules', () => {
     expect(room.submissions.p1.points).toBe(3);
   });
 
-  it('does not start the short timer for passes, and reveals when all pass', () => {
+  it('caps remaining time at 40 seconds on a pass, and reveals when all pass', () => {
     const { room } = match(2, 1);
     answer(room, 0, null, 15_000);
-    expect(room.deadline).toBe(95_000);
+    expect(room.deadline).toBe(55_000);
     answer(room, 1, null, 16_000);
     expect(room.phase).toBe('completed');
     expect(room.completedAt).toBe(16_000);
     expect(room.players.map(player => player.score)).toEqual([0, 0]);
   });
 
-  it('caps late first guesses at 90 seconds and rejects deadline-boundary submissions', () => {
+  it.each([25_000, 30_000])('does not extend the deadline when passing at %i ms', now => {
     const { room } = match();
-    answer(room, 0, ids[0], 90_000);
-    expect(room.deadline).toBe(95_000);
-    expect(answer(room, 1, ids[0], 95_000)).toBeDefined();
+    answer(room, 0, null, now);
+    expect(room.deadline).toBe(65_000);
+  });
+
+  it('does not extend a shortened deadline on another pass or a duplicate pass', () => {
+    const { room } = match();
+    answer(room, 0, null, 10_000);
+    expect(room.deadline).toBe(50_000);
+    answer(room, 0, null, 11_000);
+    answer(room, 1, null, 12_000);
+    expect(room.deadline).toBe(50_000);
+
+    answer(room, 2, ids[0], 13_000);
+    expect(room.deadline).toBe(33_000);
+  });
+
+  it('caps late first guesses at 60 seconds and rejects deadline-boundary submissions', () => {
+    const { room } = match();
+    answer(room, 0, ids[0], 60_000);
+    expect(room.deadline).toBe(65_000);
+    expect(answer(room, 1, ids[0], 65_000)).toBeDefined();
     expect(room.result?.players.map(player => player.points)).toEqual([4, 0, 0, 0]);
   });
 
   it('pauses between rounds when all disconnect and resumes with a fresh countdown', () => {
     const { room, connected } = match();
     advance(room, 10_000, connected);
-    advance(room, 95_000, []);
+    advance(room, 65_000, []);
     expect(room.phase).toBe('paused');
     expect(room.roundIndex).toBe(1);
     advance(room, 120_000, ['p0']);
@@ -97,7 +115,7 @@ describe('authoritative match rules', () => {
     const { room } = match();
     expect(answer(room, 0, -20, 10_001)).toBeDefined();
     expect(room.submissions).toEqual({});
-    expect(room.deadline).toBe(95_000);
+    expect(room.deadline).toBe(65_000);
   });
 
   it('recovers a timed-out preparation and permits another readiness attempt', () => {

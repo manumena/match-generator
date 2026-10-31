@@ -182,7 +182,7 @@ export function advance(room: RoomState, now: number, connected: string[]): void
       room.startsAt = undefined;
     } else if (now >= room.startsAt!) {
       room.phase = 'guessing';
-      room.deadline = room.startsAt! + 90_000;
+      room.deadline = room.startsAt! + 60_000;
     }
   }
   if (room.phase === 'paused' && connected.length) beginCountdown(room, now, connected);
@@ -234,6 +234,10 @@ export function submit(room: RoomState, player: Player, action: { roundId?: unkn
     actionId: action.actionId, animeId: animeId as number | null, correct,
     points: animeId === null ? 0 : correct ? room.players.length - rank : -1,
   };
+  // Passing can shorten the round, but must never extend an existing deadline.
+  if (animeId === null) {
+    room.deadline = Math.min(room.deadline!, now + 40_000);
+  }
   if (animeId !== null && !room.firstGuess) {
     room.firstGuess = true;
     room.deadline = Math.min(room.deadline!, now + 20_000);
