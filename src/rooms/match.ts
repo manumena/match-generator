@@ -9,6 +9,7 @@ interface SongRow {
   anime: string;
   name: string;
   path: string;
+  artwork_url?: string | null;
 }
 const AUDIO_BASE = 'https://dszqiegiplfnrnovpqvn.supabase.co/storage/v1/object/public/animasters/';
 
@@ -25,9 +26,11 @@ export async function prepareMatch(env: Env, settings: Settings): Promise<Song[]
   const types = selectedTypes.length ? selectedTypes : ['opening', 'ending', 'soundtrack'];
   const db = getDBConnection(env);
   const result = await db(`
-    SELECT s.id, s.anime, s.name, s.path, a.anime_id
+    SELECT s.id, s.anime, s.name, s.path, a.anime_id,
+           artwork.public_url AS artwork_url
     FROM public.songs s
     JOIN catalog.song_answers a ON a.song_id = s.id
+    LEFT JOIN catalog.artwork_assets artwork ON artwork.anime_id = a.anime_id
     WHERE s.type::text = ANY($1::text[])
     ORDER BY s.id`, [types]);
   return selectSongs(result.rows as SongRow[], settings);
@@ -51,5 +54,6 @@ export function selectSongs(rows: SongRow[], settings: Settings): Song[] {
     anime: row.anime, name: row.name,
     // Existing paths are already URL encoded. Do not encode '%' a second time.
     audioUrl: AUDIO_BASE + row.path,
+    ...(row.artwork_url ? { artworkUrl: row.artwork_url } : {}),
   }));
 }

@@ -19,6 +19,22 @@ function answer(room: ReturnType<typeof match>['room'], player: number, animeId:
 }
 
 describe('authoritative match rules', () => {
+  it('keeps artwork private until the corresponding answer is revealed', () => {
+    const { room, connected } = match(1, 2);
+    room.songs![0].artworkUrl = 'https://images.example/answer-one.jpg';
+    room.songs![1].artworkUrl = 'https://images.example/answer-two.jpg';
+
+    expect(JSON.stringify(publicSnapshot(room, connected))).not.toContain('https://images.example/');
+    advance(room, 5_000, connected);
+    expect(JSON.stringify(publicSnapshot(room, connected))).not.toContain('https://images.example/');
+    answer(room, 0, ids[0], 5_001);
+
+    const revealed = publicSnapshot(room, connected);
+    expect(revealed.result?.artworkUrl).toBe('https://images.example/answer-one.jpg');
+    expect(JSON.stringify(revealed)).not.toContain('answer-two.jpg');
+    expect(revealed.round).not.toHaveProperty('artworkUrl');
+  });
+
   it('pins the catalog and keeps the first countdown at five seconds', () => {
     const { room, connected } = match();
     expect(room.catalogVersion).toBe(CATALOG_VERSION);

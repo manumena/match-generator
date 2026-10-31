@@ -31,7 +31,11 @@ async function saved(code: string): Promise<RoomState> {
 it('completes a match, preserves standings on rematch failure, and starts one fresh match after retry', async () => {
   const animeId = Number(Object.keys(answerTitles)[0]);
   vi.mocked(prepareMatch).mockResolvedValue([
-    { roundId: 'first', animeId, anime: 'Hidden anime', name: 'Hidden title', audioUrl: 'https://audio.example/one' },
+    {
+      roundId: 'first', animeId, anime: 'Hidden anime', name: 'Hidden title',
+      audioUrl: 'https://audio.example/one',
+      artworkUrl: 'https://images.example/first-poster.jpg',
+    },
   ]);
   const host = await post('/rooms', 'Host');
   const guest = await post(`/rooms/${host.room.code}/join`, 'Guest');
@@ -59,6 +63,7 @@ it('completes a match, preserves standings on rematch failure, and starts one fr
   const countdown = await saved(host.room.code);
   expect(countdown.startsAt! - Date.now()).toBeGreaterThan(4000);
   expect(JSON.stringify(snapshots)).not.toContain('Hidden anime');
+  expect(JSON.stringify(snapshots)).not.toContain('first-poster.jpg');
   const denied = await worker.fetch(new Request(`https://api.example/rooms/${host.room.code}/join`, {
     method: 'POST', body: JSON.stringify({ nickname: 'Late' }),
   }), env, {} as ExecutionContext);
@@ -73,8 +78,15 @@ it('completes a match, preserves standings on rematch failure, and starts one fr
   await runDurableObjectAlarm(stub);
   hostSocket.send(JSON.stringify({ v: 1, type: 'guess', roundId: 'first', actionId: 'one', animeId }));
   await vi.waitFor(async () => expect((await saved(host.room.code)).submissions[host.playerId]).toBeDefined());
+  expect(JSON.stringify(snapshots)).not.toContain('first-poster.jpg');
   guestSocket.send(JSON.stringify({ v: 1, type: 'guess', roundId: 'first', actionId: 'two', animeId: null }));
   await vi.waitFor(async () => expect((await saved(host.room.code)).phase).toBe('completed'));
+  await vi.waitFor(() => expect(snapshots).toContainEqual(expect.objectContaining({
+    room: expect.objectContaining({
+      phase: 'completed',
+      result: expect.objectContaining({ artworkUrl: 'https://images.example/first-poster.jpg' }),
+    }),
+  })));
   expect((await saved(host.room.code)).players.map(player => player.score)).toEqual([2, 0]);
 
   // Keep the same room and standings while players choose a rematch.

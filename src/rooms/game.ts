@@ -24,6 +24,7 @@ export interface Song {
   anime: string;
   name: string;
   audioUrl: string;
+  artworkUrl?: string;
 }
 export interface Submission {
   actionId: string;
@@ -36,6 +37,7 @@ export interface Result {
   number: number;
   anime: string;
   name: string;
+  artworkUrl?: string;
   players: { id: string; guess: string | null; points: number; correct: boolean }[];
 }
 export interface RoomState {
@@ -144,6 +146,8 @@ function finishRound(room: RoomState, now: number, connected: string[]): void {
   const song = room.songs![room.roundIndex];
   room.result = {
     roundId: song.roundId, number: room.roundIndex + 1, anime: song.anime, name: song.name,
+    // Keep artwork private with the song sequence until this round is revealed.
+    ...(song.artworkUrl ? { artworkUrl: song.artworkUrl } : {}),
     players: room.players.map(player => {
       const submission = room.submissions[player.id];
       player.score = (player.score ?? 0) + (submission?.points ?? 0);
