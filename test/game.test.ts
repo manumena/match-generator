@@ -19,17 +19,17 @@ function answer(room: ReturnType<typeof match>['room'], player: number, animeId:
 }
 
 describe('authoritative match rules', () => {
-  it('pins the catalog and keeps the first countdown at ten seconds', () => {
+  it('pins the catalog and keeps the first countdown at five seconds', () => {
     const { room, connected } = match();
     expect(room.catalogVersion).toBe(CATALOG_VERSION);
-    expect(room.startsAt).toBe(10_000);
+    expect(room.startsAt).toBe(5_000);
     expect(setReady(room, room.players[0], 'round-0', CATALOG_VERSION, 1, connected)).toBeDefined();
-    expect(room.startsAt).toBe(10_000);
-    advance(room, 9_999, connected);
+    expect(room.startsAt).toBe(5_000);
+    advance(room, 4_999, connected);
     expect(room.phase).toBe('countdown');
-    advance(room, 10_000, connected);
+    advance(room, 5_000, connected);
     expect(room.phase).toBe('guessing');
-    expect(room.deadline).toBe(100_000);
+    expect(room.deadline).toBe(95_000);
   });
 
   it('scores wrong/first-correct/pass/second-correct as -1,+4,0,+3', () => {
@@ -65,7 +65,7 @@ describe('authoritative match rules', () => {
   it('does not start the short timer for passes, and reveals when all pass', () => {
     const { room } = match(2, 1);
     answer(room, 0, null, 15_000);
-    expect(room.deadline).toBe(100_000);
+    expect(room.deadline).toBe(95_000);
     answer(room, 1, null, 16_000);
     expect(room.phase).toBe('completed');
     expect(room.completedAt).toBe(16_000);
@@ -74,16 +74,16 @@ describe('authoritative match rules', () => {
 
   it('caps late first guesses at 90 seconds and rejects deadline-boundary submissions', () => {
     const { room } = match();
-    answer(room, 0, ids[0], 95_000);
-    expect(room.deadline).toBe(100_000);
-    expect(answer(room, 1, ids[0], 100_000)).toBeDefined();
+    answer(room, 0, ids[0], 90_000);
+    expect(room.deadline).toBe(95_000);
+    expect(answer(room, 1, ids[0], 95_000)).toBeDefined();
     expect(room.result?.players.map(player => player.points)).toEqual([4, 0, 0, 0]);
   });
 
   it('pauses between rounds when all disconnect and resumes with a fresh countdown', () => {
     const { room, connected } = match();
     advance(room, 10_000, connected);
-    advance(room, 100_000, []);
+    advance(room, 95_000, []);
     expect(room.phase).toBe('paused');
     expect(room.roundIndex).toBe(1);
     advance(room, 120_000, ['p0']);
@@ -97,7 +97,7 @@ describe('authoritative match rules', () => {
     const { room } = match();
     expect(answer(room, 0, -20, 10_001)).toBeDefined();
     expect(room.submissions).toEqual({});
-    expect(room.deadline).toBe(100_000);
+    expect(room.deadline).toBe(95_000);
   });
 
   it('recovers a timed-out preparation and permits another readiness attempt', () => {
@@ -164,13 +164,13 @@ describe('playing another match', () => {
     const { room, connected } = completedMatch();
     const songs = [{ ...room.songs![0], roundId: 'new-first' }];
     startMatch(room, songs, 20_000, connected);
-    expect(room.startsAt).toBe(30_000);
+    expect(room.startsAt).toBe(25_000);
     expect(room.result).toBeUndefined();
     expect(room.completedAt).toBeUndefined();
     expect(room.players.map(player => player.score)).toEqual([0, 0]);
     expect(room.submissions).toEqual({});
     expect(setReady(room, room.players[0], 'new-first', CATALOG_VERSION, 20_001, connected)).toBeDefined();
     advance(room, 20_002, connected);
-    expect(room.startsAt).toBe(30_000);
+    expect(room.startsAt).toBe(25_000);
   });
 });

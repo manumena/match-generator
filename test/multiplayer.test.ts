@@ -57,7 +57,7 @@ it('completes a match, preserves standings on rematch failure, and starts one fr
   expect(prepareMatch).toHaveBeenCalledTimes(1);
   expect(prepareMatch).toHaveBeenCalledWith(expect.anything(), preferences);
   const countdown = await saved(host.room.code);
-  expect(countdown.startsAt! - Date.now()).toBeGreaterThan(9000);
+  expect(countdown.startsAt! - Date.now()).toBeGreaterThan(4000);
   expect(JSON.stringify(snapshots)).not.toContain('Hidden anime');
   const denied = await worker.fetch(new Request(`https://api.example/rooms/${host.room.code}/join`, {
     method: 'POST', body: JSON.stringify({ nickname: 'Late' }),
@@ -134,7 +134,7 @@ it('completes a match, preserves standings on rematch failure, and starts one fr
   expect(rematch.submissions).toEqual({});
   expect(rematch.roundIndex).toBe(0);
   expect(rematch.songs?.[0].roundId).toBe('second-match');
-  expect(rematch.startsAt! - Date.now()).toBeGreaterThan(9000);
+  expect(rematch.startsAt! - Date.now()).toBeGreaterThan(4000);
   const alarm = await runInDurableObject(stub, (_instance: Room, state) => state.storage.getAlarm());
   expect(alarm).toBe(rematch.startsAt);
   hostSocket.close(1000);

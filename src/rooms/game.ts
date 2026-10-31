@@ -131,7 +131,9 @@ export function startMatch(room: RoomState, songs: Song[], now: number, connecte
 
 export function beginCountdown(room: RoomState, now: number, connected: string[]): void {
   room.phase = connected.length ? 'countdown' : 'paused';
-  room.startsAt = connected.length ? now + 10_000 : undefined;
+  // First-song preparation is shorter; between-song readiness retains ten seconds.
+  const countdownDuration = room.roundIndex === 0 ? 5_000 : 10_000;
+  room.startsAt = connected.length ? now + countdownDuration : undefined;
   room.deadline = undefined;
   room.firstGuess = false;
   room.submissions = {};
