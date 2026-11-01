@@ -1,4 +1,5 @@
 import catalog from './catalog/answers.1c6fcb37341c6d74935feed490f60e02beb90dfcdb457a8249eb8b2a2fdf8ddc.json';
+import { canonicalAnswerId } from './catalog/answer-identity';
 
 // Keep this published catalog revision available for rooms created before a deploy.
 export const CATALOG_VERSION = catalog.version;
@@ -232,7 +233,9 @@ export function submit(room: RoomState, player: Player, action: { roundId?: unkn
   if (animeId !== null && (typeof animeId !== 'number' || !Number.isSafeInteger(animeId) || !answerTitles[animeId])) {
     return 'Choose an anime from the suggestions, or pass.';
   }
-  const correct = animeId === song.animeId;
+  // Preserve the selected ID for reconnects and reveal labels; only scoring
+  // resolves reviewed duplicates from existing autocomplete catalogs.
+  const correct = animeId !== null && canonicalAnswerId(animeId as number) === canonicalAnswerId(song.animeId);
   const rank = Object.values(room.submissions).filter(value => value.correct).length;
   room.submissions[player.id] = {
     actionId: action.actionId, animeId: animeId as number | null, correct,

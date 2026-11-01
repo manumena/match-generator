@@ -19,6 +19,51 @@ function answer(room: ReturnType<typeof match>['room'], player: number, animeId:
 }
 
 describe('authoritative match rules', () => {
+  it('scores the first ranma suggestion and its continuation as the original song answer', () => {
+    const { room, connected } = match(3, 1);
+    room.songs![0].animeId = 51;
+    room.songs![0].anime = 'Ranma 1/2';
+    room.songs![0].name = 'Olvida la Amargura';
+
+    // The published index ranks ID 714 first for "ranma" via its exact alias.
+    expect(answer(room, 0, 714, 5_001)).toBeUndefined();
+    expect(publicSnapshot(room, connected, 'p0').submission?.animeId).toBe(714);
+    expect(answer(room, 1, 520, 5_002)).toBeUndefined();
+    expect(answer(room, 2, 51, 5_003)).toBeUndefined();
+
+    expect(room.result?.players.map(player => player.correct)).toEqual([true, true, true]);
+    expect(room.result?.players.map(player => player.points)).toEqual([3, 2, 1]);
+    expect(room.result?.players.map(player => player.guess)).toEqual([
+      'Ranma 1/2',
+      'Ranma 1/2 Nettou Hen',
+      'Ranma 1/2',
+    ]);
+  });
+
+  it.each([714, 520])('accepts the original Ranma answer for a song stored under duplicate ID %i', animeId => {
+    const { room } = match(1, 1);
+    room.songs![0].animeId = animeId;
+
+    expect(answer(room, 0, 51, 5_001)).toBeUndefined();
+    expect(room.result?.players[0]).toMatchObject({ correct: true, points: 1 });
+  });
+
+  it.each([
+    { songId: 51, guessId: 35809 },
+    { songId: 35809, guessId: 714 },
+    { songId: 51, guessId: 42 },
+    { songId: 51, guessId: null },
+  ])('keeps remakes, unrelated answers and passes separate ($songId / $guessId)', ({ songId, guessId }) => {
+    const { room } = match(1, 1);
+    room.songs![0].animeId = songId;
+
+    expect(answer(room, 0, guessId, 5_001)).toBeUndefined();
+    expect(room.result?.players[0]).toMatchObject({
+      correct: false,
+      points: guessId === null ? 0 : -1,
+    });
+  });
+
   it('keeps artwork private until the corresponding answer is revealed', () => {
     const { room, connected } = match(1, 2);
     room.songs![0].artworkUrl = 'https://images.example/answer-one.jpg';
