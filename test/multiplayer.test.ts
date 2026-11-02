@@ -152,3 +152,68 @@ it('completes a match, preserves standings on rematch failure, and starts one fr
   hostSocket.close(1000);
   guestSocket.close(1000);
 });
+
+it.each([true, false])('reveals the song after all connected players submit (disconnect first: %s)', async disconnectFirst => {
+  const host = await post('/rooms', 'Host');
+  const guest = await post(`/rooms/${host.room.code}/join`, 'Guest');
+  const departing = await post(`/rooms/${host.room.code}/join`, 'Departing');
+  const hostSocket = await open(host);
+  const guestSocket = await open(guest);
+  const departingSocket = await open(departing);
+  const snapshots: { room: {
+    phase: string;
+    players: { id: string; connected: boolean; ready: boolean }[];
+    result?: { roundId: string };
+  } }[] = [];
+  hostSocket.addEventListener('message', event => {
+    snapshots.push(JSON.parse(event.data as string));
+  });
+
+  const stub = env.ROOMS.getByName(host.room.code);
+  const deadline = Date.now() + 60_000;
+  await runInDurableObject(stub, (_instance: Room, state) => {
+    const room: RoomState = JSON.parse(state.storage.sql.exec<{ data: string }>('SELECT data FROM lobby').one().data);
+    const song = { animeId: 1, anime: 'Anime', name: 'Song', audioUrl: 'https://audio.example/song' };
+    room.songs = [{ ...song, roundId: 'first' }, { ...song, roundId: 'second' }];
+    room.phase = 'guessing';
+    room.roundIndex = 0;
+    room.startsAt = Date.now() - 1_000;
+    room.deadline = deadline;
+    state.storage.sql.exec('UPDATE lobby SET data = ?', JSON.stringify(room));
+  });
+
+  const disconnect = async () => {
+    departingSocket.close(1000);
+    await vi.waitFor(() => expect(snapshots.some(snapshot =>
+      snapshot.room.players.some(player => player.id === departing.playerId && !player.connected),
+    )).toBe(true));
+  };
+  const guess = JSON.stringify({ v: 1, type: 'guess', roundId: 'first', actionId: 'answer', animeId: 1 });
+  if (disconnectFirst) await disconnect();
+
+  hostSocket.send(guess);
+  await vi.waitFor(async () => expect((await saved(host.room.code)).submissions[host.playerId]).toBeDefined());
+  expect((await saved(host.room.code)).phase).toBe('guessing');
+
+  guestSocket.send(guess);
+  if (!disconnectFirst) {
+    await vi.waitFor(async () => expect((await saved(host.room.code)).submissions[guest.playerId]).toBeDefined());
+    expect((await saved(host.room.code)).phase).toBe('guessing');
+    await disconnect();
+  }
+
+  await vi.waitFor(() => expect(snapshots.some(snapshot =>
+    snapshot.room.phase === 'countdown' && snapshot.room.result?.roundId === 'first',
+  )).toBe(true));
+  const countdown = await saved(host.room.code);
+  expect(countdown.roundIndex).toBe(1);
+  expect(countdown.result?.players).toEqual([
+    { id: host.playerId, guess: answerTitles[1], correct: true, points: 3 },
+    { id: guest.playerId, guess: answerTitles[1], correct: true, points: 2 },
+    { id: departing.playerId, guess: null, correct: false, points: 0 },
+  ]);
+  expect(await runInDurableObject(stub, (_instance: Room, state) => state.storage.getAlarm())).toBe(countdown.startsAt);
+
+  hostSocket.close(1000);
+  guestSocket.close(1000);
+});

@@ -172,6 +172,11 @@ function finishRound(room: RoomState, now: number, connected: string[]): void {
   }
 }
 
+function allConnectedPlayersSubmitted(room: RoomState, connected: string[]): boolean {
+  // An empty room keeps its answer deadline so reconnecting players can resume.
+  return connected.length > 0 && connected.every(playerId => Boolean(room.submissions[playerId]));
+}
+
 /** Called before every action and by alarms. Late alarms never accept late guesses. */
 export function advance(room: RoomState, now: number, connected: string[]): void {
   if (room.phase === 'preparing' && now >= room.preparationDeadline!) {
@@ -191,7 +196,12 @@ export function advance(room: RoomState, now: number, connected: string[]): void
     }
   }
   if (room.phase === 'paused' && connected.length) beginCountdown(room, now, connected);
-  if (room.phase === 'guessing' && now >= room.deadline!) finishRound(room, now, connected);
+  if (room.phase === 'guessing') {
+    // A disconnect can leave only players whose answers are already final.
+    if (now >= room.deadline! || allConnectedPlayersSubmitted(room, connected)) {
+      finishRound(room, now, connected);
+    }
+  }
 }
 
 function readyForMatch(room: RoomState, player: Player, version: unknown, settingsRevision: unknown): string | undefined {
@@ -249,7 +259,7 @@ export function submit(room: RoomState, player: Player, action: { roundId?: unkn
     room.firstGuess = true;
     room.deadline = Math.min(room.deadline!, now + 20_000);
   }
-  if (room.players.every(member => room.submissions[member.id])) finishRound(room, now, connected);
+  if (allConnectedPlayersSubmitted(room, connected)) finishRound(room, now, connected);
 }
 
 /** Allowlist public fields explicitly. No private song sequence or pending scores. */

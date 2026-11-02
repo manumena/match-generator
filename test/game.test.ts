@@ -133,6 +133,64 @@ describe('authoritative match rules', () => {
     expect(room.players.map(player => player.score)).toEqual([0, 0]);
   });
 
+  it.each([
+    { songs: 1, animeId: ids[0] },
+    { songs: 2, animeId: ids[0] },
+    { songs: 1, animeId: null },
+    { songs: 2, animeId: null },
+  ])('ends the song when connected players submit ($songs songs, answer $animeId)', ({ songs, animeId }) => {
+    const { room } = match(3, songs);
+    const connected = ['p0', 'p1'];
+    advance(room, 5_000, connected);
+
+    submit(room, room.players[0], { roundId: 'round-0', actionId: 'first', animeId }, 6_000, connected);
+    expect(room.phase).toBe('guessing');
+    submit(room, room.players[1], { roundId: 'round-0', actionId: 'second', animeId }, 7_000, connected);
+
+    expect(room.phase).toBe(songs === 1 ? 'completed' : 'countdown');
+    expect(room.roundIndex).toBe(1);
+    expect(room.result?.players[2]).toEqual({ id: 'p2', guess: null, points: 0, correct: false });
+    expect(room.players.map(player => player.score)).toEqual(animeId === null ? [0, 0, 0] : [3, 2, 0]);
+  });
+
+  it('reveals on disconnect once every remaining player has answered, preserving departed players scores', () => {
+    const { room, connected } = match(4, 1);
+    answer(room, 0, ids[0], 6_000);
+    answer(room, 1, ids[0], 7_000);
+    answer(room, 2, ids[1], 8_000);
+
+    advance(room, 9_000, connected.slice(0, 2));
+
+    expect(room.phase).toBe('completed');
+    expect(room.completedAt).toBe(9_000);
+    expect(room.players.map(player => player.score)).toEqual([4, 3, -1, 0]);
+    advance(room, 10_000, connected.slice(0, 2));
+    expect(room.players.map(player => player.score)).toEqual([4, 3, -1, 0]);
+  });
+
+  it('keeps the answer window open when everybody disconnects', () => {
+    const { room } = match(2, 1);
+    answer(room, 0, null, 6_000);
+    advance(room, 7_000, []);
+    expect(room.phase).toBe('guessing');
+    expect(room.result).toBeUndefined();
+
+    advance(room, 46_000, []);
+    expect(room.phase).toBe('completed');
+  });
+
+  it('waits for a player who reconnects before the remaining answers arrive', () => {
+    const { room, connected } = match(3, 1);
+    advance(room, 5_000, ['p0', 'p1']);
+    submit(room, room.players[0], { roundId: 'round-0', actionId: 'first', animeId: null }, 6_000, ['p0', 'p1']);
+    advance(room, 7_000, connected);
+    answer(room, 1, null, 8_000);
+    expect(room.phase).toBe('guessing');
+
+    answer(room, 2, null, 9_000);
+    expect(room.phase).toBe('completed');
+  });
+
   it.each([25_000, 30_000])('does not extend the deadline when passing at %i ms', now => {
     const { room } = match();
     answer(room, 0, null, now);
