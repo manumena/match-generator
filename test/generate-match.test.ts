@@ -30,7 +30,7 @@ describe('existing match selection', () => {
     vi.spyOn(Math, 'random').mockReturnValueOnce(0.9).mockReturnValueOnce(0);
     expect(await generateMatch(env, { amount: 20, repeatAnimes: true, includeEndings: false, includeSoundtracks: false })).toEqual(songs);
     expect(query.mock.calls[0][0]).toBe("SELECT id FROM songs WHERE type IN ('opening');");
-    expect(query.mock.calls[1][0]).toBe('SELECT * FROM songs WHERE id IN (2, 1);');
+    expect(query.mock.calls[1][0]).toBe('SELECT id, anime, name, type, number, path FROM songs WHERE id IN (2, 1);');
   });
 
   it('falls back to all types when every filter is false', async () => {

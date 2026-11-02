@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-02",
+  "songs": {
+    "32": {
+      "status": "needs_title_review",
+      "reason": "Boku Dake ga Inai Machi is the anime title, not the published song title. The mapped release credits Re:Re: to Asian Kung-Fu Generation, but the actual track must be identified before assigning that performer."
+    },
+    "16": {
+      "sourceTitle": "Zankyou Zanka (残響散歌)",
+      "reason": "MyAnimeList spells the title Zankyou Zanka; the anime and label credit Aimer for 残響散歌, romanized Zankyo Sanka. The stored filename also says Zankyou Sanka.",
+      "references": ["https://sonymusic.com.tw/album/aimer-zankyo-sanka-asa-ga-kuru-standard-edition/", "https://www.sonymusic.co.jp/artist/aimer/info/535793"]
+    },
+    "25": {
+      "sourceTitle": "ワスレガタキ",
+      "reason": "Published title is in katakana; Wasuregataki is its romanization. The official Dr.STONE announcement credits Huwie Ishizaki.",
+      "references": ["https://dr-stone.jp/news/4065/", "https://dr-stone.fandom.com/wiki/Wasuregataki"]
+    },
+    "33": {
+      "sourceTitle": "Zankoku na Tenshi no Thesis (残酷な天使のテーゼ, A Cruel Angel's Thesis)",
+      "reason": "The source explicitly includes the English title; the stored title uses The rather than A. Same Evangelion opening, credited to Yoko Takahashi."
+    },
+    "35": {
+      "sourceTitle": "Kibou no Uta (希望の唄)",
+      "reason": "Kibō and Kibou are alternate romanizations of the same long vowel in the published title. Same mapped Food Wars opening."
+    },
+    "43": {
+      "sourceTitle": "JoJo ~Sono Chi no Sadame~ (ジョジョ～その血の運命～)",
+      "reason": "Stored That Bloody Fate is a translated rendering of Sono Chi no Sadame, also published as The Fate of That Blood; the filename includes JoJo. Credited to Hiroaki TOMMY Tominaga.",
+      "references": ["https://jojowiki.com/JoJo_~Sono_Chi_no_Sadame~"]
+    },
+    "47": {
+      "sourceTitle": "DADDY! DADDY! DO! feat. Airi Suzuki (DADDY! DADDY! DO! feat. 鈴木愛理)",
+      "artistCredit": "Masayuki Suzuki feat. Airi Suzuki",
+      "reason": "Stored title omits the featured singer. Preserve the performer field plus Airi Suzuki, explicitly credited in the published title.",
+      "references": ["https://kaguya.love/3rd/news/?article_id=60220"]
+    },
+    "48": {
+      "sourceTitle": "GIRI GIRI feat Suu (GIRI GIRI feat. すぅ)",
+      "artistCredit": "Masayuki Suzuki feat. Suu",
+      "reason": "Stored title omits the featured singer. Preserve the performer field plus Suu, explicitly credited in the title and official third-season announcement.",
+      "references": ["https://kaguya.love/3rd/news/?article_id=60220"]
+    },
+    "49": {
+      "sourceTitle": "Love Dramatic feat. Rikka Ihara (ラブ・ドラマティック feat.伊原六花)",
+      "artistCredit": "Masayuki Suzuki feat. Rikka Ihara",
+      "reason": "Stored title omits the featured singer. Preserve the performer field plus Rikka Ihara, explicitly credited in the published title."
+    },
+    "66": {
+      "sourceTitle": "アイドル",
+      "reason": "Idol is the English rendering of アイドル. The source credits YOASOBI, whose official release announcement also links the Idol release.",
+      "references": ["https://www.yoasobi-music.jp/news/552387"]
+    },
+    "101": {
+      "sourceTitle": "Guren",
+      "reason": "Crimsom is a stored typo for Crimson. Crimson Lotus is the translated title of Guren; the filename uses Crimson Lotus. Original theme credit is DOES.",
+      "references": ["https://naruto.fandom.com/wiki/Crimson_Lotus", "https://naruto-official.com/en/anime/naruto2"]
+    },
+    "112": {
+      "sourceTitle": "Niwaka Ame Nimo Makezu (ニワカ雨ニモ負ケズ)",
+      "reason": "The stored English translation identifies the same opening published as Niwaka Ame Nimo Makezu, credited to NICO Touches the Walls.",
+      "references": ["https://naruto.fandom.com/wiki/Not_Even_Sudden_Rain_Can_Defeat_Me", "https://naruto-official.com/en/anime/naruto2"]
+    },
+    "115": {
+      "sourceTitle": "Totsugeki Rock (突撃ロック)",
+      "reason": "Tosugeki is missing a t in the stored title and filename. The official Naruto credits list Totsugeki Rock and The Cro-Magnons.",
+      "references": ["https://naruto-official.com/en/anime/naruto2"]
+    },
+    "120": {
+      "sourceTitle": "Ｗ●ＲＫ",
+      "reason": "The published title stylizes the letter O as a filled circle. Same Hell's Paradise opening, credited to millennium parade and Sheena Ringo."
+    },
+    "122": {
+      "sourceTitle": "Chouzetsu☆Dynamic! (超絶☆ダイナミック!)",
+      "reason": "Chōzetsu and Chouzetsu are alternate long-vowel romanizations of the same title; same Dragon Ball Super opening."
+    },
+    "123": {
+      "sourceTitle": "Genkai Toppa × Survivor (限界突破×サバイバー)",
+      "reason": "Stored Genkai Toppa abbreviates the published Genkai Toppa × Survivor title; there is one matching theme in the mapped Dragon Ball Super release."
+    },
+    "2": { "status": "localized_version_review", "reason": "English broadcast title; the original Japanese Beyblade opening credit is not sufficient." },
+    "26": { "status": "localized_version_review", "reason": "Spanish broadcast title; verify the Latin American GT performer, not the original Japanese artist." },
+    "52": { "status": "localized_version_review", "reason": "Spanish broadcast opening; requires localized-version performer evidence." },
+    "53": { "status": "localized_version_review", "reason": "Stored title is the localized show title; identify the actual recording and performer." },
+    "69": { "status": "localized_version_review", "reason": "Johto is not a unique song/language identity; identify the specific localized broadcast recording." },
+    "70": { "status": "localized_version_review", "reason": "Spanish Pokémon theme; verify the localized broadcast performer." },
+    "73": { "status": "localized_version_review", "reason": "Spanish Ranma opening; the Japanese original's credit cannot be substituted." },
+    "77": { "status": "localized_version_review", "reason": "Spanish Sailor Moon theme; verify the localized broadcast performer." },
+    "83": { "status": "localized_version_review", "reason": "Spanish Slam Dunk theme; verify the localized broadcast performer." },
+    "94": { "status": "localized_version_review", "reason": "Localized Yu-Gi-Oh title; identify the actual broadcast theme before crediting a performer." }
+  }
+}

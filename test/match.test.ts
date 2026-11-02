@@ -2,6 +2,32 @@ import { expect, it } from 'vitest';
 import { answerTitles, DEFAULT_SETTINGS } from '../src/rooms/game';
 import { selectSongs } from '../src/rooms/match';
 
+it.each([null, undefined, '', '  '])('omits missing or blank artist credits (%s)', artistCredit => {
+  const [song] = selectSongs([{
+    id: 1,
+    anime_id: Number(Object.keys(answerTitles)[0]),
+    anime: 'Anime',
+    name: 'Song',
+    path: 'track.mp3',
+    artist_credit: artistCredit,
+  }], { ...DEFAULT_SETTINGS, amount: 1 });
+
+  expect(song).not.toHaveProperty('artistCredit');
+});
+
+it('keeps the full artist credit on the private selected song', () => {
+  const [song] = selectSongs([{
+    id: 1,
+    anime_id: Number(Object.keys(answerTitles)[0]),
+    anime: 'Anime',
+    name: 'Song',
+    path: 'track.mp3',
+    artist_credit: ' Masayuki Suzuki feat. Airi Suzuki ',
+  }], { ...DEFAULT_SETTINGS, amount: 1 });
+
+  expect(song.artistCredit).toBe('Masayuki Suzuki feat. Airi Suzuki');
+});
+
 it.each([
   { type: 'opening', number: 3, release_count: 1, sequence_count: 1, expected: { songType: 'opening', sequenceNumber: 3 } },
   { type: 'ending', number: 2, release_count: 1, sequence_count: 1, expected: { songType: 'ending', sequenceNumber: 2 } },

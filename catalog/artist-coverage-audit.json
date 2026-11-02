@@ -1,0 +1,3006 @@
+{
+  "auditedAt": "2026-11-02T04:54:08.205Z",
+  "scope": "The owner confirmed original/broadcast recordings and Japanese-language recordings for Japanese-titled tracks. Audio waveforms were not independently verified.",
+  "source": "Published MyAnimeList opening/ending credits, retrieved by existing release IDs.",
+  "songs": 125,
+  "releasePages": 153,
+  "unavailablePages": [],
+  "sourceSnapshots": [
+    {
+      "malId": 1,
+      "status": 200,
+      "sha256": "d1a974755f15a83ed6fd42a41bc13cdaeb490eade9346bab649fdbe82e625280"
+    },
+    {
+      "malId": 20,
+      "status": 200,
+      "sha256": "507cb0783d163f33ae893d01a3ebd2b66248b7ae63f6fa177a73e5235d277843"
+    },
+    {
+      "malId": 21,
+      "status": 200,
+      "sha256": "b091b0506c3486cd8b3cef74e7f3d85a2bca29fd1f620fc27ca9d7a9965f7d71"
+    },
+    {
+      "malId": 30,
+      "status": 200,
+      "sha256": "0d527f345a2c5dce1be1c86cce14dc4cd82b02e92ef48008a0097d45f83d8a49"
+    },
+    {
+      "malId": 45,
+      "status": 200,
+      "sha256": "9d4581fa3b9bb002e9754d5f30f7d23efe6f4e91ad5df59e770c04c0a19dae03"
+    },
+    {
+      "malId": 121,
+      "status": 200,
+      "sha256": "2f2a50aa0fbef69a7e2fdb669b8fff52d2b2a728e1a91dfe3d01f8f984f2dded"
+    },
+    {
+      "malId": 154,
+      "status": 200,
+      "sha256": "716625c861d58c1017e12e85473c23b4e9442618164f9ff8763def212b709227"
+    },
+    {
+      "malId": 170,
+      "status": 200,
+      "sha256": "20f5dfd2e8d003c8ac73ebb6e3b94407bd01f97a7384386b1bc7fc2c3b8d8291"
+    },
+    {
+      "malId": 210,
+      "status": 200,
+      "sha256": "ed21498b8ecfb9adb72266abdba467661c318e9a4fe5bddcc8d64b2cc171cb3b"
+    },
+    {
+      "malId": 225,
+      "status": 200,
+      "sha256": "7eac60b811737c216c0ff855176c95503361c85109939f7781f8e7d91d9704d7"
+    },
+    {
+      "malId": 226,
+      "status": 200,
+      "sha256": "ab64bded27d9ae9276d31abdec0b0b255f7c54bca1c1a871437a0dcadee7f3f5"
+    },
+    {
+      "malId": 232,
+      "status": 200,
+      "sha256": "d115320a801852e6fb358a1903ec2a6cf95838cd6208f60db3951c68b80c92b8"
+    },
+    {
+      "malId": 288,
+      "status": 200,
+      "sha256": "0d3e1bfc7ec044b070362883e842661a9c7009cf482b2fbe3595ea9cd9fd1655"
+    },
+    {
+      "malId": 339,
+      "status": 200,
+      "sha256": "09f052f69e252e1fbed89bb15bc09daf61c7623b76604b3f850ff0a633f5907f"
+    },
+    {
+      "malId": 481,
+      "status": 200,
+      "sha256": "217415cba7442994566e73e5fb70a6429430a6f6ad035780a143ab57367bbe8d"
+    },
+    {
+      "malId": 527,
+      "status": 200,
+      "sha256": "a36891684cef1d0c8a891c47a833b521f63765d866c1791e612f3e5cc8731aab"
+    },
+    {
+      "malId": 530,
+      "status": 200,
+      "sha256": "6ee09ca1f321ee7378f9e5dc41626a0c40a43e0fc1b467ac91f56a91d9a87db7"
+    },
+    {
+      "malId": 532,
+      "status": 200,
+      "sha256": "d6adb1c5bcc2590e25a2f8482aaa9bdf5bac52cc09e954375429a612b5efe0bd"
+    },
+    {
+      "malId": 534,
+      "status": 200,
+      "sha256": "439c713c6f1ac1db578a429b83995db80cf30d023bedf1881ba725a64f8d31de"
+    },
+    {
+      "malId": 535,
+      "status": 200,
+      "sha256": "922df1d09ddc13695fa4794cdc4f51e2d5f04bc61aac4d5d838149243e899ff3"
+    },
+    {
+      "malId": 552,
+      "status": 200,
+      "sha256": "5708a7ba26a1b05b15bf2986f317ffd35343b1e14632af4edf9b7d22fec978bc"
+    },
+    {
+      "malId": 740,
+      "status": 200,
+      "sha256": "d5f850a276472b5194886d726d97d93ebc1abca5d5e66b25b0fa662745023420"
+    },
+    {
+      "malId": 813,
+      "status": 200,
+      "sha256": "a8cfa0290f51122f233dbfe7070c2bf04a199c32039abb8db5a870c8b4c3f83f"
+    },
+    {
+      "malId": 874,
+      "status": 200,
+      "sha256": "0ff9927a68443fd8c5713161de178b3503b3dedd3f842b25ec4d6a4b0bb5fad5"
+    },
+    {
+      "malId": 996,
+      "status": 200,
+      "sha256": "71d4d03a1bdf475337249c3413feba900b66e1ab0478c5f096a5e8c1e5e0dbcf"
+    },
+    {
+      "malId": 1138,
+      "status": 200,
+      "sha256": "53f1af69fc8067a26f04900d942f06cb282619b64468204cc34f1967ef0b4f09"
+    },
+    {
+      "malId": 1172,
+      "status": 200,
+      "sha256": "efc1b061a56e514e701e735540413e868d5c9292f5fea87592713dedeba76487"
+    },
+    {
+      "malId": 1239,
+      "status": 200,
+      "sha256": "0852673dc4f5f23057fd9978a5194a38a38ebb526d2c48341522759e7237f8a6"
+    },
+    {
+      "malId": 1254,
+      "status": 200,
+      "sha256": "460dee7329f0f06c44ba79c84255dc2cc6093ffa8d4a8fbbf7b100beeab27c21"
+    },
+    {
+      "malId": 1313,
+      "status": 200,
+      "sha256": "4756f653aa25f31fa1f7ce4356e35c6b87d9cb9b333184fe300139279cfedc72"
+    },
+    {
+      "malId": 1535,
+      "status": 200,
+      "sha256": "193ea53c0202bbf67f3a96c89f412288d6e44b63249e5a8a4b097bc61314d863"
+    },
+    {
+      "malId": 1575,
+      "status": 200,
+      "sha256": "227b51d77198046b7d9b9a1295ed0960118c90f6c008149a58f95f63371cad23"
+    },
+    {
+      "malId": 1735,
+      "status": 200,
+      "sha256": "3f8403f4e509101a10a94db54df6420490f563c074df41ccfeee79bb5edbbf11"
+    },
+    {
+      "malId": 2001,
+      "status": 200,
+      "sha256": "e78ce21fea3b68ce51941a7f6432c0ab52dc39542ad69e24d0ff351b17440cea"
+    },
+    {
+      "malId": 2400,
+      "status": 200,
+      "sha256": "9bee1d2344bad2afd21b26096ba5474b0a6f613dc440e11c2a4491a465f10811"
+    },
+    {
+      "malId": 2904,
+      "status": 200,
+      "sha256": "5e3fdac29b4c5d7ffd5b06abd37a17dace054861a8ee470ef74837228d003d9f"
+    },
+    {
+      "malId": 4028,
+      "status": 200,
+      "sha256": "cda7705b416cf2104d92945efe772a7edbb583cb4274de1341a2902b9a004416"
+    },
+    {
+      "malId": 5114,
+      "status": 200,
+      "sha256": "19f44cac0a3ae2826524add99a24f058cc26e5d7b5bc141c94bff60d3099e580"
+    },
+    {
+      "malId": 5233,
+      "status": 200,
+      "sha256": "82fa4fbfbae7ba50e1abd475af017bfc2bf2d76934d3f32c1cbad56f6925dbd8"
+    },
+    {
+      "malId": 9253,
+      "status": 200,
+      "sha256": "a9f2d78c80dc9baa1130f7d31e6be1b58b224682d4962eb4d7167e5a7f22a312"
+    },
+    {
+      "malId": 9756,
+      "status": 200,
+      "sha256": "6a80887403c724e96282d2df07c79d6ad35dc1a62b4b131985e4a20aa95ad506"
+    },
+    {
+      "malId": 11061,
+      "status": 200,
+      "sha256": "635ce7f844ef7f6d4791854876bbd4ecc3462f469f46b9dcd914d3700a32fb24"
+    },
+    {
+      "malId": 11111,
+      "status": 200,
+      "sha256": "12bb74623096ca8090d7447bd458160305c4307c2c68288d09f1428325a7b234"
+    },
+    {
+      "malId": 11757,
+      "status": 200,
+      "sha256": "7963c569fbd5091f955ad3eded66587d014adae5ab6affc5506bc1c83edc5e76"
+    },
+    {
+      "malId": 14719,
+      "status": 200,
+      "sha256": "9ae31df059c580e79ddc8455390e89af058ec3dcb45208bd70fcab89f711a8b9"
+    },
+    {
+      "malId": 16498,
+      "status": 200,
+      "sha256": "0569e801d463e9a1290e5189add8e19dda5db1f704a3dc23e47569e0a53d25bf"
+    },
+    {
+      "malId": 20583,
+      "status": 200,
+      "sha256": "0746f4463bc02849c55f00b13fcb9084619d6bf8a38d6b4df7f04d40a4b5ffb3"
+    },
+    {
+      "malId": 21881,
+      "status": 200,
+      "sha256": "52d2899ef01069c35fc969c6658ac639a293527573db77e1cebcf823919228b6"
+    },
+    {
+      "malId": 22199,
+      "status": 200,
+      "sha256": "8013923db768d092f6dc50d68e9079cd6f819cdc69f8334eed450ac5850a8c50"
+    },
+    {
+      "malId": 22319,
+      "status": 200,
+      "sha256": "4431dbf5597a8be959e2978a727c53055a3c2ae4378ee2a9a5429f0a3c82642d"
+    },
+    {
+      "malId": 22535,
+      "status": 200,
+      "sha256": "c61496a9dbcdf1192cbdecbb97390dbf8db9c0d577efc3ca18f57a21e94d2ebd"
+    },
+    {
+      "malId": 23273,
+      "status": 200,
+      "sha256": "9d2f5cc9950814852f84ca88d19cce55dff4d3b372bdff54d63f54c302d05351"
+    },
+    {
+      "malId": 23755,
+      "status": 200,
+      "sha256": "2087e4ee70efa8b35a9e527e220a3c52ee0e4a447633110ac0daa2d45436caa4"
+    },
+    {
+      "malId": 25777,
+      "status": 200,
+      "sha256": "6e01f7aa41b486d5030cd85762c104385b98baecd4ccc1526437cc25b1965ea5"
+    },
+    {
+      "malId": 27899,
+      "status": 200,
+      "sha256": "efc9756d74fbfc391141a977231c5d17e190bf41b5dd83b3b4193e87c554a4b8"
+    },
+    {
+      "malId": 28171,
+      "status": 200,
+      "sha256": "b44d2220fcec80af7496341020424057f179e9e2efd669fdd7d15065e67cc214"
+    },
+    {
+      "malId": 28223,
+      "status": 200,
+      "sha256": "d019f6d40b8cc507bf25ffa0653e28e25d641ac546d04558b951a037d2fc2878"
+    },
+    {
+      "malId": 28891,
+      "status": 200,
+      "sha256": "8a71a137535659ea2361a92491ab3c891e6200bb8766d3cceb32fc42fcc4df74"
+    },
+    {
+      "malId": 29803,
+      "status": 200,
+      "sha256": "a4c790463f55677f508dc11d8c70ad6060c48f5b20a3aa19cc8eaf38744f52d1"
+    },
+    {
+      "malId": 30276,
+      "status": 200,
+      "sha256": "1bee476dfe34bb8f254988c762b4a4ee0992eb8b71b697790d33130f2f40915d"
+    },
+    {
+      "malId": 30694,
+      "status": 200,
+      "sha256": "4708815a32fe018f0f9a406efcb487abad1936cd23411832d61fc670a3925129"
+    },
+    {
+      "malId": 31043,
+      "status": 200,
+      "sha256": "77a60328c98b54a391cffd943a734f070a332b14db52714ed26d7b5903012dcb"
+    },
+    {
+      "malId": 31240,
+      "status": 200,
+      "sha256": "6fa4dba1a864c7722adda40d82dd7799590b0b496314b0497f2d5494e8df5110"
+    },
+    {
+      "malId": 31722,
+      "status": 200,
+      "sha256": "7e026a78f9fdf164a61a51aaa24eaff80ecbb124a8f5c0967820e3e4feba7ce0"
+    },
+    {
+      "malId": 31964,
+      "status": 200,
+      "sha256": "710ed3e1c88e112f4432c74ad75f6c2c5a415082c8e708071f2b6613f6c700b3"
+    },
+    {
+      "malId": 32182,
+      "status": 200,
+      "sha256": "4c1520e3375a97d34a0f394179d7b7cb4708e6f451ae38551b0fe3db01eb55e1"
+    },
+    {
+      "malId": 32282,
+      "status": 200,
+      "sha256": "3b003c84120a64babcaad54b2c7ab678aa5815a770849852fc003e00a05b1c4f"
+    },
+    {
+      "malId": 32935,
+      "status": 200,
+      "sha256": "3b3c3b2fef25daac1206a8c66c17418ca2da3c6570918b72b9b45c30b5e304f4"
+    },
+    {
+      "malId": 33206,
+      "status": 200,
+      "sha256": "92325a4eb5092ac821c5c287b66acd30e2bed397f7efc59b3ef627d4a93b7851"
+    },
+    {
+      "malId": 33486,
+      "status": 200,
+      "sha256": "6f07b0d650e9bcff0c7acdf3a3d5962c4e6917009e89c4da7902b3942db0b05e"
+    },
+    {
+      "malId": 34134,
+      "status": 200,
+      "sha256": "3e274cad4c4bde663183ceda271e5f8b097663c24e955b64b3fda9421730e187"
+    },
+    {
+      "malId": 34572,
+      "status": 200,
+      "sha256": "c9077fa8c87fca8e4194410a158bbf3701a208309f9d8aded9a4fe46ad6f2842"
+    },
+    {
+      "malId": 34577,
+      "status": 200,
+      "sha256": "b061df707d8646560b18286100dab175c531614fecb3c61f163a1669c3ee8ca8"
+    },
+    {
+      "malId": 35073,
+      "status": 200,
+      "sha256": "70b0ca435f6165756893331632b2196013694a80342994c58091bf7b255c9d8a"
+    },
+    {
+      "malId": 35760,
+      "status": 200,
+      "sha256": "24c12032592f7a3836eb39dedc7aea43df21751cab1ad03a9bc57b1f17705a15"
+    },
+    {
+      "malId": 35788,
+      "status": 200,
+      "sha256": "f170840f49af3cb65014ea5ad00c97d4cd545e9ccfbdd55b5737a794cf43e4d0"
+    },
+    {
+      "malId": 36456,
+      "status": 200,
+      "sha256": "fcd4faf2e4b290b9580ada21414738b06f8a3213f32c5c360c4c49c3046ae784"
+    },
+    {
+      "malId": 36474,
+      "status": 200,
+      "sha256": "2ad63fe1c4e2430d6b2bca31b2d46d26905e859b191d4984e5cd544473afeddb"
+    },
+    {
+      "malId": 36949,
+      "status": 200,
+      "sha256": "ee83baac6c49986aabc5c87ae8fc3a4f9139d76bd41e5b8084449da046662acc"
+    },
+    {
+      "malId": 37510,
+      "status": 200,
+      "sha256": "529d42c57e482bb549e529460cd187e5112e2348dfb5d47bb4eb99b3863e924c"
+    },
+    {
+      "malId": 37521,
+      "status": 200,
+      "sha256": "7300a6363c7ebe42de7875192273478d3e9ab9b314c1c9c725f661673ac5dd24"
+    },
+    {
+      "malId": 37675,
+      "status": 200,
+      "sha256": "077d3c639f508f6416e5452e3fd26f9afcfd6bb0f655845e848dc28b31c7f44d"
+    },
+    {
+      "malId": 37999,
+      "status": 200,
+      "sha256": "a2aec748bb3575cc8d55f2fd91cf19d3d67538319707f86db2eb318accf5735d"
+    },
+    {
+      "malId": 38000,
+      "status": 200,
+      "sha256": "10f531ba1663bf7be39b3c39451936d0aecfbfd129521647bb3a7cbae2fd2bcb"
+    },
+    {
+      "malId": 38408,
+      "status": 200,
+      "sha256": "cfbe5c6ce866f7db9469aa361220f706ea5068d4bf7033b0c47cea7cef4c1f16"
+    },
+    {
+      "malId": 38524,
+      "status": 200,
+      "sha256": "a456482333a7a81f0340330dcfb3e2dab3fc117f2be3ed262094c3d9fb110807"
+    },
+    {
+      "malId": 38671,
+      "status": 200,
+      "sha256": "1e256ba9c0f2115e6bd0457b429e9b901d621bd12a029151cc60a4ca6a446139"
+    },
+    {
+      "malId": 38691,
+      "status": 200,
+      "sha256": "7dc3b3b520ecd3e4fbe01ee6fe37494cda1d4635393c0e645d54858992466ed5"
+    },
+    {
+      "malId": 38883,
+      "status": 200,
+      "sha256": "f8306607887c6c70252cf9635ef09efbd3f6f1f21cc7315348953b7f9749f7cd"
+    },
+    {
+      "malId": 39247,
+      "status": 200,
+      "sha256": "fe7a318c3e42c8866abf735ae40b43a8603f68574622e4a77aa6f64f6989b570"
+    },
+    {
+      "malId": 39534,
+      "status": 200,
+      "sha256": "221d577b59d514767fb7eb9e691869f1465b781ed2e4edefa24b0419c7944ae6"
+    },
+    {
+      "malId": 39587,
+      "status": 200,
+      "sha256": "602a8b389d49fc70c161e6432095b251f0d38f50fe7b7a7bd6fe2eaadc55079c"
+    },
+    {
+      "malId": 39597,
+      "status": 200,
+      "sha256": "2d63fa6e6817dc7b52fe8cc79a55bc182e719ae5a9ebdf1431dc61d1b4cf337a"
+    },
+    {
+      "malId": 39701,
+      "status": 200,
+      "sha256": "c0d4f2aa8b462899e0072d45770ab34af117e4966f0d24edcf7cab2ef8f61760"
+    },
+    {
+      "malId": 39940,
+      "status": 200,
+      "sha256": "7004181f40137e8512b1d2a281e55f94811f85fe2cea6015670f34fb4961faf7"
+    },
+    {
+      "malId": 40028,
+      "status": 200,
+      "sha256": "d7c126ac5797daa5ccb7bdf844f9303ddaeed046f4187bde0de41f59b78fecc2"
+    },
+    {
+      "malId": 40540,
+      "status": 200,
+      "sha256": "b4e6feb9f6220e8bed768236900a13f27d3b79b89170dcd7d88cfa9525a26494"
+    },
+    {
+      "malId": 40591,
+      "status": 200,
+      "sha256": "b34a1c687e8ecca9dab15ae85e55b7057e25ef35a581671d937475eb21c773ac"
+    },
+    {
+      "malId": 40748,
+      "status": 200,
+      "sha256": "3b925a704f022e97a8dbee8cc4aa3005c30b6041811975ea9f6ca6e9bd8c731f"
+    },
+    {
+      "malId": 40776,
+      "status": 200,
+      "sha256": "c1bb9319197ae4d9e8abe6951d5723f5a24693de544d798cf514409aefce09b5"
+    },
+    {
+      "malId": 40852,
+      "status": 200,
+      "sha256": "2ba76b44dafa803b804a17942b832404247c2bcc4c68ccb465f98c933989c969"
+    },
+    {
+      "malId": 40902,
+      "status": 200,
+      "sha256": "05088b17b039f6606fec63a1441179f2beaef750cb0cbb0225506e6fd1aba186"
+    },
+    {
+      "malId": 40956,
+      "status": 200,
+      "sha256": "155ca43573234c0bd84b481a17703a06a7e7c8b8ad54397b4928359f42b06041"
+    },
+    {
+      "malId": 41491,
+      "status": 200,
+      "sha256": "2046545fb5f4e30e40fddda01a772b0c449a0169b9388711a55e57a7518b59bd"
+    },
+    {
+      "malId": 41587,
+      "status": 200,
+      "sha256": "97744eff864dc48ec70403b60d18527a50636a610eecb12abf7198bdd5a10b29"
+    },
+    {
+      "malId": 42203,
+      "status": 200,
+      "sha256": "b3ce1bf5e3915b75e9134a043b21ebcc644d84aa5849fbc30051deb446cf11ee"
+    },
+    {
+      "malId": 42249,
+      "status": 200,
+      "sha256": "51ab18d0f12f0d1fb07e4736d4fed550c68ac905136e651821c05be9e73d5f17"
+    },
+    {
+      "malId": 43608,
+      "status": 200,
+      "sha256": "bf80d9e1a88011f1df6f9995c06f2dee5e5a80fcbe702de4114ff4de482ba1c5"
+    },
+    {
+      "malId": 44511,
+      "status": 200,
+      "sha256": "d9966c07c505ff515da4cadefaf97437f83fac81cee431d01d0182b1ea1798d2"
+    },
+    {
+      "malId": 46569,
+      "status": 200,
+      "sha256": "870e2b1fb3c0ee4be0d68743aef45251310cb1fd5a470bb9a009056eec1b235b"
+    },
+    {
+      "malId": 47778,
+      "status": 200,
+      "sha256": "56b939f7fd038912f155c9c277e3db80d4024ff153fa41721a25b15baa77f390"
+    },
+    {
+      "malId": 48549,
+      "status": 200,
+      "sha256": "09403b41c7979feb267bad13a553188920a3314e3011726483db36a2d3620e03"
+    },
+    {
+      "malId": 48583,
+      "status": 200,
+      "sha256": "121637d96b3eefbb76423644820ac356ad35c3418640823555767b99a64edde7"
+    },
+    {
+      "malId": 48895,
+      "status": 200,
+      "sha256": "b88cb050cd8acac8ebc6609e0fd99f98bd36965e1773be0ad25c8c7783717c2b"
+    },
+    {
+      "malId": 49387,
+      "status": 200,
+      "sha256": "1fc44b43aae52cbb4e3066000f533345a510194caa21c9ac4d056e2ec793c0dd"
+    },
+    {
+      "malId": 49918,
+      "status": 200,
+      "sha256": "5ebdc470a708fb8bbb7bcdee9dbbb87c378309be28b75623c4c0b6f3988fdac6"
+    },
+    {
+      "malId": 49926,
+      "status": 200,
+      "sha256": "cf3493f2e79523fcfadd688b004bf8abe7dff61a705efc664ff971d569c61cc3"
+    },
+    {
+      "malId": 50172,
+      "status": 200,
+      "sha256": "4a5c520a42e971f6038bac741443cb3cb5e58361af75dc984764ec4f89afd0d2"
+    },
+    {
+      "malId": 50265,
+      "status": 200,
+      "sha256": "fb13606f846ac4abfc3877b192d4c6498fc108c8e2012b6f1be0e6ce6048bde1"
+    },
+    {
+      "malId": 50602,
+      "status": 200,
+      "sha256": "1643d69f49b828c0bd4bc289ebbe82690a1deeefbc7ea72f647ad43736dda3d9"
+    },
+    {
+      "malId": 50608,
+      "status": 200,
+      "sha256": "be3f1ad60294ec3f383976f0e1a9db72a83a68a6b7e8f0ce05ef8f892a188d0e"
+    },
+    {
+      "malId": 51009,
+      "status": 200,
+      "sha256": "69ae096b31bae7d4f039e153d9f85ed66398d70ede2705c81e9c65409bde13de"
+    },
+    {
+      "malId": 51019,
+      "status": 200,
+      "sha256": "389f7d7c74e517f6638d8c9e6f3ab3e56e4530a745cd1b3bcf55aab35bbb293b"
+    },
+    {
+      "malId": 51535,
+      "status": 200,
+      "sha256": "66aba6ad192286338686c47446a5ab59a15c5bc19661801adaee948387950353"
+    },
+    {
+      "malId": 51818,
+      "status": 200,
+      "sha256": "f3c3ed33a32349fee0fe340398bada8f70f115e8c05a8e8691be2030e221e61d"
+    },
+    {
+      "malId": 52034,
+      "status": 200,
+      "sha256": "6aec5266183db6049449223d70737e4150e9916046ec7dd54c8d7f49e2dc8713"
+    },
+    {
+      "malId": 52211,
+      "status": 200,
+      "sha256": "471cf7d3394b7537c594aec28d4b0b489f423834d050daab20aee3c5a6f149ec"
+    },
+    {
+      "malId": 52807,
+      "status": 200,
+      "sha256": "0046dff1621581b4cf603f1717fe81484922b1b653b12af6252ddbd824d71267"
+    },
+    {
+      "malId": 53887,
+      "status": 200,
+      "sha256": "692b3f336db40d3db892074b955f3bea852762e9fcc29c45cdafc0d217de7783"
+    },
+    {
+      "malId": 53924,
+      "status": 200,
+      "sha256": "ee6372a82e4142d3d9f32aebdb7fa733c19096f8753f06f29e5730afa87909b6"
+    },
+    {
+      "malId": 54789,
+      "status": 200,
+      "sha256": "5381459ac3cd9aed4dd41335d776b4d6bad227c28225916a0cbed8bbd9e62a1e"
+    },
+    {
+      "malId": 54857,
+      "status": 200,
+      "sha256": "0f2ebd487af161a942c1e96545c52ac42134a8a930abc95b253cd46c8f7f6c15"
+    },
+    {
+      "malId": 54918,
+      "status": 200,
+      "sha256": "c05fedc0e1a2035efab4caeddef508a610968c95c8e1e2c9b5844be79d2165d9"
+    },
+    {
+      "malId": 55644,
+      "status": 200,
+      "sha256": "c968635433e8516af8415194a0db3d711f9efe29903a9eb70a62a1b8c252430e"
+    },
+    {
+      "malId": 55701,
+      "status": 200,
+      "sha256": "677913f79b606f53891a6fa48a86c23ddec2d8f6a108175a2c8b7658b09a0f48"
+    },
+    {
+      "malId": 55791,
+      "status": 200,
+      "sha256": "75318e7bb25f83ef6044ae34bfc5ae7fecbaa63473e6172de61575b7daa3572b"
+    },
+    {
+      "malId": 55813,
+      "status": 200,
+      "sha256": "7db2bd53023aa56f24a942ddb52175de887821704a8fc2af691c8cf5fd0edabb"
+    },
+    {
+      "malId": 57592,
+      "status": 200,
+      "sha256": "600f33d6c86a97061fad2dedeb97865c94c8aadb53dbde292b2150fd304d7973"
+    },
+    {
+      "malId": 57658,
+      "status": 200,
+      "sha256": "2f6ae28335597c3a3dff416e23a3e52af71160b652a705839ee1e9ea66099dea"
+    },
+    {
+      "malId": 58934,
+      "status": 200,
+      "sha256": "f36b25f7d102cdf4838241822832d2792e78bd6cf8451c947e30364918744004"
+    },
+    {
+      "malId": 59027,
+      "status": 200,
+      "sha256": "e9987456e7854d57c7ec05831a7386a6bc74a6eb701a5bd667905e2561ea024b"
+    },
+    {
+      "malId": 59088,
+      "status": 200,
+      "sha256": "24241716f6222eabe04a7e9bf383a33d0bec68ee9edcd7c8698b9bf7486a1ed2"
+    },
+    {
+      "malId": 59229,
+      "status": 200,
+      "sha256": "7e36b71e3d1fd266ccc1e9d31b58b32d78316d516000dd5bd95512c1645cc674"
+    },
+    {
+      "malId": 60058,
+      "status": 200,
+      "sha256": "a5b4421226e76c4ed20d1a21719647bf8f7e0aed859cfb51330914d9efaf79e7"
+    },
+    {
+      "malId": 60098,
+      "status": 200,
+      "sha256": "e9e5bf6a91fef87282d9d56278c76f7dc70afab970d39765c1176b46cf77c662"
+    },
+    {
+      "malId": 61316,
+      "status": 200,
+      "sha256": "91c336fe8a0009dcd1b3bb3ce7fbe91f1450b1bb2a1656ac14e860917d3470d6"
+    },
+    {
+      "malId": 61322,
+      "status": 200,
+      "sha256": "cede66c7b71beb5cbe4841b4c14b88216ef9e2a466e77ce52e1516dedee79101"
+    },
+    {
+      "malId": 61339,
+      "status": 200,
+      "sha256": "3aeb586d28337a6da3e9c95707c636dee1287f928861b245efd423930c409738"
+    },
+    {
+      "malId": 61967,
+      "status": 200,
+      "sha256": "5f8d029decac5fee05387a784f93609d5f94c83e73ea44e34986d2706c586fd1"
+    },
+    {
+      "malId": 62568,
+      "status": 200,
+      "sha256": "81117239f0131aa06c9a2f5779375400b2eba2f2ce581ea3e7a21803485ac81f"
+    },
+    {
+      "malId": 63193,
+      "status": 200,
+      "sha256": "a29ed95c0f418bc0b8bd7c7caeddbb6811bc853b3cccc25f5861f50e89a31ff6"
+    },
+    {
+      "malId": 63794,
+      "status": 200,
+      "sha256": "17649773550805bb328cd0d4de11fddc9772ef7c3d614d507920fd63585e9909"
+    },
+    {
+      "malId": 63824,
+      "status": 200,
+      "sha256": "a5e0e6d4d5be36221399dd99515a05063f891e438c78ea0ef80718a1fc43a839"
+    }
+  ],
+  "counts": {
+    "unique_title_match": 96,
+    "localized_version_review": 10,
+    "reviewed_title_match": 15,
+    "needs_title_review": 1,
+    "conflicting_credits": 1,
+    "filename_title_match": 2
+  },
+  "rows": [
+    {
+      "songId": 1,
+      "anime": "Another",
+      "title": "Kyoumu Densen",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "ALI PROJECT",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 11111,
+          "type": "opening",
+          "title": "Kyoumu Densen (凶夢伝染)",
+          "artistCredit": "ALI PROJECT",
+          "sourceUrl": "https://myanimelist.net/anime/11111"
+        }
+      ]
+    },
+    {
+      "songId": 2,
+      "anime": "Beyblade",
+      "title": "Let it Rip",
+      "type": "opening",
+      "status": "localized_version_review",
+      "artistCredit": null,
+      "reason": "English broadcast title; the original Japanese Beyblade opening credit is not sufficient.",
+      "evidence": []
+    },
+    {
+      "songId": 3,
+      "anime": "Black Clover",
+      "title": "Haruka Mirai",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Kankaku Piero (感覚ピエロ)",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 34572,
+          "type": "opening",
+          "title": "Haruka Mirai (ハルカミライ)",
+          "artistCredit": "Kankaku Piero (感覚ピエロ)",
+          "sourceUrl": "https://myanimelist.net/anime/34572"
+        }
+      ]
+    },
+    {
+      "songId": 4,
+      "anime": "Boku no Hero Academia",
+      "title": "The Day",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Porno Graffitti",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 31964,
+          "type": "opening",
+          "title": "The Day",
+          "artistCredit": "Porno Graffitti",
+          "sourceUrl": "https://myanimelist.net/anime/31964"
+        }
+      ]
+    },
+    {
+      "songId": 5,
+      "anime": "Cardcaptor Sakura",
+      "title": "Catch You Catch Me",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Gumi",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 232,
+          "type": "opening",
+          "title": "Catch You Catch Me",
+          "artistCredit": "Gumi",
+          "sourceUrl": "https://myanimelist.net/anime/232"
+        }
+      ]
+    },
+    {
+      "songId": 6,
+      "anime": "Cardcaptor Sakura",
+      "title": "Groovy!",
+      "type": "ending",
+      "status": "unique_title_match",
+      "artistCredit": "Koumi Hirose",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 232,
+          "type": "ending",
+          "title": "Groovy!",
+          "artistCredit": "Koumi Hirose",
+          "sourceUrl": "https://myanimelist.net/anime/232"
+        }
+      ]
+    },
+    {
+      "songId": 7,
+      "anime": "Chainsawman",
+      "title": "Kick Back",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Kenshi Yonezu (米津玄師)",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 44511,
+          "type": "opening",
+          "title": "KICK BACK",
+          "artistCredit": "Kenshi Yonezu (米津玄師)",
+          "sourceUrl": "https://myanimelist.net/anime/44511"
+        }
+      ]
+    },
+    {
+      "songId": 8,
+      "anime": "Code Geass",
+      "title": "Colors",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "FLOW",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1575,
+          "type": "opening",
+          "title": "COLORS",
+          "artistCredit": "FLOW",
+          "sourceUrl": "https://myanimelist.net/anime/1575"
+        }
+      ]
+    },
+    {
+      "songId": 9,
+      "anime": "Code Geass",
+      "title": "Yuukyou Seishunka",
+      "type": "ending",
+      "status": "unique_title_match",
+      "artistCredit": "Ali Project",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1575,
+          "type": "ending",
+          "title": "Yuukyou Seishunka (勇侠青春謳)",
+          "artistCredit": "Ali Project",
+          "sourceUrl": "https://myanimelist.net/anime/1575"
+        }
+      ]
+    },
+    {
+      "songId": 10,
+      "anime": "Cowboy Bebop",
+      "title": "Tank!",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "The Seatbelts",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1,
+          "type": "opening",
+          "title": "Tank!",
+          "artistCredit": "The Seatbelts",
+          "sourceUrl": "https://myanimelist.net/anime/1"
+        }
+      ]
+    },
+    {
+      "songId": 11,
+      "anime": "Death Note",
+      "title": "The World",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Nightmare",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1535,
+          "type": "opening",
+          "title": "the WORLD",
+          "artistCredit": "Nightmare",
+          "sourceUrl": "https://myanimelist.net/anime/1535"
+        }
+      ]
+    },
+    {
+      "songId": 12,
+      "anime": "Death Parade",
+      "title": "Flyers",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "BRADIO",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 28223,
+          "type": "opening",
+          "title": "Flyers",
+          "artistCredit": "BRADIO",
+          "sourceUrl": "https://myanimelist.net/anime/28223"
+        }
+      ]
+    },
+    {
+      "songId": 13,
+      "anime": "Demon Slayer",
+      "title": "Akeboshi",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "LiSA",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 49926,
+          "type": "opening",
+          "title": "Akeboshi (明け星)",
+          "artistCredit": "LiSA",
+          "sourceUrl": "https://myanimelist.net/anime/49926"
+        }
+      ]
+    },
+    {
+      "songId": 14,
+      "anime": "Demon Slayer",
+      "title": "Gurenge",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "LiSA",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 38000,
+          "type": "opening",
+          "title": "Gurenge (紅蓮華)",
+          "artistCredit": "LiSA",
+          "sourceUrl": "https://myanimelist.net/anime/38000"
+        }
+      ]
+    },
+    {
+      "songId": 15,
+      "anime": "Demon Slayer",
+      "title": "Kizuna no Kiseki",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "MAN WITH A MISSION, milet",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 51019,
+          "type": "opening",
+          "title": "Kizuna no Kiseki (絆ノ奇跡)",
+          "artistCredit": "MAN WITH A MISSION, milet",
+          "sourceUrl": "https://myanimelist.net/anime/51019"
+        }
+      ]
+    },
+    {
+      "songId": 16,
+      "anime": "Demon Slayer",
+      "title": "Zankyo Sanka",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "Aimer",
+      "reason": "MyAnimeList spells the title Zankyou Zanka; the anime and label credit Aimer for 残響散歌, romanized Zankyo Sanka. The stored filename also says Zankyou Sanka.",
+      "evidence": [
+        {
+          "malId": 47778,
+          "type": "opening",
+          "title": "Zankyou Zanka (残響散歌)",
+          "artistCredit": "Aimer",
+          "sourceUrl": "https://myanimelist.net/anime/47778"
+        }
+      ],
+      "reviewReferences": [
+        "https://sonymusic.com.tw/album/aimer-zankyo-sanka-asa-ga-kuru-standard-edition/",
+        "https://www.sonymusic.co.jp/artist/aimer/info/535793"
+      ]
+    },
+    {
+      "songId": 17,
+      "anime": "Digimon Adventure",
+      "title": "Butterfly",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Kouji Wada",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 552,
+          "type": "opening",
+          "title": "Butter-Fly",
+          "artistCredit": "Kouji Wada",
+          "sourceUrl": "https://myanimelist.net/anime/552"
+        }
+      ]
+    },
+    {
+      "songId": 18,
+      "anime": "Digimon Adventure",
+      "title": "I wish",
+      "type": "ending",
+      "status": "unique_title_match",
+      "artistCredit": "AiM",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 552,
+          "type": "ending",
+          "title": "I Wish",
+          "artistCredit": "AiM",
+          "sourceUrl": "https://myanimelist.net/anime/552"
+        }
+      ]
+    },
+    {
+      "songId": 19,
+      "anime": "Digimon Adventure 2",
+      "title": "Ashita wa Atashi no Kaze ga Fuku",
+      "type": "ending",
+      "status": "unique_title_match",
+      "artistCredit": "AiM",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1313,
+          "type": "ending",
+          "title": "Ashita wa Atashi no Kaze ga Fuku",
+          "artistCredit": "AiM",
+          "sourceUrl": "https://myanimelist.net/anime/1313"
+        }
+      ]
+    },
+    {
+      "songId": 20,
+      "anime": "Digimon Adventure 2",
+      "title": "Target ~Akai Shougeki~",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Kouji Wada",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1313,
+          "type": "opening",
+          "title": "Target ~Akai Shougeki~",
+          "artistCredit": "Kouji Wada",
+          "sourceUrl": "https://myanimelist.net/anime/1313"
+        }
+      ]
+    },
+    {
+      "songId": 21,
+      "anime": "Digimon Tamers",
+      "title": "My Tomorrow",
+      "type": "ending",
+      "status": "unique_title_match",
+      "artistCredit": "AiM",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 874,
+          "type": "ending",
+          "title": "My Tomorrow",
+          "artistCredit": "AiM",
+          "sourceUrl": "https://myanimelist.net/anime/874"
+        }
+      ]
+    },
+    {
+      "songId": 22,
+      "anime": "Digimon Tamers",
+      "title": "The Biggest Dreamer",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Kouji Wada",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 874,
+          "type": "opening",
+          "title": "The Biggest Dreamer",
+          "artistCredit": "Kouji Wada",
+          "sourceUrl": "https://myanimelist.net/anime/874"
+        }
+      ]
+    },
+    {
+      "songId": 23,
+      "anime": "Dr. Stone",
+      "title": "Good Morning World!",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "BURNOUT SYNDROMES",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 38691,
+          "type": "opening",
+          "title": "Good Morning World!",
+          "artistCredit": "BURNOUT SYNDROMES",
+          "sourceUrl": "https://myanimelist.net/anime/38691"
+        }
+      ]
+    },
+    {
+      "songId": 24,
+      "anime": "Dr. Stone",
+      "title": "Sangenshoku",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "PELICAN FANCLUB",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 38691,
+          "type": "opening",
+          "title": "Sangenshoku (三原色)",
+          "artistCredit": "PELICAN FANCLUB",
+          "sourceUrl": "https://myanimelist.net/anime/38691"
+        }
+      ]
+    },
+    {
+      "songId": 25,
+      "anime": "Dr. Stone",
+      "title": "Wasuregataki",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "Huwie Ishizaki",
+      "reason": "Published title is in katakana; Wasuregataki is its romanization. The official Dr.STONE announcement credits Huwie Ishizaki.",
+      "evidence": [
+        {
+          "malId": 48549,
+          "type": "opening",
+          "title": "ワスレガタキ",
+          "artistCredit": "Huwie Ishizaki",
+          "sourceUrl": "https://myanimelist.net/anime/48549"
+        }
+      ],
+      "reviewReferences": [
+        "https://dr-stone.jp/news/4065/",
+        "https://dr-stone.fandom.com/wiki/Wasuregataki"
+      ]
+    },
+    {
+      "songId": 26,
+      "anime": "Dragon Ball GT",
+      "title": "Mi Corazón Encantado",
+      "type": "opening",
+      "status": "localized_version_review",
+      "artistCredit": null,
+      "reason": "Spanish broadcast title; verify the Latin American GT performer, not the original Japanese artist.",
+      "evidence": []
+    },
+    {
+      "songId": 27,
+      "anime": "Dragon Ball Z",
+      "title": "Boku-tachi wa Tenshi Datta",
+      "type": "ending",
+      "status": "unique_title_match",
+      "artistCredit": "Hironobu Kageyama",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 813,
+          "type": "ending",
+          "title": "Boku-tachi wa Tenshi datta",
+          "artistCredit": "Hironobu Kageyama",
+          "sourceUrl": "https://myanimelist.net/anime/813"
+        }
+      ]
+    },
+    {
+      "songId": 28,
+      "anime": "Dragon Ball Z",
+      "title": "Cha-la Head-cha-la",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Hironobu Kageyama",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 813,
+          "type": "opening",
+          "title": "Cha-La Head-Cha-La",
+          "artistCredit": "Hironobu Kageyama",
+          "sourceUrl": "https://myanimelist.net/anime/813"
+        }
+      ]
+    },
+    {
+      "songId": 29,
+      "anime": "Dragon Ball Z",
+      "title": "Dete Koi Tobikiri ZENKAI Power!",
+      "type": "ending",
+      "status": "unique_title_match",
+      "artistCredit": "MANNA",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 813,
+          "type": "ending",
+          "title": "Dete Koi Tobikiri ZENKAI Power!",
+          "artistCredit": "MANNA",
+          "sourceUrl": "https://myanimelist.net/anime/813"
+        }
+      ]
+    },
+    {
+      "songId": 30,
+      "anime": "Dragon Ball Z",
+      "title": "We Gotta Power",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Hironobu Kageyama",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 813,
+          "type": "opening",
+          "title": "We Gotta Power",
+          "artistCredit": "Hironobu Kageyama",
+          "sourceUrl": "https://myanimelist.net/anime/813"
+        }
+      ]
+    },
+    {
+      "songId": 31,
+      "anime": "Elfen Lied",
+      "title": "Lilium",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Kumiko Noma (野間久美子)",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 226,
+          "type": "opening",
+          "title": "LILIUM",
+          "artistCredit": "Kumiko Noma (野間久美子)",
+          "sourceUrl": "https://myanimelist.net/anime/226"
+        }
+      ]
+    },
+    {
+      "songId": 32,
+      "anime": "Erased",
+      "title": "Boku Dake ga Inai Machi",
+      "type": "opening",
+      "status": "needs_title_review",
+      "artistCredit": null,
+      "reason": "Boku Dake ga Inai Machi is the anime title, not the published song title. The mapped release credits Re:Re: to Asian Kung-Fu Generation, but the actual track must be identified before assigning that performer.",
+      "evidence": [
+        {
+          "malId": 31043,
+          "type": "opening",
+          "title": "Re:Re:",
+          "artistCredit": "Asian Kung-Fu Generation",
+          "sourceUrl": "https://myanimelist.net/anime/31043"
+        }
+      ]
+    },
+    {
+      "songId": 33,
+      "anime": "Evangelion",
+      "title": "The Cruel Angel's Thesis",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "Yoko Takahashi",
+      "reason": "The source explicitly includes the English title; the stored title uses The rather than A. Same Evangelion opening, credited to Yoko Takahashi.",
+      "evidence": [
+        {
+          "malId": 30,
+          "type": "opening",
+          "title": "Zankoku na Tenshi no Thesis (残酷な天使のテーゼ, A Cruel Angel's Thesis)",
+          "artistCredit": "Yoko Takahashi",
+          "sourceUrl": "https://myanimelist.net/anime/30"
+        }
+      ],
+      "reviewReferences": []
+    },
+    {
+      "songId": 34,
+      "anime": "Fire Force",
+      "title": "Inferno",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Mrs.GREEN APPLE",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 38671,
+          "type": "opening",
+          "title": "Inferno (インフェルノ)",
+          "artistCredit": "Mrs.GREEN APPLE",
+          "sourceUrl": "https://myanimelist.net/anime/38671"
+        }
+      ]
+    },
+    {
+      "songId": 35,
+      "anime": "Food Wars",
+      "title": "Kibō no Uta",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "ULTRA TOWER",
+      "reason": "Kibō and Kibou are alternate romanizations of the same long vowel in the published title. Same mapped Food Wars opening.",
+      "evidence": [
+        {
+          "malId": 28171,
+          "type": "opening",
+          "title": "Kibou no Uta (希望の唄)",
+          "artistCredit": "ULTRA TOWER",
+          "sourceUrl": "https://myanimelist.net/anime/28171"
+        }
+      ],
+      "reviewReferences": []
+    },
+    {
+      "songId": 36,
+      "anime": "Full Metal Alchemist",
+      "title": "Melissa",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Porno Graffitti",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 121,
+          "type": "opening",
+          "title": "Melissa (メリッサ)",
+          "artistCredit": "Porno Graffitti",
+          "sourceUrl": "https://myanimelist.net/anime/121"
+        }
+      ]
+    },
+    {
+      "songId": 37,
+      "anime": "Full Metal Alchemist Brotherhood",
+      "title": "Again",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "YUI",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 5114,
+          "type": "opening",
+          "title": "again",
+          "artistCredit": "YUI",
+          "sourceUrl": "https://myanimelist.net/anime/5114"
+        }
+      ]
+    },
+    {
+      "songId": 39,
+      "anime": "Haikyuu!!",
+      "title": "Hikari Are",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "BURNOUT SYNDROMES",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 32935,
+          "type": "opening",
+          "title": "Hikari Are (ヒカリアレ)",
+          "artistCredit": "BURNOUT SYNDROMES",
+          "sourceUrl": "https://myanimelist.net/anime/32935"
+        }
+      ]
+    },
+    {
+      "songId": 40,
+      "anime": "Hunter x Hunter",
+      "title": "Departure",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Ono Masatoshi",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 11061,
+          "type": "opening",
+          "title": "departure!",
+          "artistCredit": "Ono Masatoshi",
+          "sourceUrl": "https://myanimelist.net/anime/11061"
+        }
+      ]
+    },
+    {
+      "songId": 41,
+      "anime": "Jibaku Shounen Hanako kun",
+      "title": "No. 7",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Jibaku Shounen Band (Youji Ikuta from PENGUIN RESEARCH x Masayoshi Ooishi x ZiNG)",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 39534,
+          "type": "opening",
+          "title": "No.7",
+          "artistCredit": "Jibaku Shounen Band (Youji Ikuta from PENGUIN RESEARCH x Masayoshi Ooishi x ZiNG)",
+          "sourceUrl": "https://myanimelist.net/anime/39534"
+        }
+      ]
+    },
+    {
+      "songId": 42,
+      "anime": "Jojo's Bizarre Adventure",
+      "title": "Bloody Stream",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Coda",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 14719,
+          "type": "opening",
+          "title": "BLOODY STREAM",
+          "artistCredit": "Coda",
+          "sourceUrl": "https://myanimelist.net/anime/14719"
+        }
+      ]
+    },
+    {
+      "songId": 43,
+      "anime": "Jojo's Bizarre Adventure",
+      "title": "That Bloody Fate",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "Hiroaki TOMMY Tominaga",
+      "reason": "Stored That Bloody Fate is a translated rendering of Sono Chi no Sadame, also published as The Fate of That Blood; the filename includes JoJo. Credited to Hiroaki TOMMY Tominaga.",
+      "evidence": [
+        {
+          "malId": 14719,
+          "type": "opening",
+          "title": "JoJo ~Sono Chi no Sadame~ (ジョジョ～その血の運命～)",
+          "artistCredit": "Hiroaki TOMMY Tominaga",
+          "sourceUrl": "https://myanimelist.net/anime/14719"
+        }
+      ],
+      "reviewReferences": [
+        "https://jojowiki.com/JoJo_~Sono_Chi_no_Sadame~"
+      ]
+    },
+    {
+      "songId": 44,
+      "anime": "Jojo's Bizarre Adventure",
+      "title": "Roundabout",
+      "type": "ending",
+      "status": "unique_title_match",
+      "artistCredit": "YES",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 14719,
+          "type": "ending",
+          "title": "Roundabout",
+          "artistCredit": "YES",
+          "sourceUrl": "https://myanimelist.net/anime/14719"
+        }
+      ]
+    },
+    {
+      "songId": 45,
+      "anime": "Jujutsu Kaisen",
+      "title": "Kaikai Kitan",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Eve",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 40748,
+          "type": "opening",
+          "title": "KAIKAIKITAN (廻廻奇譚)",
+          "artistCredit": "Eve",
+          "sourceUrl": "https://myanimelist.net/anime/40748"
+        }
+      ]
+    },
+    {
+      "songId": 46,
+      "anime": "Jujutsu Kaisen",
+      "title": "Lost in Paradise",
+      "type": "ending",
+      "status": "unique_title_match",
+      "artistCredit": "ALI ft. AKLO",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 40748,
+          "type": "ending",
+          "title": "LOST IN PARADISE",
+          "artistCredit": "ALI ft. AKLO",
+          "sourceUrl": "https://myanimelist.net/anime/40748"
+        }
+      ]
+    },
+    {
+      "songId": 47,
+      "anime": "Kaguya-sama: Love is War",
+      "title": "DADDY! DADDY! DO!",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "Masayuki Suzuki feat. Airi Suzuki",
+      "reason": "Stored title omits the featured singer. Preserve the performer field plus Airi Suzuki, explicitly credited in the published title.",
+      "evidence": [
+        {
+          "malId": 40591,
+          "type": "opening",
+          "title": "DADDY! DADDY! DO! feat. Airi Suzuki (DADDY! DADDY! DO! feat. 鈴木愛理)",
+          "artistCredit": "Masayuki Suzuki",
+          "sourceUrl": "https://myanimelist.net/anime/40591"
+        }
+      ],
+      "reviewReferences": [
+        "https://kaguya.love/3rd/news/?article_id=60220"
+      ]
+    },
+    {
+      "songId": 48,
+      "anime": "Kaguya-sama: Love is War",
+      "title": "GIRI GIRI",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "Masayuki Suzuki feat. Suu",
+      "reason": "Stored title omits the featured singer. Preserve the performer field plus Suu, explicitly credited in the title and official third-season announcement.",
+      "evidence": [
+        {
+          "malId": 43608,
+          "type": "opening",
+          "title": "GIRI GIRI feat Suu (GIRI GIRI feat. すぅ)",
+          "artistCredit": "Masayuki Suzuki",
+          "sourceUrl": "https://myanimelist.net/anime/43608"
+        }
+      ],
+      "reviewReferences": [
+        "https://kaguya.love/3rd/news/?article_id=60220"
+      ]
+    },
+    {
+      "songId": 49,
+      "anime": "Kaguya-sama: Love is War",
+      "title": "Love Dramatic",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "Masayuki Suzuki feat. Rikka Ihara",
+      "reason": "Stored title omits the featured singer. Preserve the performer field plus Rikka Ihara, explicitly credited in the published title.",
+      "evidence": [
+        {
+          "malId": 37999,
+          "type": "opening",
+          "title": "Love Dramatic feat. Rikka Ihara (ラブ・ドラマティック feat.伊原六花)",
+          "artistCredit": "Masayuki Suzuki (鈴木雅之)",
+          "sourceUrl": "https://myanimelist.net/anime/37999"
+        }
+      ],
+      "reviewReferences": []
+    },
+    {
+      "songId": 50,
+      "anime": "Los Caballeros del Zodíaco",
+      "title": "Pegasus Fantasy",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "MAKE-UP",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1254,
+          "type": "opening",
+          "title": "Pegasus Fantasy",
+          "artistCredit": "MAKE-UP",
+          "sourceUrl": "https://myanimelist.net/anime/1254"
+        }
+      ]
+    },
+    {
+      "songId": 51,
+      "anime": "Los Justicieros",
+      "title": "Get Along",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Masami Okui and Megumi Hayashibara",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 534,
+          "type": "opening",
+          "title": "Get Along",
+          "artistCredit": "Masami Okui and Megumi Hayashibara",
+          "sourceUrl": "https://myanimelist.net/anime/534"
+        }
+      ]
+    },
+    {
+      "songId": 52,
+      "anime": "Medabots",
+      "title": " ¡Sabiduría y coraje!",
+      "type": "opening",
+      "status": "localized_version_review",
+      "artistCredit": null,
+      "reason": "Spanish broadcast opening; requires localized-version performer evidence.",
+      "evidence": []
+    },
+    {
+      "songId": 53,
+      "anime": "Mikami la Cazafantasmas",
+      "title": "Mikami la Cazafantasmas",
+      "type": "opening",
+      "status": "localized_version_review",
+      "artistCredit": null,
+      "reason": "Stored title is the localized show title; identify the actual recording and performer.",
+      "evidence": []
+    },
+    {
+      "songId": 54,
+      "anime": "Miss Kobayashi's Dragon Maid",
+      "title": "Ai no Supreme!",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "fhána",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 39247,
+          "type": "opening",
+          "title": "Ai no Supreme (愛のシュプリーム！)",
+          "artistCredit": "fhána",
+          "sourceUrl": "https://myanimelist.net/anime/39247"
+        }
+      ]
+    },
+    {
+      "songId": 55,
+      "anime": "Mob Psycho 100",
+      "title": "99",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "MOB CHOIR",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 32182,
+          "type": "opening",
+          "title": "99",
+          "artistCredit": "MOB CHOIR",
+          "sourceUrl": "https://myanimelist.net/anime/32182"
+        }
+      ]
+    },
+    {
+      "songId": 56,
+      "anime": "Naruto",
+      "title": "GO!!!",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "FLOW",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 20,
+          "type": "opening",
+          "title": "GO!!!",
+          "artistCredit": "FLOW",
+          "sourceUrl": "https://myanimelist.net/anime/20"
+        }
+      ]
+    },
+    {
+      "songId": 58,
+      "anime": "Naruto",
+      "title": "Haruka Kanata",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Asian Kung-fu Generation",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 20,
+          "type": "opening",
+          "title": "Haruka Kanata (遥か彼方)",
+          "artistCredit": "Asian Kung-fu Generation",
+          "sourceUrl": "https://myanimelist.net/anime/20"
+        }
+      ]
+    },
+    {
+      "songId": 59,
+      "anime": "Naruto",
+      "title": "Rocks",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Hound Dog",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 20,
+          "type": "opening",
+          "title": "R★O★C★K★S",
+          "artistCredit": "Hound Dog",
+          "sourceUrl": "https://myanimelist.net/anime/20"
+        }
+      ]
+    },
+    {
+      "songId": 60,
+      "anime": "Naruto",
+      "title": "Seishun Kyōsōkyoku",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Sambomaster",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 20,
+          "type": "opening",
+          "title": "Seishun Kyosokyoku (青春狂騒曲)",
+          "artistCredit": "Sambomaster",
+          "sourceUrl": "https://myanimelist.net/anime/20"
+        }
+      ]
+    },
+    {
+      "songId": 61,
+      "anime": "Naruto Shippuden",
+      "title": "Blood Circulator",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Asian Kung-Fu Generation",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Blood Circulator (ブラッドサーキュレーター)",
+          "artistCredit": "Asian Kung-Fu Generation",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 62,
+      "anime": "Naruto Shippuden",
+      "title": "Blue Bird",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Ikimonogakari",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Blue Bird (ブルーバード)",
+          "artistCredit": "Ikimonogakari",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 63,
+      "anime": "One Piece",
+      "title": "We Are!",
+      "type": "opening",
+      "status": "conflicting_credits",
+      "artistCredit": null,
+      "reason": "Matching releases list different performer credits.",
+      "evidence": [
+        {
+          "malId": 21,
+          "type": "opening",
+          "title": "We Are! (ウィーアー!)",
+          "artistCredit": "Hiroshi Kitadani (きただにひろし)",
+          "sourceUrl": "https://myanimelist.net/anime/21"
+        },
+        {
+          "malId": 21,
+          "type": "opening",
+          "title": "We Are! (ウィーアー! 〜7人の麦わら海賊団篇〜)",
+          "artistCredit": "the 7-nin no Mugiwara Kaizokudan (7人の麦わら海賊団)",
+          "sourceUrl": "https://myanimelist.net/anime/21"
+        },
+        {
+          "malId": 21,
+          "type": "opening",
+          "title": "We Are (ウィーアー! 〜10周年Ver.〜)",
+          "artistCredit": "TVXQ",
+          "sourceUrl": "https://myanimelist.net/anime/21"
+        }
+      ]
+    },
+    {
+      "songId": 64,
+      "anime": "One Punch Man",
+      "title": "Hoshi yori Saki ni Mitsukete Ageru",
+      "type": "ending",
+      "status": "unique_title_match",
+      "artistCredit": "Hiroko Moriguchi",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 30276,
+          "type": "ending",
+          "title": "Hoshi yori Saki ni Mitsukete Ageru (星より先に見つけてあげる)",
+          "artistCredit": "Hiroko Moriguchi",
+          "sourceUrl": "https://myanimelist.net/anime/30276"
+        }
+      ]
+    },
+    {
+      "songId": 65,
+      "anime": "One Punch Man",
+      "title": "THE HERO !! ~Okoreru Kobushi ni Hi wo Tsukero~",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "JAM Project",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 30276,
+          "type": "opening",
+          "title": "THE HERO !! ~Okoreru Kobushi ni Hi wo Tsukero~ (THE HERO !! ～怒れる拳に火をつけろ～)",
+          "artistCredit": "JAM Project",
+          "sourceUrl": "https://myanimelist.net/anime/30276"
+        }
+      ]
+    },
+    {
+      "songId": 66,
+      "anime": "Oshi no Ko",
+      "title": "Idol",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "YOASOBI",
+      "reason": "Idol is the English rendering of アイドル. The source credits YOASOBI, whose official release announcement also links the Idol release.",
+      "evidence": [
+        {
+          "malId": 52034,
+          "type": "opening",
+          "title": "アイドル",
+          "artistCredit": "YOASOBI",
+          "sourceUrl": "https://myanimelist.net/anime/52034"
+        }
+      ],
+      "reviewReferences": [
+        "https://www.yoasobi-music.jp/news/552387"
+      ]
+    },
+    {
+      "songId": 67,
+      "anime": "Overlord",
+      "title": "Clattanoia",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "O×T (Masayoshi Oishi × Tom-H@ck)",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 29803,
+          "type": "opening",
+          "title": "Clattanoia",
+          "artistCredit": "O×T (Masayoshi Oishi × Tom-H@ck)",
+          "sourceUrl": "https://myanimelist.net/anime/29803"
+        }
+      ]
+    },
+    {
+      "songId": 68,
+      "anime": "Parasyte",
+      "title": "Let Me Hear",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Fear, and Loathing in Las Vegas",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 22535,
+          "type": "opening",
+          "title": "Let Me Hear",
+          "artistCredit": "Fear, and Loathing in Las Vegas",
+          "sourceUrl": "https://myanimelist.net/anime/22535"
+        }
+      ]
+    },
+    {
+      "songId": 69,
+      "anime": "Pokemon",
+      "title": "Johto",
+      "type": "opening",
+      "status": "localized_version_review",
+      "artistCredit": null,
+      "reason": "Johto is not a unique song/language identity; identify the specific localized broadcast recording.",
+      "evidence": []
+    },
+    {
+      "songId": 70,
+      "anime": "Pokemon",
+      "title": "¡Atrapalos Ya!",
+      "type": "opening",
+      "status": "localized_version_review",
+      "artistCredit": null,
+      "reason": "Spanish Pokémon theme; verify the localized broadcast performer.",
+      "evidence": []
+    },
+    {
+      "songId": 71,
+      "anime": "Puella Magi Madoka Magica",
+      "title": "Connect",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "ClariS",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 9756,
+          "type": "opening",
+          "title": "Connect (コネクト)",
+          "artistCredit": "ClariS",
+          "sourceUrl": "https://myanimelist.net/anime/9756"
+        }
+      ]
+    },
+    {
+      "songId": 72,
+      "anime": "Puella Magi Madoka Magica",
+      "title": "Magia",
+      "type": "ending",
+      "status": "unique_title_match",
+      "artistCredit": "Kalafina",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 9756,
+          "type": "ending",
+          "title": "Magia",
+          "artistCredit": "Kalafina",
+          "sourceUrl": "https://myanimelist.net/anime/9756"
+        }
+      ]
+    },
+    {
+      "songId": 73,
+      "anime": "Ranma 1/2",
+      "title": "Olvida la Amargura",
+      "type": "opening",
+      "status": "localized_version_review",
+      "artistCredit": null,
+      "reason": "Spanish Ranma opening; the Japanese original's credit cannot be substituted.",
+      "evidence": []
+    },
+    {
+      "songId": 75,
+      "anime": "Re-ZERO: Starting Life in Another World",
+      "title": "Redo",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Konomi Suzuki",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 31240,
+          "type": "opening",
+          "title": "Redo",
+          "artistCredit": "Konomi Suzuki",
+          "sourceUrl": "https://myanimelist.net/anime/31240"
+        }
+      ]
+    },
+    {
+      "songId": 76,
+      "anime": "Ruroni Kenshin",
+      "title": "Sobakasu",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "JUDY AND MARY",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 45,
+          "type": "opening",
+          "title": "Sobakasu (そばかす)",
+          "artistCredit": "JUDY AND MARY",
+          "sourceUrl": "https://myanimelist.net/anime/45"
+        }
+      ]
+    },
+    {
+      "songId": 77,
+      "anime": "Sailor Moon",
+      "title": "Legendaria Luz de Luna",
+      "type": "opening",
+      "status": "localized_version_review",
+      "artistCredit": null,
+      "reason": "Spanish Sailor Moon theme; verify the localized broadcast performer.",
+      "evidence": []
+    },
+    {
+      "songId": 78,
+      "anime": "Serial Experiments Lain",
+      "title": "Duvet",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Bôa",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 339,
+          "type": "opening",
+          "title": "Duvet",
+          "artistCredit": "Bôa",
+          "sourceUrl": "https://myanimelist.net/anime/339"
+        }
+      ]
+    },
+    {
+      "songId": 79,
+      "anime": "Shaman King",
+      "title": "Northern Lighst",
+      "type": "opening",
+      "status": "filename_title_match",
+      "artistCredit": "Megumi Hayashibara",
+      "reason": "The existing audio filename resolves a spelling difference in the stored title.",
+      "evidence": [
+        {
+          "malId": 154,
+          "type": "opening",
+          "title": "Northern Lights",
+          "artistCredit": "Megumi Hayashibara",
+          "sourceUrl": "https://myanimelist.net/anime/154"
+        }
+      ]
+    },
+    {
+      "songId": 80,
+      "anime": "Shaman King",
+      "title": "Oversoul",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Megumi Hayashibara",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 154,
+          "type": "opening",
+          "title": "Over soul",
+          "artistCredit": "Megumi Hayashibara",
+          "sourceUrl": "https://myanimelist.net/anime/154"
+        }
+      ]
+    },
+    {
+      "songId": 81,
+      "anime": "Shingeki no Kyojin",
+      "title": "Guren no Yumiya",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Linked Horizon",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 16498,
+          "type": "opening",
+          "title": "Guren no Yumiya (紅蓮の弓矢)",
+          "artistCredit": "Linked Horizon",
+          "sourceUrl": "https://myanimelist.net/anime/16498"
+        }
+      ]
+    },
+    {
+      "songId": 82,
+      "anime": "Shingeki no Kyojin",
+      "title": "Jiyuu no Tsubasa",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Linked Horizon",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 16498,
+          "type": "opening",
+          "title": "Jiyuu no Tsubasa (自由の翼)",
+          "artistCredit": "Linked Horizon",
+          "sourceUrl": "https://myanimelist.net/anime/16498"
+        }
+      ]
+    },
+    {
+      "songId": 83,
+      "anime": "Slam Dunk",
+      "title": "Quiero Gritar Te Amo",
+      "type": "opening",
+      "status": "localized_version_review",
+      "artistCredit": null,
+      "reason": "Spanish Slam Dunk theme; verify the localized broadcast performer.",
+      "evidence": []
+    },
+    {
+      "songId": 84,
+      "anime": "Spy x Family",
+      "title": "Mixed Nuts",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Official HIGE DANdism (Official髭男dism)",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 50265,
+          "type": "opening",
+          "title": "Mixed Nuts (ミックスナッツ)",
+          "artistCredit": "Official HIGE DANdism (Official髭男dism)",
+          "sourceUrl": "https://myanimelist.net/anime/50265"
+        }
+      ]
+    },
+    {
+      "songId": 85,
+      "anime": "Spy x Family",
+      "title": "Souvenir",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "BUMP OF CHICKEN",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 50602,
+          "type": "opening",
+          "title": "SOUVENIR",
+          "artistCredit": "BUMP OF CHICKEN",
+          "sourceUrl": "https://myanimelist.net/anime/50602"
+        }
+      ]
+    },
+    {
+      "songId": 86,
+      "anime": "Steins; Gate",
+      "title": "Hacking to the Gate",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Kanako Itou",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 9253,
+          "type": "opening",
+          "title": "Hacking to the Gate",
+          "artistCredit": "Kanako Itou",
+          "sourceUrl": "https://myanimelist.net/anime/9253"
+        }
+      ]
+    },
+    {
+      "songId": 87,
+      "anime": "Sword Art Online",
+      "title": "Crossing Field",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "LiSA",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 11757,
+          "type": "opening",
+          "title": "crossing field",
+          "artistCredit": "LiSA",
+          "sourceUrl": "https://myanimelist.net/anime/11757"
+        }
+      ]
+    },
+    {
+      "songId": 88,
+      "anime": "Sword Art Online",
+      "title": "Innocence",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Aoi Eir",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 11757,
+          "type": "opening",
+          "title": "INNOCENCE",
+          "artistCredit": "Aoi Eir",
+          "sourceUrl": "https://myanimelist.net/anime/11757"
+        }
+      ]
+    },
+    {
+      "songId": 89,
+      "anime": "Tengen Toppa Gurren Lagann",
+      "title": "Sorairo Days",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Shoko Nakagawa",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 2001,
+          "type": "opening",
+          "title": "Sorairo Days (空色デイズ)",
+          "artistCredit": "Shoko Nakagawa",
+          "sourceUrl": "https://myanimelist.net/anime/2001"
+        }
+      ]
+    },
+    {
+      "songId": 90,
+      "anime": "Tokyo Ghoul",
+      "title": "Unravel",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "TK from Ling Tosite Sigure",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 22319,
+          "type": "opening",
+          "title": "unravel",
+          "artistCredit": "TK from Ling Tosite Sigure",
+          "sourceUrl": "https://myanimelist.net/anime/22319"
+        }
+      ]
+    },
+    {
+      "songId": 91,
+      "anime": "Tokyo Revengers",
+      "title": "Cry Baby",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Official HiGE DANdism",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 42249,
+          "type": "opening",
+          "title": "Cry Baby",
+          "artistCredit": "Official HiGE DANdism",
+          "sourceUrl": "https://myanimelist.net/anime/42249"
+        }
+      ]
+    },
+    {
+      "songId": 92,
+      "anime": "Vinland Saga",
+      "title": "Mukanjyo",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Survive Said The Prophet",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 37521,
+          "type": "opening",
+          "title": "MUKANJYO",
+          "artistCredit": "Survive Said The Prophet",
+          "sourceUrl": "https://myanimelist.net/anime/37521"
+        }
+      ]
+    },
+    {
+      "songId": 93,
+      "anime": "Your Lie in April",
+      "title": "Hikaru Nara",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Goose house",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 23273,
+          "type": "opening",
+          "title": "Hikaru nara (光るなら)",
+          "artistCredit": "Goose house",
+          "sourceUrl": "https://myanimelist.net/anime/23273"
+        }
+      ]
+    },
+    {
+      "songId": 94,
+      "anime": "Yu-gi-oh!",
+      "title": "El Reino de los Duelistas",
+      "type": "opening",
+      "status": "localized_version_review",
+      "artistCredit": null,
+      "reason": "Localized Yu-Gi-Oh title; identify the actual broadcast theme before crediting a performer.",
+      "evidence": []
+    },
+    {
+      "songId": 95,
+      "anime": "Akame ga Kill",
+      "title": "Skyreach",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Sora Amamiya",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 22199,
+          "type": "opening",
+          "title": "Skyreach",
+          "artistCredit": "Sora Amamiya",
+          "sourceUrl": "https://myanimelist.net/anime/22199"
+        }
+      ]
+    },
+    {
+      "songId": 96,
+      "anime": "Full Metal Alchemist Brotherhood",
+      "title": "Golden Time Lover",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Sukima Switch",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 5114,
+          "type": "opening",
+          "title": "Golden Time Lover (ゴールデンタイムラバー)",
+          "artistCredit": "Sukima Switch",
+          "sourceUrl": "https://myanimelist.net/anime/5114"
+        }
+      ]
+    },
+    {
+      "songId": 97,
+      "anime": "Full Metal Alchemist Brotherhood",
+      "title": "Hologram",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "NICO Touches the Walls",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 5114,
+          "type": "opening",
+          "title": "Hologram (ホログラム)",
+          "artistCredit": "NICO Touches the Walls",
+          "sourceUrl": "https://myanimelist.net/anime/5114"
+        }
+      ]
+    },
+    {
+      "songId": 99,
+      "anime": "Full Metal Alchemist Brotherhood",
+      "title": "Period",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Chemistry",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 5114,
+          "type": "opening",
+          "title": "Period",
+          "artistCredit": "Chemistry",
+          "sourceUrl": "https://myanimelist.net/anime/5114"
+        }
+      ]
+    },
+    {
+      "songId": 100,
+      "anime": "Naruto Shippuden",
+      "title": "Closer",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Inoue Joe",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "CLOSER",
+          "artistCredit": "Inoue Joe",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 101,
+      "anime": "Naruto Shippuden",
+      "title": "Crimsom Lotus",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "DOES",
+      "reason": "Crimsom is a stored typo for Crimson. Crimson Lotus is the translated title of Guren; the filename uses Crimson Lotus. Original theme credit is DOES.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Guren",
+          "artistCredit": "DOES",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ],
+      "reviewReferences": [
+        "https://naruto.fandom.com/wiki/Crimson_Lotus",
+        "https://naruto-official.com/en/anime/naruto2"
+      ]
+    },
+    {
+      "songId": 102,
+      "anime": "Naruto Shippuden",
+      "title": "Distance",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "LONG SHOT PARTY",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "distance",
+          "artistCredit": "LONG SHOT PARTY",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 103,
+      "anime": "Naruto Shippuden",
+      "title": "Diver",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "NICO Touches the Walls",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Diver",
+          "artistCredit": "NICO Touches the Walls",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 104,
+      "anime": "Naruto Shippuden",
+      "title": "Hero's Come Back!!",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Nobodyknows+",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Hero's Come Back",
+          "artistCredit": "Nobodyknows+",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 105,
+      "anime": "Naruto Shippuden",
+      "title": "Hotaru no Hikari",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Ikimonogakari",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Hotaru no Hikari (ホタルノヒカリ)",
+          "artistCredit": "Ikimonogakari",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 106,
+      "anime": "Naruto Shippuden",
+      "title": "Kara no Kokoro",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Anly",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Kara no Kokoro (カラノココロ)",
+          "artistCredit": "Anly",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 107,
+      "anime": "Naruto Shippuden",
+      "title": "Kaze",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Yamazaru",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Kaze (風)",
+          "artistCredit": "Yamazaru",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 108,
+      "anime": "Naruto Shippuden",
+      "title": "Line",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Sukima Switch",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "LINE",
+          "artistCredit": "Sukima Switch",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 109,
+      "anime": "Naruto Shippuden",
+      "title": "Lover",
+      "type": "opening",
+      "status": "filename_title_match",
+      "artistCredit": "7!!",
+      "reason": "The existing audio filename resolves a spelling difference in the stored title.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Lovers (ラヴァーズ)",
+          "artistCredit": "7!!",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 110,
+      "anime": "Naruto Shippuden",
+      "title": "Moshimo",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Daisuke",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Moshimo",
+          "artistCredit": "Daisuke",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 111,
+      "anime": "Naruto Shippuden",
+      "title": "Newsong",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "tacica",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "newsong",
+          "artistCredit": "tacica",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 112,
+      "anime": "Naruto Shippuden",
+      "title": "Not Even Sudden Rain Can Defeat Me",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "NICO Touches the Walls",
+      "reason": "The stored English translation identifies the same opening published as Niwaka Ame Nimo Makezu, credited to NICO Touches the Walls.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Niwaka Ame Nimo Makezu (ニワカ雨ニモ負ケズ)",
+          "artistCredit": "NICO Touches the Walls",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ],
+      "reviewReferences": [
+        "https://naruto.fandom.com/wiki/Not_Even_Sudden_Rain_Can_Defeat_Me",
+        "https://naruto-official.com/en/anime/naruto2"
+      ]
+    },
+    {
+      "songId": 113,
+      "anime": "Naruto Shippuden",
+      "title": "Sign",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "FLOW",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Sign",
+          "artistCredit": "FLOW",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 114,
+      "anime": "Naruto Shippuden",
+      "title": "Silhouette",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "KANA-BOON",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Silhouette (シルエット)",
+          "artistCredit": "KANA-BOON",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 115,
+      "anime": "Naruto Shippuden",
+      "title": "Tosugeki Rock",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "THE CRO-MAGNONS",
+      "reason": "Tosugeki is missing a t in the stored title and filename. The official Naruto credits list Totsugeki Rock and The Cro-Magnons.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Totsugeki Rock (突撃ロック)",
+          "artistCredit": "THE CRO-MAGNONS",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ],
+      "reviewReferences": [
+        "https://naruto-official.com/en/anime/naruto2"
+      ]
+    },
+    {
+      "songId": 116,
+      "anime": "Naruto Shippuden",
+      "title": "Toumei datta Sekai",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Motohiro Hata",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Toumei Datta Sekai (透明だった世界)",
+          "artistCredit": "Motohiro Hata",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 117,
+      "anime": "Naruto Shippuden",
+      "title": "Tsuki no Ookisa",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Nogizaka46",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 1735,
+          "type": "opening",
+          "title": "Tsuki no Ookisa (月の大きさ)",
+          "artistCredit": "Nogizaka46",
+          "sourceUrl": "https://myanimelist.net/anime/1735"
+        }
+      ]
+    },
+    {
+      "songId": 118,
+      "anime": "Mashle: Magic and Muscles",
+      "title": "Bling-Bang-Bang-Born",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Creepy Nuts",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 55813,
+          "type": "opening",
+          "title": "Bling-Bang-Bang-Born",
+          "artistCredit": "Creepy Nuts",
+          "sourceUrl": "https://myanimelist.net/anime/55813"
+        }
+      ]
+    },
+    {
+      "songId": 119,
+      "anime": "Mashle: Magic and Muscles",
+      "title": "Knock Out",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Taiiku Okazaki",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 52211,
+          "type": "opening",
+          "title": "Knock Out",
+          "artistCredit": "Taiiku Okazaki",
+          "sourceUrl": "https://myanimelist.net/anime/52211"
+        }
+      ]
+    },
+    {
+      "songId": 120,
+      "anime": "Hell's Paradise",
+      "title": "Work",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "millennium parade and Sheena Ringo",
+      "reason": "The published title stylizes the letter O as a filled circle. Same Hell's Paradise opening, credited to millennium parade and Sheena Ringo.",
+      "evidence": [
+        {
+          "malId": 46569,
+          "type": "opening",
+          "title": "Ｗ●ＲＫ",
+          "artistCredit": "millennium parade and Sheena Ringo",
+          "sourceUrl": "https://myanimelist.net/anime/46569"
+        }
+      ],
+      "reviewReferences": []
+    },
+    {
+      "songId": 122,
+      "anime": "Dragon Ball Super",
+      "title": "Chōzetsu ☆ Dynamic!",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "Kazuya Yoshii (吉井和哉)",
+      "reason": "Chōzetsu and Chouzetsu are alternate long-vowel romanizations of the same title; same Dragon Ball Super opening.",
+      "evidence": [
+        {
+          "malId": 30694,
+          "type": "opening",
+          "title": "Chouzetsu☆Dynamic! (超絶☆ダイナミック!)",
+          "artistCredit": "Kazuya Yoshii (吉井和哉)",
+          "sourceUrl": "https://myanimelist.net/anime/30694"
+        }
+      ],
+      "reviewReferences": []
+    },
+    {
+      "songId": 123,
+      "anime": "Dragon Ball Super",
+      "title": "Genkai Toppa",
+      "type": "opening",
+      "status": "reviewed_title_match",
+      "artistCredit": "Kiyoshi Hikawa (氷川きよし)",
+      "reason": "Stored Genkai Toppa abbreviates the published Genkai Toppa × Survivor title; there is one matching theme in the mapped Dragon Ball Super release.",
+      "evidence": [
+        {
+          "malId": 30694,
+          "type": "opening",
+          "title": "Genkai Toppa × Survivor (限界突破×サバイバー)",
+          "artistCredit": "Kiyoshi Hikawa (氷川きよし)",
+          "sourceUrl": "https://myanimelist.net/anime/30694"
+        }
+      ],
+      "reviewReferences": []
+    },
+    {
+      "songId": 124,
+      "anime": "Jujutsu Kaisen",
+      "title": "Vivid Vice",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Who-ya Extended",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 40748,
+          "type": "opening",
+          "title": "VIVID VICE",
+          "artistCredit": "Who-ya Extended",
+          "sourceUrl": "https://myanimelist.net/anime/40748"
+        }
+      ]
+    },
+    {
+      "songId": 125,
+      "anime": "Jujutsu Kaisen",
+      "title": "Ao no Sumika",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Tatsuya Kitani (キタニタツヤ)",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 51009,
+          "type": "opening",
+          "title": "Ao no Sumika (青のすみか)",
+          "artistCredit": "Tatsuya Kitani (キタニタツヤ)",
+          "sourceUrl": "https://myanimelist.net/anime/51009"
+        }
+      ]
+    },
+    {
+      "songId": 126,
+      "anime": "Jujutsu Kaisen",
+      "title": "Specialz",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "King Gnu",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 51009,
+          "type": "opening",
+          "title": "SPECIALZ",
+          "artistCredit": "King Gnu",
+          "sourceUrl": "https://myanimelist.net/anime/51009"
+        }
+      ]
+    },
+    {
+      "songId": 127,
+      "anime": "Nanatsu no Taizai",
+      "title": "Netsujou no Spectrum",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Ikimonogakari",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 23755,
+          "type": "opening",
+          "title": "Netsujou no Spectrum (熱情のスペクトラム)",
+          "artistCredit": "Ikimonogakari",
+          "sourceUrl": "https://myanimelist.net/anime/23755"
+        }
+      ]
+    },
+    {
+      "songId": 128,
+      "anime": "Nanatsu no Taizai",
+      "title": "Howling",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "FLOW x GRANRODEO",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 34577,
+          "type": "opening",
+          "title": "Howling",
+          "artistCredit": "FLOW x GRANRODEO",
+          "sourceUrl": "https://myanimelist.net/anime/34577"
+        }
+      ]
+    },
+    {
+      "songId": 129,
+      "anime": "Nanatsu no Taizai",
+      "title": "Rob the Frontier",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "UVERworld",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 39701,
+          "type": "opening",
+          "title": "ROB THE FRONTIER",
+          "artistCredit": "UVERworld",
+          "sourceUrl": "https://myanimelist.net/anime/39701"
+        }
+      ]
+    },
+    {
+      "songId": 130,
+      "anime": "Nanatsu no Taizai",
+      "title": "Ame ga Furu kara Niji ga Deru",
+      "type": "opening",
+      "status": "unique_title_match",
+      "artistCredit": "Sky Peace (スカイピース)",
+      "reason": "Unique normalized title/type match within provider-linked releases.",
+      "evidence": [
+        {
+          "malId": 34577,
+          "type": "opening",
+          "title": "Ame ga Furu kara Niji ga Deru (雨が降るから虹が出る)",
+          "artistCredit": "Sky Peace (スカイピース)",
+          "sourceUrl": "https://myanimelist.net/anime/34577"
+        }
+      ]
+    }
+  ]
+}

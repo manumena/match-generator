@@ -11,7 +11,8 @@ export interface MatchOptions {
 }
 
 const QUERY_GET_SONG_IDS = 'SELECT id FROM songs WHERE {};'
-const QUERY_GET_SONGS_BY_CONDITION = 'SELECT * FROM songs WHERE {};'
+// Keep the legacy manual-game contract stable when editorial columns are added.
+const QUERY_GET_SONGS_BY_CONDITION = 'SELECT id, anime, name, type, number, path FROM songs WHERE {};'
 const QUERY_GET_EVERY_ANIME_BY_CONDITION = 'SELECT DISTINCT anime FROM songs WHERE {};'
 
 export async function generateMatch(env: Env, options: MatchOptions) {

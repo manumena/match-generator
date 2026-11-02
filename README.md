@@ -40,7 +40,7 @@ Runtime types are generated without environment bindings to avoid coupling publi
 
 `generate-match` accepts `amount`, `repeatAnimes`, `includeOpenings`, `includeEndings`, and `includeSoundtracks`. Omitted parameters use environment defaults. Amount uses the existing `parseInt` behavior; booleans are true only for the exact string `true`. Duplicate parameters use the last value. Trailing and repeated path slashes are accepted. Successful responses retain the existing wildcard CORS headers and content types.
 
-Match generation still caps selection at available songs/anime. With repeated anime disabled it selects one song per selected anime. With repeats enabled it selects unique song IDs and keeps the database result order. Disabling every song type still falls back to all types. The schema, database connection, SQL queries, selection algorithm, and returned media paths are unchanged.
+Match generation still caps selection at available songs/anime. With repeated anime disabled it selects one song per selected anime. With repeats enabled it selects unique song IDs and keeps the database result order. Disabling every song type still falls back to all types. The manual-game query now explicitly selects its original six song fields, preserving that response as editorial database columns are added. The selection algorithm, database connection and returned media paths are unchanged.
 
 ## Configuration and deployment
 
@@ -86,7 +86,7 @@ For local verification run `npx wrangler dev --local --port 8788`; start the fro
 
 ## Multiplayer gameplay
 
-Reveal results now optionally include `songType` and `sequenceNumber`, kept private until the corresponding answer is revealed. The sequence is omitted for ambiguous release groupings, conflicting slots, invalid numbers and soundtracks. `result.number` remains the round position. See [the metadata audit](catalog/reveal-metadata-audit.md) for coverage and limitations. No database changes are needed.
+Reveal results optionally include `songType`, `sequenceNumber` and `artistCredit`, kept private until the corresponding answer is revealed. The sequence is omitted for ambiguous release groupings, conflicting slots, invalid numbers and soundtracks. `result.number` remains the round position. See [the sequence audit](catalog/reveal-metadata-audit.md) and [artist migration instructions](catalog/artist-credit-import.md). Artist credits require migration `005_song_artist_credits.sql` before deploying the updated Worker query.
 
 `src/rooms/game.ts` contains the deterministic round rules and explicit public snapshot projection. `room.ts` persists those rules in SQLite, authenticates commands, serializes mutations and schedules alarms. `match.ts` queries existing songs with canonical answer IDs and samples the configured count without repeated canonical anime; the old generation endpoint is unchanged. New room defaults are 10 songs and all song types enabled.
 

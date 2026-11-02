@@ -6,6 +6,8 @@ The initial import is applied to live Neon. See [import verification](import-ver
 
 ## Data and identities
 
+Artist enrichment has a [coverage audit](artist-coverage-audit.md) covering all 125 songs, with per-song source credits and held cases. The selected storage is nullable `public.songs.artist_credit`; migration `005_song_artist_credits.sql` populates 113 reviewed display credits and leaves 12 uncertain songs NULL. See [the manual-review checklist](artist-credit-manual-review.md) and [application instructions](artist-credit-import.md).
+
 `migrations/001_catalog.sql` adds the `catalog` schema without changing `public.songs` or the existing Worker response:
 
 - `anime`: internal integer answer ID, immutable import key, display title and curation flag.

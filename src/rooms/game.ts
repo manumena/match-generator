@@ -20,6 +20,7 @@ export interface Player {
   score?: number;
 }
 export interface SongMetadata {
+  artistCredit?: string;
   songType?: 'opening' | 'ending' | 'soundtrack';
   sequenceNumber?: number;
 }
@@ -151,6 +152,7 @@ function finishRound(room: RoomState, now: number, connected: string[]): void {
   const song = room.songs![room.roundIndex];
   room.result = {
     roundId: song.roundId, number: room.roundIndex + 1, anime: song.anime, name: song.name,
+    ...(song.artistCredit ? { artistCredit: song.artistCredit } : {}),
     ...(song.songType ? { songType: song.songType } : {}),
     ...(song.sequenceNumber !== undefined ? { sequenceNumber: song.sequenceNumber } : {}),
     // Keep artwork private with the song sequence until this round is revealed.

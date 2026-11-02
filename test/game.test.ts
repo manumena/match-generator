@@ -22,17 +22,23 @@ describe('authoritative match rules', () => {
   it('publishes song metadata only when its answer is revealed, separately from round numbering', () => {
     const { room, connected } = match(1, 2);
     room.songs![0].songType = 'opening';
+    room.songs![0].artistCredit = 'Revealed Artist';
     room.songs![0].sequenceNumber = 3;
     room.songs![1].songType = 'ending';
+    room.songs![1].artistCredit = 'Future Artist';
     room.songs![1].sequenceNumber = 7;
 
     expect(JSON.stringify(publicSnapshot(room, connected))).not.toContain('songType');
+    expect(JSON.stringify(publicSnapshot(room, connected))).not.toContain('Artist');
     advance(room, 5_000, connected);
     expect(JSON.stringify(publicSnapshot(room, connected))).not.toContain('sequenceNumber');
+    expect(JSON.stringify(publicSnapshot(room, connected))).not.toContain('Artist');
     answer(room, 0, ids[0], 5_001);
 
     const revealed = publicSnapshot(room, connected);
-    expect(revealed.result).toMatchObject({ number: 1, songType: 'opening', sequenceNumber: 3 });
+    expect(revealed.result).toMatchObject({ number: 1, songType: 'opening', sequenceNumber: 3, artistCredit: 'Revealed Artist' });
+    expect(revealed.round).not.toHaveProperty('artistCredit');
+    expect(JSON.stringify(revealed)).not.toContain('Future Artist');
     expect(revealed.round).not.toHaveProperty('songType');
     expect(revealed.round).not.toHaveProperty('sequenceNumber');
     expect(JSON.stringify(revealed)).not.toContain('"sequenceNumber":7');

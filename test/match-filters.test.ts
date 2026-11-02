@@ -17,6 +17,7 @@ it.each([
   const query = vi.fn().mockResolvedValue({ rows: [{
     id: 1, anime_id: Number(Object.keys(answerTitles)[0]), anime: 'Anime', name: 'Song', path: 'track.mp3',
     artwork_url: 'https://images.example/poster.jpg',
+    artist_credit: 'Band feat. Singer',
     type: 'opening', number: 3, release_count: 1, sequence_count: 1,
   }] });
   vi.mocked(getDBConnection).mockReturnValue(query as unknown as ReturnType<typeof getDBConnection>);
@@ -26,4 +27,6 @@ it.each([
   expect(result).toHaveLength(1);
   expect(result[0].artworkUrl).toBe('https://images.example/poster.jpg');
   expect(result[0]).toMatchObject({ songType: 'opening', sequenceNumber: 3 });
+  expect(result[0].artistCredit).toBe('Band feat. Singer');
+  expect(query).toHaveBeenCalledWith(expect.stringContaining('s.artist_credit'), [types]);
 });

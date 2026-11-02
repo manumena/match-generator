@@ -9,6 +9,7 @@ interface SongRow {
   anime: string;
   name: string;
   path: string;
+  artist_credit?: string | null;
   artwork_url?: string | null;
   type?: string | null;
   number?: number | null;
@@ -30,7 +31,7 @@ export async function prepareMatch(env: Env, settings: Settings): Promise<Song[]
   const types = selectedTypes.length ? selectedTypes : ['opening', 'ending', 'soundtrack'];
   const db = getDBConnection(env);
   const result = await db(`
-    SELECT s.id, s.anime, s.name, s.path, s.type::text AS type, s.number, a.anime_id,
+    SELECT s.id, s.anime, s.name, s.path, s.artist_credit, s.type::text AS type, s.number, a.anime_id,
            (SELECT count(*)::integer FROM catalog.releases r
             WHERE r.anime_id = a.anime_id) AS release_count,
            count(*) OVER (PARTITION BY a.anime_id, s.type, s.number)::integer AS sequence_count,
@@ -78,6 +79,7 @@ export function selectSongs(rows: SongRow[], settings: Settings): Song[] {
   return getRandomElementsFromList(candidates, settings.amount).map(row => ({
     roundId: crypto.randomUUID(), animeId: row.anime_id,
     anime: row.anime, name: row.name,
+    ...(row.artist_credit?.trim() ? { artistCredit: row.artist_credit.trim() } : {}),
     ...revealMetadata(row),
     // Existing paths are already URL encoded. Do not encode '%' a second time.
     audioUrl: AUDIO_BASE + row.path,
