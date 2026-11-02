@@ -19,7 +19,11 @@ export interface Player {
   readyForNextMatch?: string;
   score?: number;
 }
-export interface Song {
+export interface SongMetadata {
+  songType?: 'opening' | 'ending' | 'soundtrack';
+  sequenceNumber?: number;
+}
+export interface Song extends SongMetadata {
   roundId: string;
   animeId: number;
   anime: string;
@@ -33,7 +37,7 @@ export interface Submission {
   correct: boolean;
   points: number;
 }
-export interface Result {
+export interface Result extends SongMetadata {
   roundId: string;
   number: number;
   anime: string;
@@ -147,6 +151,8 @@ function finishRound(room: RoomState, now: number, connected: string[]): void {
   const song = room.songs![room.roundIndex];
   room.result = {
     roundId: song.roundId, number: room.roundIndex + 1, anime: song.anime, name: song.name,
+    ...(song.songType ? { songType: song.songType } : {}),
+    ...(song.sequenceNumber !== undefined ? { sequenceNumber: song.sequenceNumber } : {}),
     // Keep artwork private with the song sequence until this round is revealed.
     ...(song.artworkUrl ? { artworkUrl: song.artworkUrl } : {}),
     players: room.players.map(player => {

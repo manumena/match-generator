@@ -2,6 +2,31 @@ import { expect, it } from 'vitest';
 import { answerTitles, DEFAULT_SETTINGS } from '../src/rooms/game';
 import { selectSongs } from '../src/rooms/match';
 
+it.each([
+  { type: 'opening', number: 3, release_count: 1, sequence_count: 1, expected: { songType: 'opening', sequenceNumber: 3 } },
+  { type: 'ending', number: 2, release_count: 1, sequence_count: 1, expected: { songType: 'ending', sequenceNumber: 2 } },
+  { type: 'opening', number: 17, release_count: 1, sequence_count: 2, expected: { songType: 'opening' } },
+  { type: 'opening', number: 2, release_count: 3, sequence_count: 1, expected: { songType: 'opening' } },
+  { type: 'ending', number: 0, release_count: 1, sequence_count: 1, expected: { songType: 'ending' } },
+  { type: 'opening', number: 1.5, release_count: 1, sequence_count: 1, expected: { songType: 'opening' } },
+  { type: 'ending', number: null, release_count: 1, sequence_count: 1, expected: { songType: 'ending' } },
+  { type: 'opening', number: 1, release_count: 0, sequence_count: 1, expected: { songType: 'opening' } },
+  { type: 'soundtrack', number: 1, release_count: 1, sequence_count: 1, expected: { songType: 'soundtrack' } },
+  { type: 'unknown', number: 1, release_count: 1, sequence_count: 1, expected: {} },
+])('only includes consistent reveal metadata: $type / $number / $release_count / $sequence_count', ({ expected, ...metadata }) => {
+  const [song] = selectSongs([{
+    id: 1,
+    anime_id: Number(Object.keys(answerTitles)[0]),
+    anime: 'Anime',
+    name: 'Song',
+    path: 'track.mp3',
+    ...metadata,
+  }], { ...DEFAULT_SETTINGS, amount: 1 });
+
+  expect(song.songType).toBe(expected.songType);
+  expect(song.sequenceNumber).toBe('sequenceNumber' in expected ? expected.sequenceNumber : undefined);
+});
+
 it.each([null, undefined, ''])('keeps songs without artwork playable (%s)', artworkUrl => {
   const songs = selectSongs([{
     id: 1,

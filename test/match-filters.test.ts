@@ -17,6 +17,7 @@ it.each([
   const query = vi.fn().mockResolvedValue({ rows: [{
     id: 1, anime_id: Number(Object.keys(answerTitles)[0]), anime: 'Anime', name: 'Song', path: 'track.mp3',
     artwork_url: 'https://images.example/poster.jpg',
+    type: 'opening', number: 3, release_count: 1, sequence_count: 1,
   }] });
   vi.mocked(getDBConnection).mockReturnValue(query as unknown as ReturnType<typeof getDBConnection>);
   const result = await prepareMatch(env, { ...DEFAULT_SETTINGS, amount: 1, includeOpenings, includeEndings, includeSoundtracks });
@@ -24,4 +25,5 @@ it.each([
   expect(query).toHaveBeenCalledWith(expect.stringContaining('LEFT JOIN catalog.artwork_assets'), [types]);
   expect(result).toHaveLength(1);
   expect(result[0].artworkUrl).toBe('https://images.example/poster.jpg');
+  expect(result[0]).toMatchObject({ songType: 'opening', sequenceNumber: 3 });
 });

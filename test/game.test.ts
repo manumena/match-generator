@@ -19,6 +19,25 @@ function answer(room: ReturnType<typeof match>['room'], player: number, animeId:
 }
 
 describe('authoritative match rules', () => {
+  it('publishes song metadata only when its answer is revealed, separately from round numbering', () => {
+    const { room, connected } = match(1, 2);
+    room.songs![0].songType = 'opening';
+    room.songs![0].sequenceNumber = 3;
+    room.songs![1].songType = 'ending';
+    room.songs![1].sequenceNumber = 7;
+
+    expect(JSON.stringify(publicSnapshot(room, connected))).not.toContain('songType');
+    advance(room, 5_000, connected);
+    expect(JSON.stringify(publicSnapshot(room, connected))).not.toContain('sequenceNumber');
+    answer(room, 0, ids[0], 5_001);
+
+    const revealed = publicSnapshot(room, connected);
+    expect(revealed.result).toMatchObject({ number: 1, songType: 'opening', sequenceNumber: 3 });
+    expect(revealed.round).not.toHaveProperty('songType');
+    expect(revealed.round).not.toHaveProperty('sequenceNumber');
+    expect(JSON.stringify(revealed)).not.toContain('"sequenceNumber":7');
+  });
+
   it('scores the first ranma suggestion and its continuation as the original song answer', () => {
     const { room, connected } = match(3, 1);
     room.songs![0].animeId = 51;
