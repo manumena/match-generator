@@ -2,7 +2,7 @@ import { DurableObject } from 'cloudflare:workers';
 import type { Env } from '../env';
 import { nicknameFrom, ROOM_TTL } from './validation';
 import {
-  acceptsMatchPreferences, advance, failPreparation, hydrateRoom, isPlayerReady,
+  acceptsMatchPreferences, advance, beginPreparation, failPreparation, hydrateRoom, isPlayerReady,
   publicSnapshot, setNextMatchReady, setReady, startMatch, submit, updateSettings,
   type RoomState,
 } from './game';
@@ -187,12 +187,10 @@ export class Room extends DurableObject<Env> {
       return player && isPlayerReady(room, player);
     });
     if (!acceptsMatchPreferences(room) || !everyoneReady) return;
-    room.phase = 'preparing';
-    room.error = undefined;
-    room.generationId = crypto.randomUUID();
-    room.preparationDeadline = Date.now() + 30_000;
+    const generationId = crypto.randomUUID();
+    beginPreparation(room, Date.now(), generationId);
     // Start in a microtask after the current event persists the preparation marker.
-    this.ctx.waitUntil(this.generate(room.generationId, room.settings));
+    this.ctx.waitUntil(this.generate(generationId, room.settings));
   }
 
   private async generate(generationId: string, settings: RoomState['settings']): Promise<void> {
@@ -207,9 +205,13 @@ export class Room extends DurableObject<Env> {
     }
     await this.ctx.blockConcurrencyWhile(async () => {
       const room = this.liveRoom();
-      if (!room || room.phase !== 'preparing' || room.generationId !== generationId) return;
-      room.generationId = undefined;
-      room.preparationDeadline = undefined;
+      if (!room) return;
+      // liveRoom may have expired this attempt before its asynchronous work finished.
+      if (room.phase !== 'preparing' || room.generationId !== generationId) {
+        await this.commit(room);
+        this.broadcast(room);
+        return;
+      }
       if (!songs?.length) {
         failPreparation(room, error ?? 'No songs are available.');
       } else {

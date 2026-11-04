@@ -28,6 +28,60 @@ async function saved(code: string): Promise<RoomState> {
     JSON.parse(state.storage.sql.exec<{ data: string }>('SELECT data FROM lobby').one().data));
 }
 
+it.each([false, true])('runs the countdown while generation is pending (times out: %s)', async timesOut => {
+  const songs = [{
+    roundId: 'prepared-song',
+    animeId: Number(Object.keys(answerTitles)[0]),
+    anime: 'Hidden anime',
+    name: 'Hidden title',
+    audioUrl: 'https://audio.example/prepared',
+  }];
+  let finishGeneration!: (value: typeof songs) => void;
+  const generation = new Promise<typeof songs>(resolve => { finishGeneration = resolve; });
+  vi.mocked(prepareMatch).mockReturnValueOnce(generation);
+
+  const host = await post('/rooms', 'Host');
+  const socket = await open(host);
+  const snapshots: { room: { phase: string; matchStartsAt?: number } }[] = [];
+  socket.addEventListener('message', event => { snapshots.push(JSON.parse(event.data as string)); });
+  const ready = JSON.stringify({ v: 1, type: 'ready', catalogVersion: CATALOG_VERSION, settingsRevision: 0 });
+  socket.send(ready);
+
+  await vi.waitFor(async () => expect((await saved(host.room.code)).phase).toBe('preparing'));
+  const preparing = await saved(host.room.code);
+  await vi.waitFor(() => expect(snapshots).toContainEqual(expect.objectContaining({
+    room: expect.objectContaining({ phase: 'preparing', matchStartsAt: preparing.preparationDeadline }),
+  })));
+
+  if (timesOut) {
+    const stub = env.ROOMS.getByName(host.room.code);
+    // Expire the fixed budget without waiting five wall-clock seconds.
+    await runInDurableObject(stub, (_instance: Room, state) => {
+      const room = JSON.parse(state.storage.sql.exec<{ data: string }>('SELECT data FROM lobby').one().data);
+      room.preparationDeadline = Date.now() - 1;
+      state.storage.sql.exec('UPDATE lobby SET data = ?', JSON.stringify(room));
+    });
+    await runDurableObjectAlarm(stub);
+    const failed = await saved(host.room.code);
+    expect(failed.phase).toBe('lobby');
+    expect(failed.error).toBe('This is taking longer than expected.');
+    expect(failed.players.every(player => !player.ready)).toBe(true);
+
+    // An obsolete response must not replace a fresh readiness attempt.
+    vi.mocked(prepareMatch).mockResolvedValueOnce([{ ...songs[0], roundId: 'retry-song' }]);
+    socket.send(ready);
+    finishGeneration(songs);
+    await vi.waitFor(async () => expect((await saved(host.room.code)).phase).toBe('countdown'));
+    expect((await saved(host.room.code)).songs?.[0].roundId).toBe('retry-song');
+  } else {
+    finishGeneration(songs);
+    await vi.waitFor(async () => expect((await saved(host.room.code)).phase).toBe('countdown'));
+    expect((await saved(host.room.code)).startsAt).toBe(preparing.preparationDeadline);
+  }
+
+  socket.close(1000);
+});
+
 it('completes a match, preserves standings on rematch failure, and starts one fresh match after retry', async () => {
   const animeId = Number(Object.keys(answerTitles)[0]);
   vi.mocked(prepareMatch).mockResolvedValue([

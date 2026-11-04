@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { advance, answerTitles, beginCountdown, hydrateRoom, publicSnapshot, setNextMatchReady, setReady, startMatch, submit, updateSettings, CATALOG_VERSION } from '../src/rooms/game';
+import { advance, answerTitles, beginCountdown, beginPreparation, hydrateRoom, publicSnapshot, setNextMatchReady, setReady, startMatch, submit, updateSettings, CATALOG_VERSION } from '../src/rooms/game';
 
 const ids = Object.keys(answerTitles).slice(0, 3).map(Number);
 function match(players = 4, songs = 2) {
@@ -19,6 +19,36 @@ function answer(room: ReturnType<typeof match>['room'], player: number, animeId:
 }
 
 describe('authoritative match rules', () => {
+  it('counts generation time toward the first countdown without restarting it', () => {
+    const { room, connected } = match();
+    const songs = room.songs!;
+    beginPreparation(room, 1_000, 'attempt');
+
+    const preparing = publicSnapshot(room, connected);
+    expect(preparing.matchStartsAt).toBe(6_000);
+    expect(preparing.round).toBeUndefined();
+    expect(preparing).not.toHaveProperty('songs');
+
+    startMatch(room, songs, 4_000, connected);
+    expect(room.startsAt).toBe(6_000);
+    expect(room.preparationDeadline).toBeUndefined();
+    advance(room, 6_000, connected);
+    expect(room.phase).toBe('guessing');
+    expect(room.deadline).toBe(66_000);
+  });
+
+  it.each([6_000, 7_000])('rejects generation finishing at or after the countdown (%i)', now => {
+    const { room, connected } = match();
+    const songs = room.songs!;
+    beginPreparation(room, 1_000, 'attempt');
+
+    startMatch(room, songs, now, connected);
+    expect(room.phase).toBe('lobby');
+    expect(room.error).toBe('This is taking longer than expected.');
+    expect(room.generationId).toBeUndefined();
+    expect(room.players.every(player => !player.ready)).toBe(true);
+  });
+
   it('publishes song metadata only when its answer is revealed, separately from round numbering', () => {
     const { room, connected } = match(1, 2);
     room.songs![0].songType = 'opening';

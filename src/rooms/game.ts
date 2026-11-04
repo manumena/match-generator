@@ -3,6 +3,7 @@ import { canonicalAnswerId } from './catalog/answer-identity';
 
 // Keep this published catalog revision available for rooms created before a deploy.
 export const CATALOG_VERSION = catalog.version;
+const FIRST_SONG_COUNTDOWN_MS = 5_000;
 export const answerTitles: Readonly<Record<string, string>> = catalog.titles;
 export const DEFAULT_SETTINGS = {
   // Match the lobby's 5 / 10 / 20 / 50 presets for newly created rooms.
@@ -127,21 +128,37 @@ export function failPreparation(room: RoomState, error: string): void {
   room.players.forEach(player => { player.ready = false; });
 }
 
+/** Generation uses the countdown's existing time budget; it cannot delay playback. */
+export function beginPreparation(room: RoomState, now: number, generationId: string): void {
+  room.phase = 'preparing';
+  room.error = undefined;
+  room.generationId = generationId;
+  room.preparationDeadline = now + FIRST_SONG_COUNTDOWN_MS;
+}
+
 export function startMatch(room: RoomState, songs: Song[], now: number, connected: string[]): void {
+  const scheduledStart = room.phase === 'preparing' ? room.preparationDeadline : undefined;
+  if (scheduledStart !== undefined && now >= scheduledStart) {
+    failPreparation(room, 'This is taking longer than expected.');
+    return;
+  }
+
+  room.generationId = undefined;
+  room.preparationDeadline = undefined;
   room.songs = songs;
   room.roundIndex = 0;
   room.result = undefined;
   room.completedAt = undefined;
   room.error = undefined;
   room.players.forEach(player => { player.score = 0; });
-  beginCountdown(room, now, connected);
+  beginCountdown(room, now, connected, scheduledStart);
 }
 
-export function beginCountdown(room: RoomState, now: number, connected: string[]): void {
+export function beginCountdown(room: RoomState, now: number, connected: string[], scheduledStart?: number): void {
   room.phase = connected.length ? 'countdown' : 'paused';
   // First-song preparation is shorter; between-song readiness retains ten seconds.
-  const countdownDuration = room.roundIndex === 0 ? 5_000 : 10_000;
-  room.startsAt = connected.length ? now + countdownDuration : undefined;
+  const countdownDuration = room.roundIndex === 0 ? FIRST_SONG_COUNTDOWN_MS : 10_000;
+  room.startsAt = connected.length ? scheduledStart ?? now + countdownDuration : undefined;
   room.deadline = undefined;
   room.firstGuess = false;
   room.submissions = {};
@@ -188,7 +205,7 @@ function allConnectedPlayersSubmitted(room: RoomState, connected: string[]): boo
 /** Called before every action and by alarms. Late alarms never accept late guesses. */
 export function advance(room: RoomState, now: number, connected: string[]): void {
   if (room.phase === 'preparing' && now >= room.preparationDeadline!) {
-    failPreparation(room, 'Match preparation timed out. Please ready up again.');
+    failPreparation(room, 'This is taking longer than expected.');
   }
   if (room.phase === 'countdown') {
     // A disconnect can also make every remaining player ready for a later round.
@@ -231,7 +248,7 @@ export function setNextMatchReady(room: RoomState, player: Player, completedRoun
 
 export function setReady(room: RoomState, player: Player, roundId: unknown, version: unknown, now: number, connected: string[], settingsRevision: unknown = 0): string | undefined {
   if (room.phase === 'lobby') return readyForMatch(room, player, version, settingsRevision);
-  // First-song readiness cannot shorten its full ten-second countdown.
+  // First-song readiness cannot shorten its countdown.
   if (room.phase !== 'countdown' || !room.result || room.songs?.[room.roundIndex].roundId !== roundId) {
     return 'This round is not accepting Ready.';
   }
@@ -276,6 +293,7 @@ export function publicSnapshot(room: RoomState, connected: string[], playerId?: 
   const submission = playerId ? room.submissions[playerId] : undefined;
   return {
     code: room.code, hostId: room.hostId, phase: room.phase,
+    matchStartsAt: room.phase === 'preparing' ? room.preparationDeadline : undefined,
     catalogVersion: room.catalogVersion, settings: room.settings, settingsRevision: room.settingsRevision, serverTime: Date.now(),
     players: room.players.map(player => ({
       id: player.id, nickname: player.nickname, connected: connected.includes(player.id),
