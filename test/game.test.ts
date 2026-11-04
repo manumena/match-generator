@@ -183,8 +183,9 @@ describe('authoritative match rules', () => {
     answer(room, 0, null, 15_000);
     expect(room.deadline).toBe(55_000);
     answer(room, 1, null, 16_000);
-    expect(room.phase).toBe('completed');
-    expect(room.completedAt).toBe(16_000);
+    expect(room.phase).toBe('results');
+    expect(room.startsAt).toBe(26_000);
+    expect(room.completedAt).toBeUndefined();
     expect(room.players.map(player => player.score)).toEqual([0, 0]);
   });
 
@@ -202,7 +203,7 @@ describe('authoritative match rules', () => {
     expect(room.phase).toBe('guessing');
     submit(room, room.players[1], { roundId: 'round-0', actionId: 'second', animeId }, 7_000, connected);
 
-    expect(room.phase).toBe(songs === 1 ? 'completed' : 'countdown');
+    expect(room.phase).toBe(songs === 1 ? 'results' : 'countdown');
     expect(room.roundIndex).toBe(1);
     expect(room.result?.players[2]).toEqual({ id: 'p2', guess: null, points: 0, correct: false });
     expect(room.players.map(player => player.score)).toEqual(animeId === null ? [0, 0, 0] : [3, 2, 0]);
@@ -216,8 +217,8 @@ describe('authoritative match rules', () => {
 
     advance(room, 9_000, connected.slice(0, 2));
 
-    expect(room.phase).toBe('completed');
-    expect(room.completedAt).toBe(9_000);
+    expect(room.phase).toBe('results');
+    expect(room.completedAt).toBeUndefined();
     expect(room.players.map(player => player.score)).toEqual([4, 3, -1, 0]);
     advance(room, 10_000, connected.slice(0, 2));
     expect(room.players.map(player => player.score)).toEqual([4, 3, -1, 0]);
@@ -231,7 +232,8 @@ describe('authoritative match rules', () => {
     expect(room.result).toBeUndefined();
 
     advance(room, 46_000, []);
-    expect(room.phase).toBe('completed');
+    expect(room.phase).toBe('paused');
+    expect(room.result?.roundId).toBe('round-0');
   });
 
   it('waits for a player who reconnects before the remaining answers arrive', () => {
@@ -243,7 +245,7 @@ describe('authoritative match rules', () => {
     expect(room.phase).toBe('guessing');
 
     answer(room, 2, null, 9_000);
-    expect(room.phase).toBe('completed');
+    expect(room.phase).toBe('results');
   });
 
   it.each([25_000, 30_000])('does not extend the deadline when passing at %i ms', now => {
@@ -305,11 +307,70 @@ describe('authoritative match rules', () => {
   });
 });
 
+describe('final song results', () => {
+  function finalReveal() {
+    const state = match(2, 1);
+    answer(state.room, 0, ids[0], 6_000);
+    answer(state.room, 1, null, 7_000);
+    return state;
+  }
+
+  it('reveals the last song for ten seconds without publishing another round', () => {
+    const { room, connected } = finalReveal();
+    const snapshot = publicSnapshot(room, connected);
+    expect(snapshot.phase).toBe('results');
+    expect(snapshot.resultsEndsAt).toBe(17_000);
+    expect(snapshot.round).toBeUndefined();
+    expect(snapshot.result?.roundId).toBe('round-0');
+    expect(room.completedAt).toBeUndefined();
+    expect(setNextMatchReady(room, room.players[0], 'round-0', CATALOG_VERSION, 0)).toBeDefined();
+    expect(updateSettings(room, room.players[0], { ...room.settings, amount: 5 }, 0)).toBeDefined();
+
+    advance(room, 16_999, connected);
+    expect(room.phase).toBe('results');
+    advance(room, 17_000, connected);
+    expect(room.phase).toBe('completed');
+    expect(room.completedAt).toBe(17_000);
+    expect(room.players.map(player => player.score)).toEqual([2, 0]);
+  });
+
+  it('shortens the final reveal only after all connected players ready and clears their consent', () => {
+    const { room, connected } = finalReveal();
+    expect(setReady(room, room.players[0], 'old-round', CATALOG_VERSION, 8_000, connected)).toBeDefined();
+    expect(setReady(room, room.players[0], 'round-0', CATALOG_VERSION, 8_000, connected)).toBeUndefined();
+    expect(room.startsAt).toBe(17_000);
+    expect(setReady(room, room.players[1], 'round-0', CATALOG_VERSION, 9_000, connected)).toBeUndefined();
+    expect(room.startsAt).toBe(9_500);
+
+    advance(room, 9_499, connected);
+    expect(room.phase).toBe('results');
+    advance(room, 9_500, connected);
+    expect(room.phase).toBe('completed');
+    expect(room.players.every(player => !player.ready)).toBe(true);
+    expect(setReady(room, room.players[0], 'round-0', CATALOG_VERSION, 9_501, connected)).toBeDefined();
+  });
+
+  it('counts remaining connected players and resumes the final reveal after an empty room', () => {
+    const { room, connected } = finalReveal();
+    setReady(room, room.players[0], 'round-0', CATALOG_VERSION, 8_000, connected);
+    advance(room, 9_000, ['p0']);
+    expect(room.startsAt).toBe(9_500);
+    advance(room, 9_100, []);
+    expect(room.phase).toBe('paused');
+    advance(room, 20_000, ['p0']);
+    expect(room.phase).toBe('results');
+    expect(room.startsAt).toBe(30_000);
+    expect(room.players.every(player => !player.ready)).toBe(true);
+    expect(publicSnapshot(room, ['p0']).round).toBeUndefined();
+  });
+});
+
 describe('playing another match', () => {
   function completedMatch() {
     const state = match(2, 1);
     answer(state.room, 0, ids[0], 11_000);
     answer(state.room, 1, null, 12_000);
+    advance(state.room, 22_000, state.connected);
     return state;
   }
 
@@ -345,7 +406,7 @@ describe('playing another match', () => {
     room.players.forEach(player => { player.ready = true; });
     advance(room, 50_000, connected);
     expect(room.phase).toBe('completed');
-    expect(room.completedAt).toBe(12_000);
+    expect(room.completedAt).toBe(22_000);
     expect(room.result).toEqual(result);
     expect(room.players.map(player => player.score)).toEqual([2, 0]);
     expect(room.players.every(player => !player.ready)).toBe(true);

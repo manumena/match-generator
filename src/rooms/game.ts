@@ -11,7 +11,7 @@ export const DEFAULT_SETTINGS = {
   includeOpenings: true, includeEndings: true, includeSoundtracks: true,
 };
 export type Settings = typeof DEFAULT_SETTINGS;
-export type Phase = 'lobby' | 'preparing' | 'countdown' | 'guessing' | 'paused' | 'completed';
+export type Phase = 'lobby' | 'preparing' | 'countdown' | 'guessing' | 'results' | 'paused' | 'completed';
 export interface Player {
   id: string;
   nickname: string;
@@ -155,7 +155,8 @@ export function startMatch(room: RoomState, songs: Song[], now: number, connecte
 }
 
 export function beginCountdown(room: RoomState, now: number, connected: string[], scheduledStart?: number): void {
-  room.phase = connected.length ? 'countdown' : 'paused';
+  const finalSongRevealed = room.roundIndex === room.songs?.length;
+  room.phase = connected.length ? (finalSongRevealed ? 'results' : 'countdown') : 'paused';
   // First-song preparation is shorter; between-song readiness retains ten seconds.
   const countdownDuration = room.roundIndex === 0 ? FIRST_SONG_COUNTDOWN_MS : 10_000;
   room.startsAt = connected.length ? scheduledStart ?? now + countdownDuration : undefined;
@@ -186,15 +187,18 @@ function finishRound(room: RoomState, now: number, connected: string[]): void {
     }),
   };
   room.roundIndex++;
-  if (room.roundIndex === room.songs!.length) {
-    room.phase = 'completed';
-    room.completedAt = now;
-    room.startsAt = undefined;
-    room.deadline = undefined;
-    room.players.forEach(player => { player.ready = false; });
-  } else {
-    beginCountdown(room, now, connected);
-  }
+  // The last reveal gets the same intermission as earlier songs. Its countdown
+  // leads to standings instead of exposing or scheduling a nonexistent song.
+  beginCountdown(room, now, connected);
+}
+
+function completeMatch(room: RoomState, now: number): void {
+  room.phase = 'completed';
+  room.completedAt = now;
+  room.startsAt = undefined;
+  room.deadline = undefined;
+  // Continuing to standings never counts as consent to play another match.
+  room.players.forEach(player => { player.ready = false; });
 }
 
 function allConnectedPlayersSubmitted(room: RoomState, connected: string[]): boolean {
@@ -207,7 +211,7 @@ export function advance(room: RoomState, now: number, connected: string[]): void
   if (room.phase === 'preparing' && now >= room.preparationDeadline!) {
     failPreparation(room, 'This is taking longer than expected.');
   }
-  if (room.phase === 'countdown') {
+  if (room.phase === 'countdown' || room.phase === 'results') {
     // A disconnect can also make every remaining player ready for a later round.
     if (room.result && connected.length && connected.every(id => room.players.find(player => player.id === id)?.ready)) {
       room.startsAt = Math.min(room.startsAt!, now + 500);
@@ -216,8 +220,12 @@ export function advance(room: RoomState, now: number, connected: string[]): void
       room.phase = 'paused';
       room.startsAt = undefined;
     } else if (now >= room.startsAt!) {
-      room.phase = 'guessing';
-      room.deadline = room.startsAt! + 60_000;
+      if (room.phase === 'results') {
+        completeMatch(room, now);
+      } else {
+        room.phase = 'guessing';
+        room.deadline = room.startsAt! + 60_000;
+      }
     }
   }
   if (room.phase === 'paused' && connected.length) beginCountdown(room, now, connected);
@@ -248,8 +256,9 @@ export function setNextMatchReady(room: RoomState, player: Player, completedRoun
 
 export function setReady(room: RoomState, player: Player, roundId: unknown, version: unknown, now: number, connected: string[], settingsRevision: unknown = 0): string | undefined {
   if (room.phase === 'lobby') return readyForMatch(room, player, version, settingsRevision);
+  const expectedRoundId = room.phase === 'results' ? room.result?.roundId : room.songs?.[room.roundIndex]?.roundId;
   // First-song readiness cannot shorten its countdown.
-  if (room.phase !== 'countdown' || !room.result || room.songs?.[room.roundIndex].roundId !== roundId) {
+  if (!['countdown', 'results'].includes(room.phase) || !room.result || expectedRoundId !== roundId) {
     return 'This round is not accepting Ready.';
   }
   player.ready = true;
@@ -294,6 +303,7 @@ export function publicSnapshot(room: RoomState, connected: string[], playerId?: 
   return {
     code: room.code, hostId: room.hostId, phase: room.phase,
     matchStartsAt: room.phase === 'preparing' ? room.preparationDeadline : undefined,
+    resultsEndsAt: room.phase === 'results' ? room.startsAt : undefined,
     catalogVersion: room.catalogVersion, settings: room.settings, settingsRevision: room.settingsRevision, serverTime: Date.now(),
     players: room.players.map(player => ({
       id: player.id, nickname: player.nickname, connected: connected.includes(player.id),

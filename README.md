@@ -104,6 +104,8 @@ Lobby `ready` messages include the observed `settingsRevision` (missing revision
 
 ### Playing again
 
+The final song enters a `results` phase before completion, with its reveal in `result` and a `resultsEndsAt` timestamp instead of another playable `round`. Like earlier song reveals, it lasts ten seconds or ends sooner when all connected players send `ready`; in this phase, `roundId` identifies the revealed final song. Empty rooms pause and resume with a fresh countdown. Entering `completed` clears reveal readiness, starts the completion retention period, and allows separate rematch consent.
+
 After completion, `{ v: 1, type: "ready-next-match", completedRoundId, catalogVersion, settingsRevision }` opts into another match. The final result's round ID binds this consent to a specific completed match; ordinary round/lobby Ready messages cannot start rematches. Persisted `readyForNextMatch` markers also prevent older deployed rooms' final-round readiness from counting as rematch consent. Reconnection clears readiness. All connected players must opt in; disconnected members retain their slots and credentials without blocking preparation. New joins remain disabled after the initial lobby.
 
 Standings remain intact during preparation. A successful generation clears previous scores, submissions, reveal and completion time, then starts a full ten-second first-song countdown. Failure or the thirty-second preparation timeout restores the completed screen, clears readiness and preserves the original completion time. The previous completion expiry is suspended during preparation and removed on success; the next completed match gets its own thirty-minute retention period. No database schema migration is needed.

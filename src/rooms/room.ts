@@ -58,7 +58,7 @@ export class Room extends DurableObject<Env> {
     if (room.phase === 'completed' && room.completedAt !== undefined) deadlines.push(room.completedAt + ROOM_TTL);
     else if (room.abandonedAt !== null) deadlines.push(room.abandonedAt + ROOM_TTL);
     if (room.phase === 'preparing') deadlines.push(room.preparationDeadline!);
-    if (room.phase === 'countdown') deadlines.push(room.startsAt!);
+    if (room.phase === 'countdown' || room.phase === 'results') deadlines.push(room.startsAt!);
     if (room.phase === 'guessing') deadlines.push(room.deadline!);
     if (deadlines.length) await this.ctx.storage.setAlarm(Math.min(...deadlines));
     else await this.ctx.storage.deleteAlarm();

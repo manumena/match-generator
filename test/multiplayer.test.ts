@@ -134,14 +134,27 @@ it('completes a match, preserves standings on rematch failure, and starts one fr
   await vi.waitFor(async () => expect((await saved(host.room.code)).submissions[host.playerId]).toBeDefined());
   expect(JSON.stringify(snapshots)).not.toContain('first-poster.jpg');
   guestSocket.send(JSON.stringify({ v: 1, type: 'guess', roundId: 'first', actionId: 'two', animeId: null }));
-  await vi.waitFor(async () => expect((await saved(host.room.code)).phase).toBe('completed'));
+  await vi.waitFor(async () => expect((await saved(host.room.code)).phase).toBe('results'));
   await vi.waitFor(() => expect(snapshots).toContainEqual(expect.objectContaining({
     room: expect.objectContaining({
-      phase: 'completed',
+      phase: 'results',
       result: expect.objectContaining({ artworkUrl: 'https://images.example/first-poster.jpg' }),
     }),
   })));
   expect((await saved(host.room.code)).players.map(player => player.score)).toEqual([2, 0]);
+
+  const finalReveal = await saved(host.room.code);
+  expect(finalReveal.startsAt! - Date.now()).toBeGreaterThan(9_000);
+  expect(finalReveal.completedAt).toBeUndefined();
+  expect(await runInDurableObject(stub, (_instance: Room, state) => state.storage.getAlarm())).toBe(finalReveal.startsAt);
+  const readyForResults = JSON.stringify({ v: 1, type: 'ready', roundId: 'first' });
+  hostSocket.send(readyForResults);
+  await vi.waitFor(async () => expect((await saved(host.room.code)).players[0].ready).toBe(true));
+  expect((await saved(host.room.code)).startsAt).toBe(finalReveal.startsAt);
+  guestSocket.send(readyForResults);
+  await vi.waitFor(async () => expect((await saved(host.room.code)).startsAt!).toBeLessThan(finalReveal.startsAt!));
+  await vi.waitFor(async () => expect((await saved(host.room.code)).phase).toBe('completed'));
+  expect((await saved(host.room.code)).players.every(player => !player.ready)).toBe(true);
 
   // Keep the same room and standings while players choose a rematch.
   const playAgain = (revision: number) => JSON.stringify({
