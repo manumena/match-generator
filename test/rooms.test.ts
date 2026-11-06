@@ -2,18 +2,23 @@ import { describe, expect, it, vi } from 'vitest';
 import { evictDurableObject, runDurableObjectAlarm, runInDurableObject } from 'cloudflare:test';
 import worker, { Room } from '../src';
 import { env } from './fixtures';
+import type { AvatarConfig } from '../src/rooms/avatar';
 import { newRoomCode } from '../src/rooms/validation';
 
 interface Session {
   token: string;
   playerId: string;
-  room: { code: string; hostId: string; players: { id: string; nickname: string; connected: boolean }[] };
+  room: {
+    code: string;
+    hostId: string;
+    players: { id: string; nickname: string; connected: boolean; avatar?: AvatarConfig }[];
+  };
 }
 function request(path: string, init?: RequestInit) {
   return worker.fetch(new Request(`https://api.example${path}`, init), env, {} as ExecutionContext);
 }
-function post(path: string, nickname: unknown) {
-  return request(path, { method: 'POST', body: JSON.stringify({ nickname }) });
+function post(path: string, nickname: unknown, avatar?: unknown) {
+  return request(path, { method: 'POST', body: JSON.stringify({ nickname, avatar }) });
 }
 async function create(): Promise<Session> {
   const response = await post('/rooms', 'Host');
@@ -37,6 +42,35 @@ describe('room lifecycle', () => {
     expect(session.room.hostId).toBe(session.playerId);
     expect(session.room.players).toMatchObject([{ id: session.playerId, nickname: 'Host', connected: false }]);
     expect(JSON.stringify(session.room)).not.toContain(session.token);
+  });
+
+  it('stores validated avatar choices on room entry and broadcasts them to other players', async () => {
+    const avatar: AvatarConfig = {
+      version: 1,
+      hair: 'bob',
+      hairColor: 'silver',
+      skin: 'sky',
+      eyes: 'almond',
+      expression: 'laugh',
+      prop: 'headphones',
+    };
+    const created = await post('/rooms', 'Host', { ...avatar, extra: 'ignored' });
+    expect(created.status).toBe(201);
+    const session: Session = await created.json();
+    expect(session.room.players[0].avatar).toEqual(avatar);
+
+    const path = `/rooms/${session.room.code}/join`;
+    expect((await post(path, 'Guest', { ...avatar, prop: ['straw', 'glasses'] })).status).toBe(400);
+
+    const socket = (await connect(session)).webSocket!;
+    socket.accept();
+    expect((await nextSnapshot(socket)).room.players).toHaveLength(1);
+
+    const guestAvatar = { ...avatar, prop: 'straw' };
+    const update = nextSnapshot(socket);
+    expect((await post(path, 'Guest', guestAvatar)).status).toBe(201);
+    expect((await update).room.players[1]).toMatchObject({ nickname: 'Guest', avatar: guestAvatar });
+    socket.close(1000);
   });
 
   it('joins by lowercase code and rejects duplicate nicknames and full rooms', async () => {

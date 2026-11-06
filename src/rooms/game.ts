@@ -1,5 +1,6 @@
 import catalog from './catalog/answers.1c6fcb37341c6d74935feed490f60e02beb90dfcdb457a8249eb8b2a2fdf8ddc.json';
 import { canonicalAnswerId } from './catalog/answer-identity';
+import type { AvatarConfig } from './avatar';
 
 // Keep this published catalog revision available for rooms created before a deploy.
 export const CATALOG_VERSION = catalog.version;
@@ -15,6 +16,7 @@ export type Phase = 'lobby' | 'preparing' | 'countdown' | 'guessing' | 'results'
 export interface Player {
   id: string;
   nickname: string;
+  avatar?: AvatarConfig;
   token: string;
   ready?: boolean;
   readyForNextMatch?: string;
@@ -306,7 +308,7 @@ export function publicSnapshot(room: RoomState, connected: string[], playerId?: 
     resultsEndsAt: room.phase === 'results' ? room.startsAt : undefined,
     catalogVersion: room.catalogVersion, settings: room.settings, settingsRevision: room.settingsRevision, serverTime: Date.now(),
     players: room.players.map(player => ({
-      id: player.id, nickname: player.nickname, connected: connected.includes(player.id),
+      id: player.id, nickname: player.nickname, avatar: player.avatar, connected: connected.includes(player.id),
       ready: isPlayerReady(room, player), score: player.score ?? 0,
       submitted: Boolean(room.submissions[player.id]),
     })),

@@ -12,12 +12,12 @@ rooms.use('*', async (context, next) => {
 });
 
 rooms.post('/', async context => {
-  const nickname = await readNickname(context.req.raw);
-  if (!nickname) return context.json({ error: 'Use a nickname of 1–24 characters, without control characters.' }, 400);
+  const entry = await readEntry(context.req.raw);
+  if (!entry) return context.json({ error: 'Use a nickname of 1–24 characters, without control characters.' }, 400);
   for (let attempt = 0; attempt < 20; attempt++) {
     const code = newRoomCode();
     const response = await context.env.ROOMS.getByName(code).fetch('https://room/create', {
-      method: 'POST', body: JSON.stringify({ code, nickname }),
+      method: 'POST', body: JSON.stringify({ code, ...entry }),
     });
     if (response.status !== 409) return response;
   }
@@ -27,10 +27,10 @@ rooms.post('/', async context => {
 rooms.post('/:code/join', async context => {
   const code = context.req.param('code').toUpperCase();
   if (!ROOM_CODE.test(code)) return context.json({ error: 'Room codes contain exactly four letters or numbers.' }, 400);
-  const nickname = await readNickname(context.req.raw);
-  if (!nickname) return context.json({ error: 'Use a nickname of 1–24 characters, without control characters.' }, 400);
+  const entry = await readEntry(context.req.raw);
+  if (!entry) return context.json({ error: 'Use a nickname of 1–24 characters, without control characters.' }, 400);
   return context.env.ROOMS.getByName(code).fetch('https://room/join', {
-    method: 'POST', body: JSON.stringify({ nickname }),
+    method: 'POST', body: JSON.stringify(entry),
   });
 });
 
@@ -56,7 +56,7 @@ rooms.onError(error => {
   });
 });
 
-async function readNickname(request: Request): Promise<string | null> {
+async function readEntry(request: Request): Promise<{ nickname: string; avatar?: unknown } | null> {
   // Bound the actual stream, rather than trusting a user-provided Content-Length.
   const reader = request.body?.getReader();
   if (!reader) return null;
@@ -73,7 +73,8 @@ async function readNickname(request: Request): Promise<string | null> {
     const bytes = new Uint8Array(size);
     let offset = 0;
     for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
-    const body = JSON.parse(new TextDecoder().decode(bytes)) as { nickname?: unknown } | null;
-    return nicknameFrom(body?.nickname);
+    const body = JSON.parse(new TextDecoder().decode(bytes)) as { nickname?: unknown; avatar?: unknown } | null;
+    const nickname = nicknameFrom(body?.nickname);
+    return nickname ? { nickname, avatar: body?.avatar } : null;
   } catch { return null; }
 }

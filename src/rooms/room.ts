@@ -1,10 +1,11 @@
 import { DurableObject } from 'cloudflare:workers';
 import type { Env } from '../env';
 import { nicknameFrom, ROOM_TTL } from './validation';
+import { readAvatar } from './avatar';
 import {
   acceptsMatchPreferences, advance, beginPreparation, failPreparation, hydrateRoom, isPlayerReady,
   publicSnapshot, setNextMatchReady, setReady, startMatch, submit, updateSettings,
-  type RoomState,
+  type Player, type RoomState,
 } from './game';
 import { MatchAvailabilityError, prepareMatch } from './match';
 
@@ -83,9 +84,13 @@ export class Room extends DurableObject<Env> {
     const path = new URL(request.url).pathname;
     let room = this.liveRoom();
     if (path === '/create' || path === '/join') {
-      const body = await request.json() as { nickname?: unknown; code: string };
+      const body = await request.json() as { nickname?: unknown; avatar?: unknown; code: string };
       const nickname = nicknameFrom(body.nickname);
       if (!nickname) return Response.json({ error: 'Use a nickname of 1–24 characters, without control characters.' }, { status: 400 });
+      const avatar = readAvatar(body.avatar);
+      if (body.avatar !== undefined && !avatar) {
+        return Response.json({ error: 'Choose a valid avatar before entering the room.' }, { status: 400 });
+      }
       if (path === '/create' && room) return Response.json({ error: 'Code occupied' }, { status: 409 });
       if (path === '/join' && !room) return Response.json({ error: 'Room not found or expired.' }, { status: 404 });
       if (room && room.phase !== 'lobby') return Response.json({ error: 'This match has already started.' }, { status: 409 });
@@ -93,7 +98,7 @@ export class Room extends DurableObject<Env> {
         return Response.json({ error: 'That nickname is already in use in this room.' }, { status: 409 });
       }
       if (room && room.players.length >= 10) return Response.json({ error: 'This room is full.' }, { status: 409 });
-      const player = { id: crypto.randomUUID(), nickname, token: crypto.randomUUID(), ready: false, score: 0 };
+      const player: Player = { id: crypto.randomUUID(), nickname, avatar, token: crypto.randomUUID(), ready: false, score: 0 };
       room ??= hydrateRoom({ code: body.code, hostId: player.id, players: [], abandonedAt: Date.now() });
       room.players.push(player);
       await this.commit(room);
