@@ -45,12 +45,23 @@ describe('room lifecycle', () => {
   });
 
   it.each([
-    'headphones', 'ash-cap', 'urahara-hat', 'dragon-ball-scouter',
-    'kamina-glasses', 'kakashi-mask', 'nezuko-bamboo',
-  ] as const)('stores and broadcasts the %s avatar prop', async prop => {
+    { hair: 'bob', prop: 'headphones' },
+    { hair: 'bob', prop: 'ash-cap' },
+    { hair: 'bob', prop: 'urahara-hat' },
+    { hair: 'bob', prop: 'dragon-ball-scouter' },
+    { hair: 'bob', prop: 'kamina-glasses' },
+    { hair: 'bob', prop: 'kakashi-mask' },
+    { hair: 'bob', prop: 'nezuko-bamboo' },
+    { hair: 'curtains', prop: 'none' },
+    { hair: 'swept-undercut', prop: 'none' },
+    { hair: 'rounded-curls', prop: 'none' },
+    { hair: 'high-ponytail', prop: 'none' },
+    { hair: 'twin-tails', prop: 'none' },
+    { hair: 'long-layers', prop: 'none' },
+  ] as const)('stores and broadcasts $hair hair with $prop', async ({ hair, prop }) => {
     const avatar: AvatarConfig = {
       version: 1,
-      hair: 'bob',
+      hair,
       hairColor: 'silver',
       skin: 'sky',
       eyes: 'almond',
