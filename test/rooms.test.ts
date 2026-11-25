@@ -44,7 +44,10 @@ describe('room lifecycle', () => {
     expect(JSON.stringify(session.room)).not.toContain(session.token);
   });
 
-  it('stores validated avatar choices on room entry and broadcasts them to other players', async () => {
+  it.each([
+    'headphones', 'ash-cap', 'urahara-hat', 'dragon-ball-scouter',
+    'kamina-glasses', 'kakashi-mask', 'nezuko-bamboo',
+  ] as const)('stores and broadcasts the %s avatar prop', async prop => {
     const avatar: AvatarConfig = {
       version: 1,
       hair: 'bob',
@@ -52,7 +55,7 @@ describe('room lifecycle', () => {
       skin: 'sky',
       eyes: 'almond',
       expression: 'laugh',
-      prop: 'headphones',
+      prop,
     };
     const created = await post('/rooms', 'Host', { ...avatar, extra: 'ignored' });
     expect(created.status).toBe(201);
@@ -66,7 +69,7 @@ describe('room lifecycle', () => {
     socket.accept();
     expect((await nextSnapshot(socket)).room.players).toHaveLength(1);
 
-    const guestAvatar = { ...avatar, prop: 'straw' };
+    const guestAvatar = { ...avatar, prop };
     const update = nextSnapshot(socket);
     expect((await post(path, 'Guest', guestAvatar)).status).toBe(201);
     expect((await update).room.players[1]).toMatchObject({ nickname: 'Guest', avatar: guestAvatar });
